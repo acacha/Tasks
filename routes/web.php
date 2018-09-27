@@ -13,10 +13,14 @@
 
 // TDD -> TEST DRIVEN DEVELOPMENT
 
+Route::get('/tasks','TasksController@index');
+
+
 
 Route::get('/about',function () {
     return view('about');
 });
+
 Route::view('/contact', 'contact');
 
 Route::get('/', function () {

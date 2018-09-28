@@ -1,13 +1,17 @@
 <?php
 
+// PSR-4
 namespace Tests\Feature;
 
+use App\Task;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TasksTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      */
@@ -20,6 +24,8 @@ class TasksTest extends TestCase
             'name' => 'comprar pa',
             'completed' => false
         ]);
+
+//        dd(Task::find(1));
 
         // 2 execute
         $response = $this->get('/tasks');

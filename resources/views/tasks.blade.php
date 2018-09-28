@@ -12,7 +12,13 @@
     {{--LARAVEL BLADE--}}
     <ul>
         @foreach ($tasks as $task)
-            <li>{{ $task->name }} <button>Completar</button> <button>Modificar</button> <button>Eliminar</button></li>
+            <li>{{ $task->name }} <button>Completar</button> <button>Modificar</button>
+                <form action="/tasks/{{ $task->id }}" method="POST">
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <button>Eliminar</button>
+                </form>
+            </li>
         @endforeach
     </ul>
     <form action="/tasks" method="POST">

@@ -8,6 +8,9 @@ use Tests\TestCase;
 class CompletedTaskControllerTest extends TestCase {
     use RefreshDatabase;
 
+    /**
+     * @test
+     */
     public function can_complete_a_task()
     {
         //1
@@ -23,6 +26,9 @@ class CompletedTaskControllerTest extends TestCase {
         $this->assertEquals($task->completed, true);
     }
 
+    /**
+     * @test
+     */
     public function cannot_complete_a_unexisting_task()
     {
         $response = $this->post('/completed_task/1');
@@ -30,6 +36,9 @@ class CompletedTaskControllerTest extends TestCase {
         $response->assertStatus(404);
     }
 
+    /**
+     * @test
+     */
     public function can_uncomplete_a_task()
     {
         //1
@@ -45,7 +54,10 @@ class CompletedTaskControllerTest extends TestCase {
         $this->assertEquals($task->completed, false);
 
     }
-
+    
+    /**
+     * @test
+     */
     public function cannot_uncomplete_a_unexisting_task()
     {
         // 1 -> no cal fer res

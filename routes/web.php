@@ -16,7 +16,14 @@
 Route::get('/tasks','TasksController@index');
 Route::post('/tasks','TasksController@store');
 Route::delete('/tasks/{id}','TasksController@destroy');
+Route::put('/tasks/{id}','TasksController@update');
 
+//Route::get('/task_edit',function () {
+//    return view('task_edit');
+//});
+Route::get('/task_edit/{id}','TasksController@edit');
+
+// Route::resource() com alternativa
 
 
 //Route::get('/tasks',function() {

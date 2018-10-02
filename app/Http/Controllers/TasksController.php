@@ -36,4 +36,26 @@ class TasksController extends Controller
         // Retornar a /tasks
         return redirect()->back();
     }
+
+    public function update(Request $request)
+    {
+//        dd($request->id);
+        // Models -> Eloquent -> ORM (HIBERNATE de Java) Object Relation Model
+//        dd(Task::find($request->id));
+
+//        if (!Task::find($request->id)) return response(404,'No he trobat');
+        $task = Task::findOrFail($request->id);
+
+        $task->name = $request->name;
+        $task->completed = true;
+        $task->save();
+        return $task;
+    }
+
+    public function edit(Request $request)
+    {
+        $task = Task::findOrFail($request->id);
+        return view('task_edit',[ 'task' => $task]);
+//        return view('task_edit',compact('task'));
+    }
 }

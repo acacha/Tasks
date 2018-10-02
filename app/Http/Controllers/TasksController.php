@@ -58,4 +58,20 @@ class TasksController extends Controller
         return view('task_edit',[ 'task' => $task]);
 //        return view('task_edit',compact('task'));
     }
+
+
 }
+
+//class CompletedTaskController {
+//    // Complete
+//    public function store()
+//    {
+//
+//    }
+//
+//    // Uncomplete
+//    public function delete()
+//    {
+//
+//    }
+//}

@@ -49,7 +49,7 @@ class TasksController extends Controller
         $task->name = $request->name;
         $task->completed = true;
         $task->save();
-        return $task;
+        return redirect('/tasks');
     }
 
     public function edit(Request $request)

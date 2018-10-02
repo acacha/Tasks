@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Edita una tasca</h1>
-    <form action="/tasks" method="POST">
+    <form action="/tasks/{{$task->id}}" method="POST">
         @csrf
         {{ method_field('PUT') }}
         Name: <input name="name" type="text" value="{{$task->name}}">

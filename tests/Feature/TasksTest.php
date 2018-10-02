@@ -122,7 +122,7 @@ class TasksTest extends TestCase
             'name' => 'Comprar pa',
             'completed' => true
         ]);
-        $response->assertSuccessful();
+        $response->assertStatus(302);
 //            $response->assertStatus(200);
 
         // 2 opcions
@@ -135,7 +135,7 @@ class TasksTest extends TestCase
     }
 
     /**
-     * @test
+     * @ test
      */
     public function can_edit_a_task_todo_validation()
     {

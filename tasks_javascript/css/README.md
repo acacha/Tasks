@@ -8,7 +8,7 @@
 ## Positioning / Centering
 
 - Using flexbox
-- Horizontal centering:  flex justify-center
+- Horizontal centering: flex justify-center
 - https://tailwindcss.com/docs/flexbox-justify-content
 - flex-col : Ordenat en columnes 
 

@@ -6,33 +6,76 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-</head>
-<body>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 
-<div id="app">
-    <input type="text" placeholder="Nova Tasca">
-    <!--Aniria la llista-->
+</head>
+<body class="bg-grey-lighter font-sans">
+
+<div id="app" class="container flex justify-center">
+    <div class="flex flex-col">
+        <h1 class="text-center text-red-light">Tasques</h1>
+        <div class="flex-row">
+            <input id="newTask" onblur="addTask()" type="text" placeholder="Nova Tasca"
+                   class="m-3 mt-5 p-2 pl-5 shadow border rounded focus:outline-none focus:shadow-outline text-grey-darker">
+            <svg onclick="addTask()" class="h-3 w-3"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
+        </div>
+
+        <!--Aniria la llista-->
+        <!--<ul></ul>-->
+        <!--<ul>-->
+        <!--<li @foreach="task in tasks">{{ $task.name }} class="asdasd"></li>-->
+        <!--</ul>-->
+        <div id="tasks"></div>
+    </div>
 </div>
 
 <script>
+    var tasks = ["Comprar tomates","Comprar llet","Estudiar PHP","Fucking hostile"] // HARDCODED
+
+    function addTask() {
+        // Afegir la tasca al vector tasks
+        // Manipulació d'arrays
+        var task = document.getElementById('newTask')
+        console.log(task.value);
+        tasks.splice(0,0,task.value)
+        console.log(tasks)
+        draw_list()
+    }
+
+    function draw_list() {
+        var divtasks = document.getElementById('tasks')
+        var ul = document.createElement('ul')
+        ul.setAttribute('class','list-reset')
+        tasks.forEach(function (task) {
+            var li = document.createElement('li')
+            var text = document.createTextNode(task)
+            li.setAttribute('class','text-grey-darker m-2 pl-5')
+            li.appendChild(text)
+            ul.appendChild(li)
+        })
+        divtasks.appendChild(ul)
+    }
+
+    draw_list()
+
     // MVC --> MODEL???? --> no tenim base de dades
     // Model -> variables/objectes Javascript
-    var tasks = ["Comprar pa","Comprar llet","Estudiar PHP","Fucking hostile"]
+    // TODO -> Connectar-se al servidor i omplir les variables amb info de la base de dades
+    // APIs?
+
 
     // Codi Javascript que agafan este model generi HTML que toca ul>li
     // CREAR DOCUMENTS HTML DE FORMA IMPERATIVA (SENSE PLANTILLA)
     // PLANTILLA en canvi és forma declarative
 
-    var app = document.getElementById('app')
-    var ul = document.createElement('ul');
-    tasks.forEach(function(task) {
-        console.log(task)
-        var li = document.createElement('li');
-        li.appendChild(document.createTextNode(task))
-        li.appendChild()
-        ul.appendChild(li)
-    })
-    app.appendChild(ul);
+    // DOM -> Document Object Model HTML -> Document
+    // Llibreria DOM
+    // crearli = function () {
+    //
+    // }
+    // tasks.forEach(crearLi)
+    // SVG --> SVG
+
 </script>
 
 </body>

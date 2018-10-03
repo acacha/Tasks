@@ -14,14 +14,48 @@
 <div id="app" class="container flex justify-center">
     <div class="flex flex-col">
         <h1 class="text-center text-red-lighter">Tasques</h1>
-        <input type="text" placeholder="Que voleu fer?" class="mt-3 p-2 pl-5 shadow appearance-none border rounded focus:outline-none focus:shadow-outline text-grey-darker">
+        <input type="text"
+               placeholder="Que voleu fer?"
+               class="mt-3 p-2 pl-5 shadow appearance-none border rounded focus:outline-none focus:shadow-outline text-grey-darker"
+               onchange="addTask(event)"
+               oninput="input(event,1)">
         <div id="tasks" class="mt-3 flex shadow-lg bg-white"></div>
     </div>
 </div>
 
 <script>
-    //MODEL
     var tasks = ["Comprar pa","Comprar llet","Estudiar PHP","Fucking hostile"]
+
+    function input (e,x) {
+        // console.log(e);
+        // console.log('INPUT');
+    }
+
+    function addTask(e) {
+        // console.log('TODO')
+        // console.log(e)
+        // console.log(e.target)
+        console.log(e.target.value)
+        tasks.splice(0,0,e.target.value)
+        console.log(tasks)
+        update_tasks();
+    }
+    //MODEL
+
+    function update_tasks() {
+        var app = document.getElementById('tasks')
+        var ul = document.createElement('ul');
+        ul.setAttribute("class", "list-reset flex flex-col")
+
+        tasks.forEach(function(task) {
+            // console.log(task)
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(task))
+            li.setAttribute("class", "text-grey-darker text-sm m-1 pl-5");
+            ul.appendChild(li)
+        })
+        app.appendChild(ul);
+    }
 
 
     var app = document.getElementById('tasks')

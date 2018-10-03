@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <!--<link href="/css/styles.css" rel="stylesheet">-->
+</head>
+<body class="bg-grey-lightest font-sans">
+
+<div id="app" class="container flex justify-center">
+    <div class="flex flex-col">
+        <h1 class="text-center text-red-lighter">Tasques</h1>
+        <input type="text" placeholder="Que voleu fer?" class="mt-3 p-2 pl-5 shadow appearance-none border rounded focus:outline-none focus:shadow-outline text-grey-darker">
+        <div id="tasks" class="mt-3 flex shadow-lg bg-white"></div>
+    </div>
+</div>
+
+<script>
+    //MODEL
+    var tasks = ["Comprar pa","Comprar llet","Estudiar PHP","Fucking hostile"]
+
+
+    var app = document.getElementById('tasks')
+    var ul = document.createElement('ul');
+    ul.setAttribute("class", "list-reset flex flex-col")
+
+    tasks.forEach(function(task) {
+        // console.log(task)
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(task))
+        li.setAttribute("class", "text-grey-darker text-sm m-1 pl-5");
+        ul.appendChild(li)
+    })
+    app.appendChild(ul);
+</script>
+
+</body>
+</html>

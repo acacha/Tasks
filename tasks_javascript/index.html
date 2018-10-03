@@ -10,15 +10,29 @@
 <body>
 
 <div id="app">
+    <input type="text" placeholder="Nova Tasca">
     <!--Aniria la llista-->
 </div>
 
 <script>
     // MVC --> MODEL???? --> no tenim base de dades
     // Model -> variables/objectes Javascript
-    var tasks = ["Comprar pa","Comprar llet","Estudiar PHP"]
+    var tasks = ["Comprar pa","Comprar llet","Estudiar PHP","Fucking hostile"]
 
-    // Codi Javascript que agafan este model creei HTML que toca ul>li
+    // Codi Javascript que agafan este model generi HTML que toca ul>li
+    // CREAR DOCUMENTS HTML DE FORMA IMPERATIVA (SENSE PLANTILLA)
+    // PLANTILLA en canvi és forma declarative
+
+    var app = document.getElementById('app')
+    var ul = document.createElement('ul');
+    tasks.forEach(function(task) {
+        console.log(task)
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(task))
+        li.appendChild()
+        ul.appendChild(li)
+    })
+    app.appendChild(ul);
 </script>
 
 </body>

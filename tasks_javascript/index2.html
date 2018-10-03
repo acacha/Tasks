@@ -9,17 +9,20 @@
 </head>
 <body>
 
-<div id="app">
-    <!--Aniria la llista-->
-</div>
+<button onclick="alert('Hello world!')">Saluda</button>
+
+<button onclick="saluda()">Saluda</button>
+
+<button onclick="alert(suma(1,2))">Suma 1+2</button>
 
 <script>
-    // MVC --> MODEL???? --> no tenim base de dades
-    // Model -> variables/objectes Javascript
-    var tasks = ["Comprar pa","Comprar llet","Estudiar PHP"]
-
-    // Codi Javascript que agafan este model creei HTML que toca ul>li
+    console.log('Hello world') // echo 'Hello world'
+    function suma(x,y) {
+        return x+y
+    }
 </script>
+
+<script src="functions.js"></script>
 
 </body>
 </html>

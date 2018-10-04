@@ -1,21 +1,78 @@
 <template>
-    <input type="text">
-    <ul>
-        <li>Tasca 1</li>
-        <li>Tasca 2</li>
-        <li>Tasca 3</li>
-        <li>Tasca 4</li>
-        <li>Tasca 5</li>
-    </ul>
+    <div>
+        <input type="text"
+               v-model="newTask" @keyup.enter="add">
+        <button @click="add">Afegir</button>
+
+        <!--// SINTAX SUGAR-->
+
+        <!--<input :value="newTask" @input="newTask = $event.target.value">-->
+        <ul>
+            <li v-for="task in tasks" :key="task.id">
+                <span :class="{ strike: task.completed }">{{task.name}}</span>
+                &nbsp;
+                <span @click="remove(task)">&#215;</span>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
 
+// document.getElementById('newTask').value
+//     var newTask='No tasca'
+//     document.getElementById.value= newTask
+    export default {
+      data() {
+        return {
+            newTask: '',
+            tasks: [
+                {
+                    id: 1,
+                    name: 'Comprar pa',
+                    completed: false
+                },
+                {
+                    id: 2,
+                    name: 'Comprar llet',
+                    completed: false
+                },
+                {
+                    id: 3,
+                    name: 'Estudiar PHP',
+                    completed: true
+                }
+
+            ]
+        }
+      },
+      methods: {
+          add() {
+              this.tasks.splice(0,0,{ name: this.newTask, completed: false } )
+              this.newTask=''
+          },
+          remove(task) {
+              window.console.log(task)
+              this.tasks.splice(this.tasks.indexOf(task),1)
+          }
+      }
+    }
+
+    // CAR
+// {
+//     marca: 'Renault',
+//     consum: '5l/100',
+//     start: function() {
+//       console.log('arranca');
+//     }
+// }
 </script>
 
-<styles>
-
-</styles>
+<style>
+  .strike {
+    text-decoration: line-through;
+  }
+</style>
 
 <!--
 

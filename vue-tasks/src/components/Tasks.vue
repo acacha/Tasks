@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Tasques ({{total}}):</h1>
         <input type="text"
                v-model="newTask" @keyup.enter="add">
         <button @click="add">Afegir</button>
@@ -8,23 +9,50 @@
 
         <!--<input :value="newTask" @input="newTask = $event.target.value">-->
         <ul>
-            <li v-for="task in tasks" :key="task.id">
+            <li v-for="task in filteredTasks" :key="task.id">
                 <span :class="{ strike: task.completed }">{{task.name}}</span>
                 &nbsp;
                 <span @click="remove(task)">&#215;</span>
             </li>
+        </ul>
+
+        <h3>Filtros:</h3>
+        Activa filter: {{ filter }}
+        <ul>
+            <li><button @click="setFilter('all')">Totes</button></li>
+            <li><button @click="setFilter('completed')">Completades</button></li>
+            <li><button @click="setFilter('active')">Pendents</button></li>
         </ul>
     </div>
 </template>
 
 <script>
 
+    var filters = {
+      all: function(tasks) {
+        return tasks
+      },
+      completed: function(tasks) {
+        return tasks.filter(function (task) {
+          return task.completed
+            // NO CAL
+          // if (task.completed) return true
+          // else return false
+        })
+      },
+      active: function(tasks) {
+          return tasks.filter(function (task) {
+              return !task.completed
+          })
+      },
+    }
 // document.getElementById('newTask').value
 //     var newTask='No tasca'
 //     document.getElementById.value= newTask
     export default {
       data() {
         return {
+            filter: 'all', // All Completed Active
             newTask: '',
             tasks: [
                 {
@@ -42,11 +70,23 @@
                     name: 'Estudiar PHP',
                     completed: true
                 }
-
             ]
         }
       },
+      computed: {
+        total() {
+          return this.tasks.length
+        },
+        filteredTasks() {
+            // Segons el filtre actiu
+            // Alternativa switch/case -> array associatiu
+            return filters[this.filter](this.tasks)
+        }
+      },
       methods: {
+          setFilter(newFilter) {
+              this.filter = newFilter
+          },
           add() {
               this.tasks.splice(0,0,{ name: this.newTask, completed: false } )
               this.newTask=''
@@ -164,6 +204,7 @@ Comunicació pares fills:
 
 8) SLOTS
 
+TODO
 
 9) Axios
 

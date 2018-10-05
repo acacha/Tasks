@@ -11,9 +11,10 @@
         <ul>
             <li v-for="task in filteredTasks" :key="task.id">
                 <span :class="{ strike: task.completed }">
-                    <editable-text>
-                        {{task.name}}
-                    </editable-text>
+                    <editable-text
+                            :text="task.name"
+                            @edited="editName(task, $event)"
+                    ></editable-text>
                 </span>
                 &nbsp;
                 <span @click="remove(task)">&#215;</span>
@@ -91,6 +92,12 @@ export default {
     }
   },
   methods: {
+      editName(task,text) {
+          console.log('TASK: ' , task.name);
+          console.log('text: ' , text);
+          console.log('TODO edit name');
+          task.name = text
+      },
       setFilter(newFilter) {
           this.filter = newFilter
       },

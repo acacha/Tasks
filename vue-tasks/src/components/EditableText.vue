@@ -35,6 +35,9 @@ export default {
         //INFORMAT AL PARE
         this.$emit('edited',this.currentText)
     }
+  },
+  created() {
+    console.log('Component EditableText ha estat creat');
   }
 }
 

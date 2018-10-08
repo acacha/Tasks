@@ -53,8 +53,8 @@ Route::redirect('/hola','/prova');
 
 
 //Complete
-Route::post('/completed_task','CompletedTaskController@store');
+//Route::post('/completed_task','CompletedTaskController@store');
 
 //Uncomplete
-Route::delete('/completed_task','CompletedTaskController@destroy');
+//Route::delete('/completed_task','CompletedTaskController@destroy');
 

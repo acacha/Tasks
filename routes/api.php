@@ -1,5 +1,6 @@
 <?php
 
+use App\Task;
 use Illuminate\Http\Request;
 
 /*
@@ -15,4 +16,24 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/v1/tasks',function () {
+    // Connectar-se obtenir tasques
+//    return [
+//      {
+//          'name' => 'Compra pa',
+//          'completed' => false
+//      },
+//      {
+//        'name' => 'Compra llet',
+//          'completed' => false
+//      },
+//      {
+//        'name' => 'Compra pa',
+//          'completed' => false
+//      },
+//    ];
+
+      return Task::all();
 });

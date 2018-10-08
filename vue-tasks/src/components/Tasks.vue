@@ -99,6 +99,9 @@ export default {
       remove(task) {
           this.dataTasks.splice(this.dataTasks.indexOf(task),1)
       }
+  },
+  created() {
+    console.log('Component Tasks ha estat creat');
   }
 }
 </script>

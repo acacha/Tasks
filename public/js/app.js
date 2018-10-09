@@ -14013,7 +14013,6 @@ window.Vue = __webpack_require__(37);
  */
 
 Vue.component('example-component', __webpack_require__(40));
-
 Vue.component('tasks', __webpack_require__(43));
 
 var app = new Vue({

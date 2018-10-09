@@ -1,3 +1,8 @@
+# CORS
+
+localhost/:1 Failed to load http://127.0.0.1:8050/api/v1/tasks: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8080' is therefore not allowed access.
+
+
 # vue-tasks
 
 ##

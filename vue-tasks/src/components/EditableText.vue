@@ -28,6 +28,11 @@ export default {
       required: true
     }
   },
+  watch: {
+    text(newText) {
+        this.currentText = this.text
+    }
+  },
   // props: ['text'],
   methods: {
     edit() {

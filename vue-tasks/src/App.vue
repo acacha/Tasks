@@ -30,13 +30,14 @@ export default {
   components: {
       'tasks' : Tasks,
   },
-  mounted() {
-    axios.get('http://localhost:8050/api/v1/tasks').then((response) => {
+  created() {
+    axios.get('http://127.0.0.1:8050/api/v1/tasks').then((response) => {
       this.tasks = response.data
     }).catch((error) => {
       this.error = error
     })
-      // AJAX -> Asynchonous JAvascript i  XML
+
+      // AJAX -> Asynchonous Javascript i  XML
       // XHR ->  XML/JSON HTTP Request Asíncrones
       // this.tasks =
 

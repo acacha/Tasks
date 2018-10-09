@@ -77,6 +77,13 @@
             @endif
 
             <div class="content">
+                <nav>
+                    <ul><li><a href="/">Welcome</a></li></ul>
+                    <ul><li><a href="/tasks">Tasques amb PHP</a></li></ul>
+                    <ul><li><a href="/tasks_vue">Tasques amb Vue</a></li></ul>
+                    <ul><li><a href="/contact">Contact</a></li></ul>
+                    <ul><li><a href="/about">About</a></li></ul>
+                </nav>
                 <div class="title m-b-md">
                     MY APP
                 </div>

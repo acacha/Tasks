@@ -1,5 +1,6 @@
 <?php
 
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -22,6 +23,8 @@ class TasksVueControllerTest extends TestCase{
         $response->assertSuccessful();
 
         $response->assertViewIs('tasks_vue');
-        $response->assertViewHas('tasks');
+        $response->assertViewHas('tasks',Task::all());
+
+
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    PROVA
+    <tasks :tasks="{{ $tasks }}"></tasks>
 @endsection

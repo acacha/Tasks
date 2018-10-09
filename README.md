@@ -1,4 +1,8 @@
-# Guide
+# vue-tasks
+
+##
+ 
+## Guia de treball
 
 - https://012.vuejs.org/guide/
 - Patro MVVM: https://www.packtpub.com/mapt/book/web_development/9781786469946/2/ch02lvl1sec18/mvvm-architectural-pattern
@@ -101,3 +105,8 @@ TODO
 - Programació asíncrona i Javascript
 
 -->
+
+# tasks_javascript
+
+- Carpeta: tasks:javascript
+- tailwind CSS

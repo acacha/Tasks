@@ -32,12 +32,12 @@ export default {
   methods: {
     edit() {
         this.editing = false
-        //INFORMAT AL PARE
+        //INFORMAR AL PARE
         this.$emit('edited',this.currentText)
     }
   },
   created() {
-    console.log('Component EditableText ha estat creat');
+    // console.log('Component EditableText ha estat creat');
   }
 }
 

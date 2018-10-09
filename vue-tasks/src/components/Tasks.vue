@@ -68,7 +68,7 @@ export default {
     }
   },
   props: {
-    'tasks': {
+    tasks: {
       type: Array,
       default: function () {
           return []
@@ -83,6 +83,11 @@ export default {
         // Segons el filtre actiu
         // Alternativa switch/case -> array associatiu
         return filters[this.filter](this.dataTasks)
+    }
+  },
+  watch: {
+    tasks(newTasks) {
+      this.dataTasks = newTasks
     }
   },
   methods: {
@@ -101,7 +106,7 @@ export default {
       }
   },
   created() {
-    console.log('Component Tasks ha estat creat');
+    // console.log('Component Tasks ha estat creat');
   }
 }
 </script>

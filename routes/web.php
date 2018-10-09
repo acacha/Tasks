@@ -58,3 +58,12 @@ Route::redirect('/hola','/prova');
 //Uncomplete
 //Route::delete('/completed_task','CompletedTaskController@destroy');
 
+//Route::get('/tasks_vue', function() {
+//   echo 'hola';
+//});
+Route::get('/tasks_vue', 'TasksVueController@index');
+
+// index -> LIST
+// store -> create
+// delete -> destory
+// edit -> PUT

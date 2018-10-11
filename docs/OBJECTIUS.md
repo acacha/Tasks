@@ -6,6 +6,13 @@
 - Tasques només Vue: vue_tasks
 - Tasques amb vue i Laravel
 
+## Tasques que no fareu amb el profe
+
+Heu de repetir el mateix que heu fet amb tasques però amb 2 models extres diferents:
+
+- Tags (etiquetes) (tenen només un camp nom)
+- Projects (projectes) -> També tenen de moment només un nom
+
 ## Tasques només PHP
 
 - Totes les operacions CRUD

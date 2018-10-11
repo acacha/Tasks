@@ -1,14 +1,3 @@
-# CORS
-
-localhost/:1 Failed to load http://127.0.0.1:8050/api/v1/tasks: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8080' is therefore not allowed access.
-
-
-# vue-tasks
-
-##
- 
-## Guia de treball
-
 - https://012.vuejs.org/guide/
 - Patro MVVM: https://www.packtpub.com/mapt/book/web_development/9781786469946/2/ch02lvl1sec18/mvvm-architectural-pattern
 - Basic data binding:  https://laracasts.com/series/learn-vue-2-step-by-step/episodes/1
@@ -110,8 +99,3 @@ TODO
 - Programació asíncrona i Javascript
 
 -->
-
-# tasks_javascript
-
-- Carpeta: tasks:javascript
-- tailwind CSS

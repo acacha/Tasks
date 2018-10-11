@@ -39,7 +39,7 @@ Options:
 
 # Eloquent
 
-CRUD (CREATE RETRIVE UPDATE DELETE)
+CRUD (CREATE RETRIEVE UPDATE DELETE)
 
 '''Recursos'''
 - https://laravel.com/docs/5.7/eloquent

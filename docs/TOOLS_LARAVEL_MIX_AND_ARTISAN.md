@@ -11,7 +11,7 @@ Instal·lació:
 composer global require cpriego/valet-linux
 valet install
 cd ~/Code/acacha
-laravel park
+valet park
 ```
 
 Ara si la carpeta del projecte es diu tasks, aleshores la URL serà:

@@ -18,22 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/v1/tasks',function () {
-    // Connectar-se obtenir tasques
-//    return [
-//      {
-//          'name' => 'Compra pa',
-//          'completed' => false
-//      },
-//      {
-//        'name' => 'Compra llet',
-//          'completed' => false
-//      },
-//      {
-//        'name' => 'Compra pa',
-//          'completed' => false
-//      },
-//    ];
+Route::get('/v1/tasks/{task}','Api\TasksController@show');
 
-      return Task::all();
-});

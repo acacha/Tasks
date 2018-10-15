@@ -1,8 +1,10 @@
 <template>
-    <div>
+    <div id="tasks" class="tasks">
         <h1>Tasques ({{total}}):</h1>
         <input type="text"
-               v-model="newTask" @keyup.enter="add">
+               v-model="newTask" @keyup.enter="add"
+               name="name"
+        >
 
         <button @click="add">Afegir</button>
 
@@ -22,13 +24,16 @@
             </li>
         </ul>
 
-        <h3>Filtros:</h3>
-        Activa filter: {{ filter }}
-        <ul>
-            <li><button @click="setFilter('all')">Totes</button></li>
-            <li><button @click="setFilter('completed')">Completades</button></li>
-            <li><button @click="setFilter('active')">Pendents</button></li>
-        </ul>
+        <span id="filters" v-show="total > 0">
+            <h3>Filtros:</h3>
+            Active filter: {{ filter }}
+            <ul>
+                <li><button @click="setFilter('all')">Totes</button></li>
+                <li><button @click="setFilter('completed')">Completades</button></li>
+                <li><button @click="setFilter('active')">Pendents</button></li>
+            </ul>
+        </span>
+
     </div>
 </template>
 
@@ -98,15 +103,30 @@ export default {
           this.filter = newFilter
       },
       add() {
-          this.dataTasks.splice(0,0,{ name: this.newTask, completed: false } )
-          this.newTask=''
+          axios.post('/api/v1/tasks', {
+            name: this.newTask
+          }).then((response) => {
+            this.dataTasks.splice(0,0,{ id: response.data.id, name: this.newTask, completed: false } )
+            this.newTask=''
+          }).catch((error) => {
+            console.log(response)
+          })
       },
       remove(task) {
           this.dataTasks.splice(this.dataTasks.indexOf(task),1)
       }
   },
-  created() {
-    // console.log('Component Tasks ha estat creat');
+  created () {
+    // Si tinc prop tasks no fer res
+    // sino vull fer petició a la API per obtenir les tasques
+    if (this.tasks.length === 0) {
+      // axios.get('/api/v1/task')
+      axios.get('/api/v1/tasks').then((response) => {
+        this.dataTasks = response.data
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>

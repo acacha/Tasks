@@ -1,0 +1,1 @@
+global.axios = require('axios')

@@ -9,10 +9,13 @@ NOTA: Crida a l'API és sinònim en el nostre projecte de axios
 - Si passem un array de 3 tasques com a propietat tasks predefinides les mostra correctament
 - Comprovar funciona/mostra el total de tasques
 - Si afegim una nova tasca es mostra a la llista de tasques
+- Es mostra missatge validació quan intentem crear una tasca sense nom (i no s'executa axios)
 - Si afegim una nova tasca s'executa una crida a l'API per afegir la tasca a la base de dades
 - Si eliminem una tasca NO es mostra a la llista de tasques
 - Si eliminem una tasca s'executa una crida a l'API per afegir la tasca a la base de dades
 - Si premem la icona refresh, s'executa una crida a l'API per (re)obtenir les tasques de la base de dades
+- Comprovar els filtres: Si indiquem tasques de tots els tipus (completades i no completades) comprovem que funcionen
+els filtres
 
 ISOLATION
 - Es tracta de testejar el component independentment del backend

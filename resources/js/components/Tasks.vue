@@ -118,11 +118,15 @@ export default {
   created () {
     console.log('CREATED IS EXECUTED!')
     if (this.tasks.length === 0) {
+      console.log('entra if')
       window.axios.get('/api/v1/tasks').then((response) => {
         console.log('AXIOS EXECUTED!')
+        console.log('response:')
         console.log(response.data)
         this.dataTasks = response.data
       }).catch((error) => {
+        console.log(error)
+        console.log('ERROR EXECUTED')
         console.log(error)
       })
     }

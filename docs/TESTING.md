@@ -102,6 +102,7 @@ Executeu igual que si vulguessiu executar tots els testos però canvieu:
 - Expect: Used to construct assertions, compare a value with the expected result on a test. Chai Assertions.
 - Spy: A test spy is an object that records its interaction with other objects and can be used to check if a certain function was called, the arguments passed to it (if any) and what the return value is (once again, if any). Sinon Spies.
 - Stub: Change how the function is called on the tests. It replaces a function’s behavior, avoiding the original function invocation. Can be used to test how our unit behaves to different return values from a dependency function. Sinon Stubs.
+- Mocking/ Faking
 - Mount: When mounting a component, an instance is created. The component is rendered as well as its child components.
 - Shallow: Very similar to mount but child components are stubbed, not rendered or instanced. Very useful in order to reduce the dependencies of a component’s test.
 

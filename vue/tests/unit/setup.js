@@ -1,2 +1,2 @@
-global.axios = require('axios')
-window.axios = require('axios')
+global.axios = require('axios') // Node global
+window.axios = require('axios') // Browser

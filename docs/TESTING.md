@@ -118,6 +118,70 @@ https://vue-test-utils.vuejs.org/api/wrapper/#properties
 
 # Vue. Que testejar i que no?
 
+- https://www.youtube.com/watch?v=OIpfWTThrK8
+
+# Knowing What to Test
+For UI components, we don't recommend aiming for complete line-based coverage, because it leads to too much focus on the internal implementation details of the components and could result in brittle tests.
+
+Instead, we recommend writing tests that assert your component's public interface, and treat its internals as a black box. A single test case would assert that some input (user interaction or change of props) provided to the component results in the expected output (render result or emitted custom events).
+
+For example, for the Counter component which increments a display counter by 1 each time a button is clicked, its test case would simulate the click and assert that the rendered output has increased by 1. The test doesn't care about how the Counter increments the value, it only cares about the input and the output.
+
+## Output (HTML/DOM Render)
+
+Recordeu que heu de veure els components com una funció (o com una capsula o caixa) i saber quina és la seva API,
+és a dir, quina és la seva interfície d'ús com a programadors:
+
+- Entrades: props/slots | User interaction (clicks, hovers, etc) | Vue lifecycle hooks
+- Sortides: events i output DOM (HTML/template)
+- nota: també s'ha de tenir en compte les connexions amb fills i pares
+
+Són utils les funcions:
+- wrapper.text(): mostra el text del component
+- wrapper.html(): mostra el thml del component
+- wrapper.find(CSS_SELECTOR): permet buscar un element a la plantilla. Si el troba torna un altre wrapper i podeu 
+aplicar funcions (text(), html(), fer un altre find(), contains, etc)
+- wrapper.contains(CSS_SELECTOR): https://vue-test-utils.vuejs.org/api/wrapper/#contains-selector
+- https://vue-test-utils.vuejs.org/api/wrapper/#exists
+
+### Lógica a la plantilla (v-if|v-show|v-fors)
+
+Si tenim parts de la plantilla que es renderitzen condicionalment, cal testejar els dos casos (if i else).
+
+IMPORTANT: Compte la diferència entre v-if (simplement busqueu element amb find i comproveu si està o no) i v-show (utilitzeu funció isVisible pq si utilitzeu find el trobarà però no és visible)
+
+- Útil: expect(wrapper.find('div').exists()).to.be(true)
+
+
+```javascript
+// Checking conditional rendering
+  it('not_shows_filters_if_task_list_is_empty', () => {
+    const wrapper = mount(Tasks)
+    // eslint-disable-next-line no-unused-expressions
+    expect(wrapper.find('span#filters').isVisible()).to.be.false
+  })
+
+  it('not_shows_filters_if_task_list_is_not_empty', () => {
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: [
+          {
+            name: 'Compra pa'
+          }
+        ]
+      }
+    })
+    // eslint-disable-next-line no-unused-expressions
+    expect(wrapper.find('span#filters').isVisible()).to.be.true
+  })
+``` 
+
+Les llistes també s'han de comprovar
+
+## Esdeveniments/events
+
+https://vue-test-utils.vuejs.org/api/wrapper/#emitted
+
 ## Vue Data
 
 Si tenim clar que l'estat inicial del component podem testejar els valors inicials (estat inicial) del component:
@@ -140,7 +204,9 @@ Els mètodes són simples funcions amb una entrada i una sortida i per tant es p
 Sovint els mètodes s'executen després d'alguna interacció de l'usuari amb el DOM (click, dblclick, hovers, etc)
 
 Per tant el primer que cal aprendre és a interactuar amb el DOM per tal de disparar l'esdeveniment que ha d'executar el 
-mètode que volem testejar.
+mètode que volem testejar. 
+
+ https://vue-test-utils.vuejs.org/guides/dom-events.html
 
 Exemple mètode (mètode add de tasques):
 
@@ -391,6 +457,20 @@ it('watchs_for_tasks_prop', () => {
     expect(wrapper.vm.tasks).to.have.length(2)
   })
 ```
+
+## NO testejar els estils o questions relacionades amb CSS
+
+Per què? pq canvien els estils molt fàcilment i fa els testos debils (falle/es trenquen fàcilment). A més els estils 
+es compliquen fàcilment
+
+```javascript
+it('should_render_a_formatted_username')
+it('should_render_a_formatted_username_with_a_custom_avatar')
+it('should_render_a_formatted_username_in_green_with_a_custom_avatar_if_the_user_is_loggend_in_but_it_should_display' +
+ 'a_formatted_username_in_red_with_custom_avatar_if_not_logged)
+ WTF!
+```
+it
 
 ## No testejar el propi framework (no testejar vue)
 

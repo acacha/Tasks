@@ -24,6 +24,174 @@ describe('Tasks.vue', () => {
     expect(wrapper.props().tasks).to.have.lengthOf(0)
   })
 
+  // RENDERED OUTPUT (HTML/DOM OUTPUT TEMPLATE)
+
+  // Checking shows a list
+
+// Checking DOM -> Ok però compte si canviem la plantilla podem tenir que canviar el test
+  it.only('contains_a_list_of_tasks', () => {
+    // Prepare
+
+    // 2 execute
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: [
+          {
+            id: 1,
+            name: 'Compra pa',
+            completed: true
+          },
+          {
+            id: 2,
+            name: 'Compra llet',
+            completed: false
+          },
+          {
+            id: 3,
+            name: 'Estudiar PHP',
+            completed: false
+          }
+        ]
+      }
+    })
+
+    // 3 assert
+    expect(wrap.text()).toContain(text)
+
+
+  })
+
+  it('shows_nothing_when_no_tasks_provided', () => {
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: []
+      }
+    })
+  })
+
+  // Checking DOM -> Ok però compte si canviem la plantilla podem tenir que canviar el test
+  it('contains_a_form_to_create_new_task', () => {
+    const wrapper = mount(Tasks)
+    // eslint-disable-next-line no-unused-expressions
+    expect(wrapper.contains('input')).to.be.true
+    const input = wrapper.find('input')
+    // eslint-disable-next-line no-unused-expressions
+    expect(input.is('input')).to.be.true
+    const input1 = wrapper.find('input[name="name"]')
+    // eslint-disable-next-line no-unused-expressions
+    expect(input1.is('input')).to.be.true
+  })
+
+  // Checking conditional rendering
+  it('not_shows_filters_if_task_list_is_empty', () => {
+    const wrapper = mount(Tasks)
+    // eslint-disable-next-line no-unused-expressions
+    expect(wrapper.find('span#filters').isVisible()).to.be.false
+  })
+
+  // TODO 1
+  it('show_all_tasks_when_all_filter_is_selected', () => {
+    // Prepare
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: [
+          {
+            id: 1,
+            name: 'Compra pa',
+            completed: true
+          },
+          {
+            id: 2,
+            name: 'Compra llet',
+            completed: false
+          },
+          {
+            id: 3,
+            name: 'Estudiar PHP',
+            completed: false
+          }
+        ]
+      })
+
+      // 2 Execute -> click on filter all
+
+      // 3 Assert see all tasks
+  })
+
+  // TODO 2
+  it('shows_only_completed_tasks_when_completed_filter_is_selected', () => {
+    // Prepare
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: [
+          {
+            id: 1,
+            name: 'Compra pa',
+            completed: true
+          },
+          {
+            id: 2,
+            name: 'Compra llet',
+            completed: false
+          },
+          {
+            id: 3,
+            name: 'Estudiar PHP',
+            completed: false
+          }
+        ]
+      })
+
+      // 2 Execute -> click on filter completed
+
+      // 3 Assert see only completed tasks
+    })
+
+  // TODO 3
+  it('shows_only_active_tasks_when_active_filter_is_selected', () => {
+    // Prepare
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: [
+          {
+            id: 1,
+            name: 'Compra pa',
+            completed: true
+          },
+          {
+            id: 2,
+            name: 'Compra llet',
+            completed: false
+          },
+          {
+            id: 3,
+            name: 'Estudiar PHP',
+            completed: false
+          }
+        ]
+      })
+
+    // 2 Execute -> click on filter active
+
+    // 3 Assert see only active tasks
+  })
+
+  it('not_shows_filters_if_task_list_is_not_empty', () => {
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: [
+          {
+            id: 1,
+            name: 'Compra pa',
+            completed: false
+          }
+        ]
+      }
+    })
+    // eslint-disable-next-line no-unused-expressions
+    expect(wrapper.find('span#filters').isVisible()).to.be.true
+  })
+
   // ***************** TOTAL COMPUTED PROPERTY TESTS ****************
 
   // UNIT TEST-> DIRECT TEST
@@ -104,6 +272,11 @@ describe('Tasks.vue', () => {
   })
 
   // ***************** METHODS *******************
+
+  // TODO
+  it('adds_task_using_enter', (done) => {
+    // https://vue-test-utils.vuejs.org/guides/dom-events.html
+  })
 
   // ADD
   it('adds_task', (done) => {
@@ -199,4 +372,4 @@ describe('Tasks.vue', () => {
 
 
     })
-})
+}))

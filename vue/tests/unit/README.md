@@ -2,6 +2,9 @@
 
 Que volem que faci?/Que volem testejar?
 
+Funcionalitats:
+- Les mateixes que http://todomvc.com/examples/vue/
+
 NOTA: Crida a l'API és sinònim en el nostre projecte de axios
 
 - Si no indiquem la propietat tasks s'executa una CRIDA a l'API per obtenir la llista de tasques
@@ -16,6 +19,9 @@ NOTA: Crida a l'API és sinònim en el nostre projecte de axios
 - Si premem la icona refresh, s'executa una crida a l'API per (re)obtenir les tasques de la base de dades
 - Comprovar els filtres: Si indiquem tasques de tots els tipus (completades i no completades) comprovem que funcionen
 els filtres
+- Boto/Checkbox completar/descompletar (Toogle)
+- Mostrar un text que indiqui quantes tasques queden per fer
+- Boto/acció permeti eliminar les tasques ja completades
 
 ISOLATION
 - Es tracta de testejar el component independentment del backend

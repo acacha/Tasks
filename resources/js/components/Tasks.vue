@@ -9,7 +9,6 @@
         <button @click="add">Afegir</button>
 
         <!--// SINTAX SUGAR-->
-
         <!--<input :value="newTask" @input="newTask = $event.target.value">-->
         <ul>
             <li v-for="task in filteredTasks" :key="task.id">

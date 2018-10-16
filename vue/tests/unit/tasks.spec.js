@@ -55,7 +55,7 @@ describe('Tasks.vue', () => {
     })
 
     // 3 assert
-    expect(wrapper.text()).toContain('todo')
+    expect(wrapper.text()).to.contain('todo')
   })
 
   it('shows_nothing_when_no_tasks_provided', () => {
@@ -64,7 +64,7 @@ describe('Tasks.vue', () => {
         tasks: []
       }
     })
-    expect(wrapper.text()).toContain('todo')
+    expect(wrapper.text()).to.contain('todo')
   })
 
   // Checking DOM -> Ok però compte si canviem la plantilla podem tenir que canviar el test
@@ -115,7 +115,7 @@ describe('Tasks.vue', () => {
     // 2 Execute -> click on filter all
 
     // 3 Assert see all tasks
-    expect(wrapper.text()).toContain('todo')
+    expect(wrapper.text()).to.contain('todo')
   })
 
   // TODO 2
@@ -146,7 +146,7 @@ describe('Tasks.vue', () => {
     // 2 Execute -> click on filter completed
 
     // 3 Assert see only completed tasks
-    expect(wrapper.text()).toContain('todo')
+    expect(wrapper.text()).to.contain('todo')
   })
 
   // TODO 3
@@ -177,7 +177,7 @@ describe('Tasks.vue', () => {
     // 2 Execute -> click on filter active
 
     // 3 Assert see only active tasks
-    expect(wrapper.text()).toContain('todo')
+    expect(wrapper.text()).to.contain('todo')
   })
 
   it('not_shows_filters_if_task_list_is_not_empty', () => {

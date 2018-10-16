@@ -41,22 +41,22 @@
 import EditableText from './EditableText'
 
 var filters = {
-  all: function(tasks) {
+  all: function (tasks) {
     return tasks
   },
-  completed: function(tasks) {
+  completed: function (tasks) {
     return tasks.filter(function (task) {
       return task.completed
-        // NO CAL
+      // NO CAL
       // if (task.completed) return true
       // else return false
     })
   },
-  active: function(tasks) {
-      return tasks.filter(function (task) {
-          return !task.completed
-      })
-  },
+  active: function (tasks) {
+    return tasks.filter(function (task) {
+      return !task.completed
+    })
+  }
 }
 
 export default {
@@ -64,61 +64,61 @@ export default {
   components: {
     'editable-text': EditableText
   },
-  data() {
+  data () {
     return {
-        filter: 'all', // All Completed Active
-        newTask: '',
-        dataTasks: this.tasks
+      filter: 'all', // All Completed Active
+      newTask: '',
+      dataTasks: this.tasks
     }
   },
   props: {
     tasks: {
       type: Array,
       default: function () {
-          return []
+        return []
       }
     }
   },
   computed: {
-    total() {
+    total () {
       return this.dataTasks.length
     },
-    filteredTasks() {
-        // Segons el filtre actiu
-        // Alternativa switch/case -> array associatiu
-        return filters[this.filter](this.dataTasks)
+    filteredTasks () {
+      // Segons el filtre actiu
+      // Alternativa switch/case -> array associatiu
+      return filters[this.filter](this.dataTasks)
     }
   },
   watch: {
-    tasks(newTasks) {
+    tasks (newTasks) {
       this.dataTasks = newTasks
     }
   },
   methods: {
-      editName(task,text) {
-          task.name = text
-      },
-      setFilter(newFilter) {
-          this.filter = newFilter
-      },
-      add() {
-          axios.post('/api/v1/tasks', {
-            name: this.newTask
-          }).then((response) => {
-            this.dataTasks.splice(0,0,{ id: response.data.id, name: this.newTask, completed: false } )
-            this.newTask=''
-          }).catch((error) => {
-            console.log(response)
-          })
-      },
-      remove(task) {
-          this.dataTasks.splice(this.dataTasks.indexOf(task),1)
-      }
+    editName (task, text) {
+      task.name = text
+    },
+    setFilter (newFilter) {
+      this.filter = newFilter
+    },
+    add () {
+      window.axios.post('/api/v1/tasks', {
+        name: this.newTask
+      }).then((response) => {
+        this.dataTasks.splice(0, 0, { id: response.data.id, name: this.newTask, completed: false })
+        this.newTask = ''
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    remove (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    }
   },
   created () {
-    console.log('CREATED IS EXECUTED!');
+    console.log('CREATED IS EXECUTED!')
     if (this.tasks.length === 0) {
-      axios.get('/api/v1/tasks').then((response) => {
+      window.axios.get('/api/v1/tasks').then((response) => {
         console.log('AXIOS EXECUTED!')
         console.log(response.data)
         this.dataTasks = response.data

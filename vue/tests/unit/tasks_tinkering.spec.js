@@ -8,10 +8,12 @@ describe('Tasks.vue', () => {
   beforeEach(() => {
     // Assign test helpers methods to wrapper
     Object.assign(Wrapper.prototype, TestHelpers)
+    // eslint-disable-next-line no-undef
     moxios.install(axios)
   })
 
   afterEach(function () {
+    // eslint-disable-next-line no-undef
     moxios.uninstall(axios)
   })
 

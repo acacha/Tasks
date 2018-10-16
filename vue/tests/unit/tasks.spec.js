@@ -1,5 +1,5 @@
-import { expect } from 'chai'
-import { shallowMount, mount, Wrapper } from '@vue/test-utils'
+import {expect} from 'chai'
+import {mount, shallowMount, Wrapper} from '@vue/test-utils'
 import Tasks from '../../../resources/js/components/Tasks'
 import moxios from 'moxios'
 import TestHelpers from './helpers.js'
@@ -27,8 +27,7 @@ describe('Tasks.vue', () => {
   // RENDERED OUTPUT (HTML/DOM OUTPUT TEMPLATE)
 
   // Checking shows a list
-
-// Checking DOM -> Ok però compte si canviem la plantilla podem tenir que canviar el test
+  // Checking DOM -> Ok però compte si canviem la plantilla podem tenir que canviar el test
   it.only('contains_a_list_of_tasks', () => {
     // Prepare
 
@@ -56,7 +55,7 @@ describe('Tasks.vue', () => {
     })
 
     // 3 assert
-    expect(wrap.text()).toContain(text)
+    expect(wrapper.text()).toContain('todo')
 
 
   })
@@ -67,6 +66,7 @@ describe('Tasks.vue', () => {
         tasks: []
       }
     })
+    expect(wrapper.text()).toContain('todo')
   })
 
   // Checking DOM -> Ok però compte si canviem la plantilla podem tenir que canviar el test
@@ -111,11 +111,13 @@ describe('Tasks.vue', () => {
             completed: false
           }
         ]
-      })
+      }
+    })
 
-      // 2 Execute -> click on filter all
+    // 2 Execute -> click on filter all
 
-      // 3 Assert see all tasks
+    // 3 Assert see all tasks
+    expect(wrapper.text()).toContain('todo')
   })
 
   // TODO 2
@@ -140,12 +142,14 @@ describe('Tasks.vue', () => {
             completed: false
           }
         ]
-      })
-
-      // 2 Execute -> click on filter completed
-
-      // 3 Assert see only completed tasks
+      }
     })
+
+    // 2 Execute -> click on filter completed
+
+    // 3 Assert see only completed tasks
+    expect(wrapper.text()).toContain('todo')
+  })
 
   // TODO 3
   it('shows_only_active_tasks_when_active_filter_is_selected', () => {
@@ -169,11 +173,13 @@ describe('Tasks.vue', () => {
             completed: false
           }
         ]
-      })
+      }
+    })
 
     // 2 Execute -> click on filter active
 
     // 3 Assert see only active tasks
+    expect(wrapper.text()).toContain('todo')
   })
 
   it('not_shows_filters_if_task_list_is_not_empty', () => {
@@ -256,7 +262,8 @@ describe('Tasks.vue', () => {
     })
     expect(wrapper.vm.tasks).to.have.length(1)
     // https://vue-test-utils.vuejs.org/api/wrapper/setProps.html
-    wrapper.setProps({ tasks: [
+    wrapper.setProps({
+      tasks: [
         {
           id: 1,
           name: 'Compra pa',
@@ -267,7 +274,8 @@ describe('Tasks.vue', () => {
           name: 'Compra llet',
           completed: false
         },
-      ]})
+      ]
+    })
     expect(wrapper.vm.tasks).to.have.length(2)
   })
 
@@ -369,7 +377,5 @@ describe('Tasks.vue', () => {
       expect(wrapper.vm.dataTasks[2].completed).equals(false)
       done()
     })
-
-
-    })
-}))
+  })
+})

@@ -1,5 +1,5 @@
-import {expect} from 'chai'
-import {mount, shallowMount, Wrapper} from '@vue/test-utils'
+import { expect } from 'chai'
+import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Tasks from '../../../resources/js/components/Tasks'
 import moxios from 'moxios'
 import TestHelpers from './helpers.js'
@@ -56,8 +56,6 @@ describe('Tasks.vue', () => {
 
     // 3 assert
     expect(wrapper.text()).toContain('todo')
-
-
   })
 
   it('shows_nothing_when_no_tasks_provided', () => {
@@ -226,7 +224,7 @@ describe('Tasks.vue', () => {
     expect(wrapper.vm.total).equals(2)
   })
 
-  //INDIRECT TEST -> Busquem que el total sigui correcte a la renderització/vista/dom final
+  // INDIRECT TEST -> Busquem que el total sigui correcte a la renderització/vista/dom final
   it('renders_default_title_with_total_0_without_tasks', () => {
     const wrapper = shallowMount(Tasks)
     expect(wrapper.text()).to.contain('Tasques (0)')
@@ -273,7 +271,7 @@ describe('Tasks.vue', () => {
           id: 2,
           name: 'Compra llet',
           completed: false
-        },
+        }
       ]
     })
     expect(wrapper.vm.tasks).to.have.length(2)
@@ -335,9 +333,7 @@ describe('Tasks.vue', () => {
       expect(wrapper.vm.dataTasks[0].completed).equals(false)
       done()
     })
-
   })
-
 
   // ***************** CREATED LIFECYCLE ****************
   it('fetchs_tasks_from_backend_when_no_tasks_prop_is_given', (done) => {

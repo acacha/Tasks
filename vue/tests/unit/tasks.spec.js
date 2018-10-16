@@ -8,11 +8,11 @@ describe('Tasks.vue', () => {
   beforeEach(() => {
     // Assign test helpers methods to wrapper
     Object.assign(Wrapper.prototype, TestHelpers)
-    moxios.install(axios)
+    moxios.install(global.axios)
   })
 
   afterEach(function () {
-    moxios.uninstall(axios)
+    moxios.uninstall(global.axios)
   })
 
   // Checks component's initial state
@@ -28,7 +28,7 @@ describe('Tasks.vue', () => {
 
   // Checking shows a list
   // Checking DOM -> Ok però compte si canviem la plantilla podem tenir que canviar el test
-  it.only('contains_a_list_of_tasks', () => {
+  it('contains_a_list_of_tasks', () => {
     // Prepare
 
     // 2 execute

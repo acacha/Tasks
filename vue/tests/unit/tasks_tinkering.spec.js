@@ -54,7 +54,7 @@ describe('Tasks.vue', () => {
     expect(wrapper.classes()).to.contain('tasks')
   })
 
-  // Interesant!!! Aquó testejem HTML (contingut) i no pas estil. Les llistes es poden formatar de múltiples formes però sempre seran llistes
+  // Interesant!!! Aquí testejem HTML (contingut) i no pas estil. Les llistes es poden formatar de múltiples formes però sempre seran llistes
   // Punt debil, que passa si la llista la fem amb una eina com vuetify i utilitzem custom components com v-list
   it('contains_a_list', () => {
     const wrapper = mount(Tasks)

@@ -16,7 +16,7 @@
 
 export default {
   name: 'EditableText',
-  data() {
+  data () {
     return {
       editing: false,
       currentText: this.text
@@ -29,19 +29,19 @@ export default {
     }
   },
   watch: {
-    text(newText) {
-        this.currentText = this.text
+    text (newText) {
+      this.currentText = this.text
     }
   },
   // props: ['text'],
   methods: {
-    edit() {
-        this.editing = false
-        //INFORMAR AL PARE
-        this.$emit('edited',this.currentText)
+    edit () {
+      this.editing = false
+      // INFORMAR AL PARE
+      this.$emit('edited', this.currentText)
     }
   },
-  created() {
+  created () {
     // console.log('Component EditableText ha estat creat');
   }
 }

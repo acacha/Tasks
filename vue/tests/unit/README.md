@@ -7,8 +7,9 @@ Funcionalitats:
 
 NOTA: Crida a l'API és sinònim en el nostre projecte de axios
 
-- Si no indiquem la propietat tasks s'executa una CRIDA a l'API per obtenir la llista de tasques
 - Si passem un array buit de tasques com a propietat tasks aleshores mostra 0 tasques
+- Si no indiquem la propietat tasks s'executa una CRIDA a l'API (axios)
+per obtenir la llista de tasques
 - Si passem un array de 3 tasques com a propietat tasks predefinides les mostra correctament
 - Comprovar funciona/mostra el total de tasques
 - Si afegim una nova tasca es mostra a la llista de tasques

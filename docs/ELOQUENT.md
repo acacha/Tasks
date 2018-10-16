@@ -1,5 +1,3 @@
-# Relationships
-
 # Models
 
 Artisan:

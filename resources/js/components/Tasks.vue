@@ -6,13 +6,17 @@
                name="name"
         >
 
+        <div v-if="errorMessage">
+            Ha succeit un error: {{ errorMessage }}
+        </div>
+
         <button @click="add">Afegir</button>
 
         <!--// SINTAX SUGAR-->
         <!--<input :value="newTask" @input="newTask = $event.target.value">-->
         <ul>
             <li v-for="task in filteredTasks" :key="task.id">
-                <span :class="{ strike: task.completed }">
+                <span :id="'task' + task.id" :class="{ strike: task.completed }">
                     <editable-text
                             :text="task.name"
                             @edited="editName(task, $event)"
@@ -68,7 +72,8 @@ export default {
     return {
       filter: 'all', // All Completed Active
       newTask: '',
-      dataTasks: this.tasks
+      dataTasks: this.tasks,
+      errorMessage: ''
     }
   },
   props: {
@@ -116,18 +121,12 @@ export default {
     }
   },
   created () {
-    console.log('CREATED IS EXECUTED!')
     if (this.tasks.length === 0) {
-      console.log('entra if')
       window.axios.get('/api/v1/tasks').then((response) => {
-        console.log('AXIOS EXECUTED!')
-        console.log('response:')
-        console.log(response.data)
         this.dataTasks = response.data
       }).catch((error) => {
-        console.log(error)
-        console.log('ERROR EXECUTED')
-        console.log(error)
+        console.log('XIVATO')
+        this.errorMessage = error.data.message
       })
     }
   }

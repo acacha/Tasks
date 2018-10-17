@@ -4,7 +4,6 @@ import Tasks from '../../../resources/js/components/Tasks.vue'
 import moxios from 'moxios'
 
 describe('Tasks.vue', () => {
-
   beforeEach(function () {
     moxios.install(global.axios)
   })
@@ -13,7 +12,57 @@ describe('Tasks.vue', () => {
     moxios.uninstall(global.axios)
   })
 
-  it('contains_a_list_of_taks', () => {
+  it.only('shows_error', () => {
+    // 2 execute
+    const wrapper = mount(Tasks)
+
+    wrapper.vm.errorMessage = 'Ui que mal!'
+    // Assertion
+
+    expect(wrapper.text()).contains('Ui que mal!')
+  })
+
+  it('not_shows_filters_when_no_tasks', () => {
+    // 2 execute
+    const wrapper = mount(Tasks)
+
+    wrapper.vm.errorMessage = 'Ui que mal!'
+    // Assertion
+
+    expect(wrapper.text()).contains('Filtros:').to.be.false
+  })
+
+  it.only('shows_filters_when_is_more_than_0_tasks', () => {
+    // 2 execute
+    const wrapper = mount(Tasks, {
+      propsData: {
+        tasks: [
+          {
+            id: 1,
+            name: 'Comprar pa',
+            completed: false
+          },
+          {
+            id: 2,
+            name: 'Comprar llet',
+            completed: true
+          },
+          {
+            id: 3,
+            name: 'Estudiar PHP',
+            completed: false
+          }
+        ]
+      }
+    })
+
+    wrapper.vm.errorMessage = 'Ui que mal!'
+    // Assertion
+
+    expect(wrapper.text()).contains('Filtros:')
+  })
+
+  it('contains_a_list_of_tasks', () => {
     // 1 PREPARE (OPTIONAL)
 
     // 2 EXECUTE
@@ -44,6 +93,7 @@ describe('Tasks.vue', () => {
     // console.log('AQUI HTML:')
     // console.log(wrapper.html())
     // 3 EXPECT
+
     expect(wrapper.text()).contains('Comprar pa')
     expect(wrapper.text()).contains('Comprar llet')
     expect(wrapper.text()).contains('Estudiar PHP')
@@ -52,7 +102,7 @@ describe('Tasks.vue', () => {
     expect(wrapper.vm.dataTasks).to.have.lengthOf(3)
     expect(wrapper.vm.dataTasks[0].id).equals(1)
     expect(wrapper.vm.dataTasks[0].name).equals('Comprar pa')
-    expect(wrapper.vm.dataTasks[0].completed).equals(false)
+    expect(wrapper.vm.e[0].completed).equals(false)
 
     expect(wrapper.vm.dataTasks[1].id).equals(2)
     expect(wrapper.vm.dataTasks[1].name).equals('Comprar llet')
@@ -61,10 +111,23 @@ describe('Tasks.vue', () => {
     expect(wrapper.vm.dataTasks[2].id).equals(3)
     expect(wrapper.vm.dataTasks[2].name).equals('Estudiar PHP')
     expect(wrapper.vm.dataTasks[2].completed).equals(false)
-
   })
 
-  it.only('contains_a_list_of_tasks_from_api_if_no_prop_tasks_is_provided', (done) => {
+  it.skip('shows_error_when_api_fails', (done) => {
+    // 1 Prepare (opcional)
+    moxios.stubRequest('/api/v1/tasks', {
+      status: 500,
+      response: {
+        data: 'Ha petat tot estrepitosament'
+      }
+    })
+
+    // 2 Execució
+    const wrapper = mount(Tasks) // <tasks></tasks>
+    expect(wrapper.text()).contains('Ha petat tot estrepitosament')
+  })
+
+  it('contains_a_list_of_tasks_from_api_if_no_prop_tasks_is_provided', (done) => {
     // 1 Prepare (opcional)
     moxios.stubRequest('/api/v1/tasks', {
       status: 200,
@@ -90,26 +153,15 @@ describe('Tasks.vue', () => {
     // 2 Execució
     const wrapper = mount(Tasks) // <tasks></tasks>
 
-    console.log(wrapper.html())
     // 3 expectations
     moxios.wait(() => {
       expect(wrapper.text()).contains('Comprar pa')
       expect(wrapper.text()).contains('Comprar llet')
       expect(wrapper.text()).contains('Estudiar PHP')
 
-      // wrapper.vm -> Objecte Vue (vm: View Model)
-      expect(wrapper.vm.dataTasks).to.have.lengthOf(3)
-      expect(wrapper.vm.dataTasks[0].id).equals(1)
-      expect(wrapper.vm.dataTasks[0].name).equals('Comprar pa')
-      expect(wrapper.vm.dataTasks[0].completed).equals(false)
+      // eslint-disable-next-line no-unused-expressions
+      expect(wrapper.find('span#task2').classes('strike')).to.be.true
 
-      expect(wrapper.vm.dataTasks[1].id).equals(2)
-      expect(wrapper.vm.dataTasks[1].name).equals('Comprar llet')
-      expect(wrapper.vm.dataTasks[1].completed).equals(true)
-
-      expect(wrapper.vm.dataTasks[2].id).equals(3)
-      expect(wrapper.vm.dataTasks[2].name).equals('Estudiar PHP')
-      expect(wrapper.vm.dataTasks[2].completed).equals(false)
       done()
     })
   })

@@ -122,11 +122,17 @@ export default {
   },
   created () {
     if (this.tasks.length === 0) {
+      console.log('entra if')
       window.axios.get('/api/v1/tasks').then((response) => {
+        console.log('XIVATO ok')
         this.dataTasks = response.data
       }).catch((error) => {
-        console.log('XIVATO')
-        this.errorMessage = error.data.message
+        // console.log('XIVATO error')
+        // console.log('ERROR:')
+        // console.log(error)
+        // console.log('data:')
+        // console.log(error.response.data)
+        this.errorMessage = error.response.data
       })
     }
   }

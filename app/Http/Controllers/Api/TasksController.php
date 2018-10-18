@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreTask;
 use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,9 +26,18 @@ class TasksController extends Controller
           $task->delete();
     }
 
-    public function store(Request $request)
+    public function store(StoreTask $request)
     {
-//        Task::create();
+        // Opcio 1 -> MAI
+//        if ($request->name === '') {
+//            abort(422,'El camp nom és obligatori');
+//        }
+
+        // Opció 2 -> acceptable
+//        $request->validate([
+//            'name' => 'required'
+//        ]);
+
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;

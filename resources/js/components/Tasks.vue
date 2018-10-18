@@ -23,7 +23,7 @@
                     ></editable-text>
                 </span>
                 &nbsp;
-                <span @click="remove(task)">&#215;</span>
+                <span :id="'delete_task_' + task.id" @click="remove(task)">&#215;</span>
             </li>
         </ul>
 
@@ -110,11 +110,6 @@ export default {
       window.axios.post('/api/v1/tasks', {
         name: this.newTask
       }).then((response) => {
-        console.log('RESPONSE:')
-        console.log(response.data)
-        console.log('TASCA:')
-        let task = { id: response.data.id, name: this.newTask, completed: false }
-        console.log(task)
         this.dataTasks.splice(0, 0, { id: response.data.id, name: this.newTask, completed: false })
         this.newTask = ''
       }).catch((error) => {

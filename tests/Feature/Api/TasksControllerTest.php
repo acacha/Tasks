@@ -53,9 +53,22 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
+    public function cannot_create_tasks_without_name()
+    {
+        $response = $this->json('post','/api/v1/tasks/',[
+            'name' => ''
+        ]);
+
+        $result = json_decode($response->getContent());
+        $response->assertStatus(422);
+    }
+
+    /**
+     * @test
+     */
     public function can_create_task()
     {
-        $response = $this->post('/api/v1/tasks/',[
+        $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pa'
         ]);
 
@@ -120,5 +133,5 @@ class TasksControllerTest extends TestCase
         $this->assertEquals('Comprar pa',$result->name);
         $this->assertFalse((boolean) $newTask->completed);
     }
-    
+
 }

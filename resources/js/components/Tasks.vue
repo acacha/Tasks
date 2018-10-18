@@ -10,7 +10,7 @@
             Ha succeit un error: {{ errorMessage }}
         </div>
 
-        <button @click="add">Afegir</button>
+        <button id="button_add_task" @click="add">Afegir</button>
 
         <!--// SINTAX SUGAR-->
         <!--<input :value="newTask" @input="newTask = $event.target.value">-->
@@ -110,6 +110,11 @@ export default {
       window.axios.post('/api/v1/tasks', {
         name: this.newTask
       }).then((response) => {
+        console.log('RESPONSE:')
+        console.log(response.data)
+        console.log('TASCA:')
+        let task = { id: response.data.id, name: this.newTask, completed: false }
+        console.log(task)
         this.dataTasks.splice(0, 0, { id: response.data.id, name: this.newTask, completed: false })
         this.newTask = ''
       }).catch((error) => {
@@ -122,16 +127,10 @@ export default {
   },
   created () {
     if (this.tasks.length === 0) {
-      console.log('entra if')
       window.axios.get('/api/v1/tasks').then((response) => {
-        console.log('XIVATO ok')
+        console.log(response.data)
         this.dataTasks = response.data
       }).catch((error) => {
-        // console.log('XIVATO error')
-        // console.log('ERROR:')
-        // console.log(error)
-        // console.log('data:')
-        // console.log(error.response.data)
         this.errorMessage = error.response.data
       })
     }

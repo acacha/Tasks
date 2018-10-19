@@ -1,16 +1,18 @@
 <template>
     <div id="tasks" class="tasks">
         <h1>Tasques ({{total}}):</h1>
-        <input type="text"
-               v-model="newTask" @keyup.enter="add"
-               name="name"
-        >
+        <form>
+            <input type="text"
+                   v-model="newTask" @keyup.enter="add"
+                   name="name"
+                   required
+            >
+            <button id="button_add_task" @click="add">Afegir</button>
+        </form>
 
         <div v-if="errorMessage">
             Ha succeit un error: {{ errorMessage }}
         </div>
-
-        <button id="button_add_task" @click="add">Afegir</button>
 
         <!--// SINTAX SUGAR-->
         <!--<input :value="newTask" @input="newTask = $event.target.value">-->
@@ -107,6 +109,7 @@ export default {
       this.filter = newFilter
     },
     add () {
+      if (this.newTask === '') return
       window.axios.post('/api/v1/tasks', {
         name: this.newTask
       }).then((response) => {

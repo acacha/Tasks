@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreTask;
+use App\Http\Requests\UpdateTask;
 use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,7 +46,7 @@ class TasksController extends Controller
         return $task;
     }
 
-    public function edit(Request $request, Task $task)
+    public function update(UpdateTask $request, Task $task)
     {
         $task->name = $request->name;
         $task->save();

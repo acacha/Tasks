@@ -21,7 +21,7 @@ class TasksControllerTest extends TestCase
         $task = factory(Task::class)->create();
 
         // 2
-        $response = $this->get('/api/v1/tasks/' . $task->id);
+        $response = $this->json('GET','/api/v1/tasks/' . $task->id);
 
         // 3
         $result = json_decode($response->getContent());
@@ -39,7 +39,7 @@ class TasksControllerTest extends TestCase
         $task = factory(Task::class)->create();
 
         // 2
-        $response = $this->delete('/api/v1/tasks/' . $task->id);
+        $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
 
         // 3
         $result = json_decode($response->getContent());
@@ -55,11 +55,14 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_create_tasks_without_name()
     {
-        $response = $this->json('post','/api/v1/tasks/',[
+        // Peticions HTTP és normal no és XHR -> Ajax
+//        $response = $this->post('/api/v1/tasks/',[
+//            'name' => ''
+//        ]);
+        // XHR -> JSON
+        $response = $this->json('POST','/api/v1/tasks/',[
             'name' => ''
         ]);
-
-        $result = json_decode($response->getContent());
         $response->assertStatus(422);
     }
 
@@ -89,7 +92,7 @@ class TasksControllerTest extends TestCase
         //1
         create_example_tasks();
 
-        $response = $this->get('/api/v1/tasks');
+        $response = $this->json('GET','/api/v1/tasks');
         $response->assertSuccessful();
 
         $result = json_decode($response->getContent());
@@ -117,7 +120,7 @@ class TasksControllerTest extends TestCase
         ]);
 
         // 2
-        $response = $this->put('/api/v1/tasks/' . $oldTask->id, [
+        $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
             'name' => 'Comprar pa'
         ]);
 
@@ -133,5 +136,23 @@ class TasksControllerTest extends TestCase
         $this->assertEquals('Comprar pa',$result->name);
         $this->assertFalse((boolean) $newTask->completed);
     }
+
+    /**
+     * @test
+     */
+    public function cannot_edit_task_without_name()
+    {
+        // 1
+        $oldTask = factory(Task::class)->create();
+
+        // 2
+        $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
+            'name' => ''
+        ]);
+
+        // 3
+        $response->assertStatus(422);
+    }
+
 
 }

@@ -9,6 +9,12 @@ require('./bootstrap')
 
 window.Vue = require('vue')
 
+const Vuetify = require('vuetify')
+window.Vue.use(Vuetify)
+
+require('vuetify/dist/vuetify.min.css')
+require('material-design-icons-iconfont/dist/material-design-icons.css')
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

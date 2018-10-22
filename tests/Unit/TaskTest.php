@@ -3,7 +3,9 @@
 namespace Tests\Unit;
 
 use App\File;
+use App\Tag;
 use App\Task;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -11,6 +13,52 @@ class TaskTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @test
+     */
+    public function can_assign_user_to_task()
+    {
+        // 1 Prepare
+        $task = Task::create([
+            'name' => 'Comprar pa'
+        ]);
+
+        $userOriginal = factory(User::class)->create();
+
+        // 2 Execute
+        $task->assignUser($userOriginal);
+
+        $user = $task->user;
+
+        $this->assertTrue($user->is($userOriginal));
+    }
+
+    /**
+     * @test
+     */
+    public function can_assign_tag_to_task()
+    {
+        // 1 Prepare
+        $task = Task::create([
+            'name' => 'Comprar pa'
+        ]);
+
+        $tag = Tag::create([
+            'name' => 'home'
+        ]);
+
+        // execució
+        $task->addTag($tag);
+
+        // Assertion
+        $tags = $task->tags;
+
+        $this->assertTrue($tags[0]->is($tag));
+    }
+
+    /**
+     * @test
+     */
     public function a_task_can_have_tags() {
         // 1 Prepare
         $task = Task::create([
@@ -31,16 +79,14 @@ class TaskTest extends TestCase
         $tags = [$tag1, $tag2, $tag3];
 
         // execució
-        $task->assignTags($tags);
+        $task->addTags($tags);
 
         // Assertion
-        $tags = $task->tags();
+        $tags = $task->tags;
 
         $this->assertTrue($tags[0]->is($tag1));
         $this->assertTrue($tags[1]->is($tag2));
         $this->assertTrue($tags[2]->is($tag3));
-
-
     }
 
 
@@ -67,6 +113,7 @@ class TaskTest extends TestCase
         // 1 Aixó torna tota la relació, treball extra
 //        $file = $task->files()->where('path','');
         // 2 Això retorna el object:
+
         $file = $task->file;
 
         // 3 Comprovo
@@ -85,7 +132,7 @@ class TaskTest extends TestCase
             'name' => 'Comprar pa'
         ]);
         // 2 Executo -> Wishful programming
-        $file = $task->file();
+        $file = $task->file;
 
         // 3 Comprovo
         // $file

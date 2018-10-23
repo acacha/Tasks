@@ -22,6 +22,6 @@ HEADER
     @yield('content')
 </div>
 FOOTER
-<script src="{{ mix('/js/App.vue') }}"></script>
+<script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

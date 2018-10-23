@@ -6,36 +6,20 @@ export default {
     return {
       drawer: null,
       items: [
-        { icon: 'contacts', text: 'Contacts' },
-        { icon: 'history', text: 'Frequently contacted' },
-        { icon: 'content_copy', text: 'Duplicates' },
+        { icon: 'home', text: 'Welcome', url: '/' },
+        { icon: 'home', text: 'Home', url: '/home' },
         {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
-          text: 'Labels',
+          text: 'Tasques',
           model: true,
           children: [
-            { icon: 'add', text: 'Create label' }
+            { icon: 'build', text: 'Tasques amb PHP', url: '/tasks' },
+            { icon: 'build', text: 'Tasques', url: '/tasks_vue' }
           ]
         },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: 'More',
-          model: false,
-          children: [
-            { text: 'Import' },
-            { text: 'Export' },
-            { text: 'Print' },
-            { text: 'Undo changes' },
-            { text: 'Other contacts' }
-          ]
-        },
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'chat_bubble', text: 'Send feedback' },
-        { icon: 'help', text: 'Help' },
-        { icon: 'phonelink', text: 'App downloads' },
-        { icon: 'keyboard', text: 'Go to the old version' }
+        { icon: 'help', text: 'Contact', url: '/contact' },
+        { icon: 'public', text: 'About', url: '/about' }
       ]
     }
   }

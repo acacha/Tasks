@@ -5,15 +5,16 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap')
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import './bootstrap'
+import ExampleComponent from './components/ExampleComponent.vue'
+import Tasks from './components/Tasks.vue'
 
-window.Vue = require('vue')
-
-const Vuetify = require('vuetify')
+window.Vue = Vue
 window.Vue.use(Vuetify)
-
-require('vuetify/dist/vuetify.min.css')
-require('material-design-icons-iconfont/dist/material-design-icons.css') // Ensure you are using css-loader
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -21,8 +22,8 @@ require('material-design-icons-iconfont/dist/material-design-icons.css') // Ensu
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-window.Vue.component('example-component', require('./components/ExampleComponent.vue'))
-window.Vue.component('tasks', require('./components/Tasks.vue'))
+window.Vue.component('example-component', ExampleComponent)
+window.Vue.component('tasks', Tasks)
 
 const AppComponent = require('./App.vue')
 // eslint-disable-next-line no-unused-vars

@@ -2,11 +2,11 @@
 
 Intenteu obrir la URL: 
 
- http://localhost:8080/js/app.js
+ http://localhost:8080/js/App.vue
  
 o si useu HTTPS:
 
- https://localhost:8080/js/app.js
+ https://localhost:8080/js/App.vue
  
 Si us dona error:
 

@@ -50,10 +50,10 @@ npm run watch
 npm run hot
 ```
 
-Per funcionar cal apuntar el nostre app.js a:
+Per funcionar cal apuntar el nostre App.vue a:
 
 ```
-    <script src="http://localhost:8080/js/app.js"></script>
+    <script src="http://localhost:8080/js/App.vue"></script>
 ```
 
 Com la URL pot canviar:
@@ -62,7 +62,7 @@ Com la URL pot canviar:
 <body>
     <div id="app"></div>
 
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/App.vue') }}"></script>
 </body>
 ```
 

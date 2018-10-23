@@ -20,7 +20,7 @@ Instal·leu el mòdul Javascript
 npm install vuetify --save
 ```
 
-Un cop instal·lat, al vostre fitxer main.js principal (en el cas de Laravel a resources/js/app.js) instal·leu Vuetify 
+Un cop instal·lat, al vostre fitxer main.js principal (en el cas de Laravel a resources/js/App.vue) instal·leu Vuetify 
 de la mateixa forma que s'instal·la qualsevol Plugin (Vue.use):
 
 ```javascript
@@ -85,7 +85,7 @@ Instal·leu Vuetify:
 npm install --save-dev vuetify material-design-icons-iconfont
 ```
 
-Editeu el fitxer de layout principal **resources/js/app.js** i afegiu després de la línia:
+Editeu el fitxer de layout principal **resources/js/App.vue** i afegiu després de la línia:
 
 
 ```
@@ -119,8 +119,8 @@ El layout que utilitzarem inicialment (més endavant el complicarem més) és el
 |             +-----------------------------------------------+
 | Bar         | DINAMIC CONTENT HERE (depending on URL/routes)|
 | (Drawer)    |                                               |
-+-------------+                                               |
-| FOOTER      |                                               |
++-------------+-----------------------------------------------|
+| FOOTER                                                      |
 +-------------+-----------------------------------------------|
 
 Si ho passem a una estructura jeràrquica tipus document DOM/HTML amb components vue Vuetify/Propis:
@@ -254,7 +254,7 @@ i canviant el nostre layout sense Vuetify a un layout amb Vuetify:
         </v-footer>
     </v-app>
 </div>
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/App.vue') }}"></script>
 </body>
 </html>
 ``` 

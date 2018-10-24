@@ -139,4 +139,22 @@ class TaskTest extends TestCase
         $this->assertNull($file);
 
     }
+
+    /**
+     * @test
+     */
+    public function can_toggle_completed()
+    {
+        $task = factory(Task::class)->create([
+            'completed' => false
+        ]);
+        $task->toggleCompleted();
+        $this->assertTrue($task->completed);
+
+        $task = factory(Task::class)->create([
+            'completed' => true
+        ]);
+        $task->toggleCompleted();
+        $this->assertFalse($task->completed);
+    }
 }

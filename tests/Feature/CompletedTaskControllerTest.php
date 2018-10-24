@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,8 +14,7 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function can_complete_a_task()
     {
-        $this->markTestSkipped();
-        //1
+        $this->withoutExceptionHandling();
         $task= Task::create([
             'name' => 'comprar pa',
             'completed' => false
@@ -25,7 +25,7 @@ class CompletedTaskControllerTest extends TestCase {
         // 2) comprovar canvis al objecte $task
         $task = $task->fresh();
         $response->assertRedirect('/tasks');
-        $response->assertStatus('302');
+        $response->assertStatus(302);
         $this->assertEquals($task->completed, true);
     }
 
@@ -44,7 +44,6 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function can_uncomplete_a_task()
     {
-        $this->markTestSkipped();
         //1
         $task= Task::create([
             'name' => 'comprar pa',

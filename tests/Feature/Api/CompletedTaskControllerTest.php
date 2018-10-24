@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,18 +14,12 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function can_complete_a_task()
     {
-        $this->markTestSkipped();
-        //1
         $task= Task::create([
             'name' => 'comprar pa',
             'completed' => false
         ]);
-        //2
         $response = $this->json('POST','/api/v1/completed_task/' . $task->id);
         $response->assertSuccessful();
-
-        //3 Dos opcions: 1) Comprovar base de dades directament
-        // 2) comprovar canvis al objecte $task
         $task = $task->fresh();
         $this->assertEquals($task->completed, true);
     }
@@ -44,7 +39,7 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function can_uncomplete_a_task()
     {
-        $this->markTestSkipped();
+        $this->withoutExceptionHandling();
         //1
         $task= Task::create([
             'name' => 'comprar pa',
@@ -52,10 +47,9 @@ class CompletedTaskControllerTest extends TestCase {
         ]);
         //2
         $response = $this->json('DELETE','/api/v1/completed_task/' . $task->id);
-        //3 Dos opcions: 1) Comprovar base de dades directament
-        // 2) comprovar canvis al objecte $task
+        $response->assertSuccessful();
         $task = $task->fresh();
-        $this->assertEquals($task->completed, false);
+        $this->assertEquals((boolean) $task->completed, false);
     }
 
     /**

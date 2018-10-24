@@ -24,3 +24,6 @@ Route::delete('/v1/tasks/{task}','Api\TasksController@destroy');    // DELETE
 Route::post('/v1/tasks','Api\TasksController@store');               // CREATE
 Route::put('/v1/tasks/{task}','Api\TasksController@update');         // EDIT
 
+// Completed tasks -> Estats
+Route::delete('/v1/completed_task/{task}','Api\CompletedTasksController@destroy');
+Route::post('/v1/completed_task/{task}','Api\CompletedTasksController@store');

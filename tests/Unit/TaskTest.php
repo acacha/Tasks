@@ -157,4 +157,12 @@ class TaskTest extends TestCase
         $task->toggleCompleted();
         $this->assertFalse($task->completed);
     }
+
+    /**
+     * @test
+     */
+    public function map()
+    {
+
+    }
 }

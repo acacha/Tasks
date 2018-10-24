@@ -10,21 +10,17 @@ class TasksControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    // CRUD -> CRU -> CREATE RETRIEVE UPDATE DELETE
-    // BREAD -> PA -> BROWSE READ EDIT ADD DELETE
     /**
      * @test
      */
     public function can_show_a_task()
     {
-        // 1
         $task = factory(Task::class)->create();
 
-        // 2
         $response = $this->json('GET','/api/v1/tasks/' . $task->id);
 
-        // 3
         $result = json_decode($response->getContent());
+        dd($result);
         $response->assertSuccessful();
         $this->assertEquals($task->name, $result->name);
         $this->assertEquals($task->completed, (boolean) $result->completed);

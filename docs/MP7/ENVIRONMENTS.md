@@ -5,7 +5,10 @@ Recordar fases aplicacions amb framework com Laravel:
 s'aplica la configuració. La configuració pot ser "dinàmica" o depenent de l'entorn (no es configura igual aplicació a 
 explotació/producció que a desenvolupament) 
 
-# Fases:
+Fase paradigma Front Controller/SPA Single Page Application
+- ROUTER/VUE-ROUTER
+
+# Entorns:
 
 - Desenvolupament/development: entorn local dels desenvolupadors. Cada desenvolupador té el seu propi sistema en local
 - Staging: fase intermitja opcional. En grans projectes es poden aplicar abans els canvis a uns servidors el més similars

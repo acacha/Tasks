@@ -2,10 +2,15 @@
 
 namespace Tests\Unit;
 
+use App\User;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class HelpersTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      */
@@ -17,6 +22,6 @@ class HelpersTest extends TestCase
 
         $this->assertEquals($user->name, 'Sergi Tur Badenas');
         $this->assertEquals($user->email, 'sergiturbadenas@gmail.com');
-        $this->assertEquals($user->password, env('PRIMARY_USER_PASSWORD','123456'));
+        $this->assertTrue(Hash::check(env('PRIMARY_USER_PASSWORD','123456'), $user->password));
     }
 }

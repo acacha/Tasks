@@ -11,6 +11,11 @@
 |
 */
 
+Auth::routes();
+
+// TODO
+Route::post('/login_alt','Auth\LoginAltController@login');
+
 // TDD -> TEST DRIVEN DEVELOPMENT
 
 Route::get('/tasks','TasksController@index');

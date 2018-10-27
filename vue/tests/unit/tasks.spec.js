@@ -3,6 +3,11 @@ import { mount, shallowMount, Wrapper } from '@vue/test-utils'
 import Tasks from '../../../resources/js/components/Tasks'
 import moxios from 'moxios'
 import TestHelpers from './helpers.js'
+import Vuetify from 'vuetify'
+import Vue from 'vue'
+
+Vue.use(Vuetify)
+Vue.config.silent = true
 
 describe('Tasks.vue', () => {
   beforeEach(() => {
@@ -285,7 +290,7 @@ describe('Tasks.vue', () => {
   })
 
   // ADD
-  it('adds_task', (done) => {
+  it.only('adds_task', (done) => {
     // 1 Prepare
     moxios.stubRequest('/api/v1/tasks', {
       status: 200,

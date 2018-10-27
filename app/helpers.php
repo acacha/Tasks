@@ -5,7 +5,7 @@ use App\User;
 
 if (!function_exists('create_primary_user')) {
     function create_primary_user() {
-        $user = User::where('email', 'sergiturbadenas@gmail.com');
+        $user = User::where('email', 'sergiturbadenas@gmail.com')->first();
         if (!$user) {
             User::firstOrCreate([
                 'name' => 'Sergi Tur Badenas',

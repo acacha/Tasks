@@ -22,7 +22,7 @@ let exampletasks = [
   }
 ]
 
-describe.only('Tasks.vue', () => {
+describe('Tasks.vue', () => {
   beforeEach(function () {
     moxios.install(global.axios)
   })
@@ -142,7 +142,7 @@ describe.only('Tasks.vue', () => {
     // https://vue-test-utils.vuejs.org/guides/#testing-key-mouse-and-other-dom-events
   })
 
-  it.only('delete_a_task', (done) => {
+  it('delete_a_task', (done) => {
     // 1 Prepare
     //     moxios.stubRequest('/api/v1/tasks', { TODO
 
@@ -158,7 +158,7 @@ describe.only('Tasks.vue', () => {
     // Moxios wait
   })
 
-  it.only('adds_a_task', (done) => {
+  it('adds_a_task', (done) => {
     // 1
     moxios.stubRequest('/api/v1/tasks', {
       status: 200,

@@ -16,9 +16,15 @@ a no ser que es continui la cadena (Petició 2 passi info a petició 3 i així c
   - Estes formes anomenem drivers i no haurien afectar la nostra api (el nostre codi)  
 - Cas anterior: quan es guarda informació en sessió només per a la següent petició anomenem flash
 
-# token authentication (API)
+# Token authentication (API)
 
 Utilitzarem Laravel passport
+
+# Laravel Authentication
+
+## Config
+
+Fitxer de config: **config/auth.php** 
 
 # Recursos
 

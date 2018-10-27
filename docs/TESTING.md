@@ -507,6 +507,18 @@ https://gist.github.com/patocallaghan/6154431
 
 # TROUBLESHOOTING
 
+# Troubleshooting
+
+## SyntaxError: The string did not match the expected pattern using Moxios/Aios
+
+
+Cal tenir en compte que tant el projecte (arrel) com la carpeta de testos (Vue o tests/Vue) han de tenir els paquets instal·lats en local:
+
+```
+cd tests/Vue
+npm install --save-dev moxios axios
+``` 
+
 ## No ESLint configuration found quan s'executa una test
 
 Exemple test:

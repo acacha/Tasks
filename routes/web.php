@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Auth::routes();
 
 // TODO
@@ -67,6 +69,8 @@ Route::delete('/completed_task/{task}','CompletedTasksController@destroy');
 //   echo 'hola';
 //});
 Route::get('/tasks_vue', 'TasksVueController@index');
+Route::get('/home', 'TasksVueController@index');
+
 
 // index -> LIST
 // store -> create

@@ -29,5 +29,8 @@
         "popper.js": "^1.12",
         "vue": "^2.5.7",
         "vuetify": "^1.3.3"
+    },
+    "dependencies": {
+        "vuelidate": "^0.7.4"
     }
 }

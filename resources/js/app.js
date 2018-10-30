@@ -12,8 +12,7 @@ window.Vue.use(Vuetify)
 
 window.Vue.component('example-component', ExampleComponent)
 window.Vue.component('tasks', Tasks)
-window.Vue.component('login-form',LoginForm)
-
+window.Vue.component('login-form', LoginForm)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

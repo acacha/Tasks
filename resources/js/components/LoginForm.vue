@@ -12,8 +12,8 @@
                     type="text"
                     v-model="dataEmail"
                     :error-messages="emailErrors"
-                    @input="$v.email.$touch()"
-                    @blur="$v.email.$touch()"
+                    @input="$v.dataEmail.$touch()"
+                    @blur="$v.dataEmail.$touch()"
             ></v-text-field>
             <v-text-field id="password"
                           prepend-icon="lock"
@@ -43,7 +43,7 @@ export default {
   name: 'LoginForm',
   mixins: [validationMixin],
   validations: {
-    email: { required, email },
+    dataEmail: { required, email },
     password: { required, minLength: minLength(6) }
   },
   data () {
@@ -56,15 +56,15 @@ export default {
   computed: {
     emailErrors () {
       const errors = []
-      if (!this.$v.email.$dirty) return errors
-      !this.$v.email.email && errors.push('El camp email ha de ser un email vàlid.')
-      !this.$v.email.required && errors.push('El camp email és obligatori.')
+      if (!this.$v.dataEmail.$dirty) return errors
+      !this.$v.dataEmail.email && errors.push('El camp email ha de ser un email vàlid.')
+      !this.$v.dataEmail.required && errors.push('El camp email és obligatori.')
       return errors
     },
     passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) return errors
-      !this.$v.email.minLength && errors.push('El camp password ha de tenir una mida mínima de 6 caràcters.')
+      !this.$v.password.minLength && errors.push('El camp password ha de tenir una mida mínima de 6 caràcters.')
       !this.$v.password.required && errors.push('El camp password és obligatori.')
       return errors
     }

@@ -20,59 +20,33 @@ Route::post('/login_alt','Auth\LoginAltController@login');
 
 // TDD -> TEST DRIVEN DEVELOPMENT
 
-Route::get('/tasks','TasksController@index');
-Route::post('/tasks','TasksController@store');
-Route::delete('/tasks/{id}','TasksController@destroy');
-Route::put('/tasks/{id}','TasksController@update');
+// MIDDLEWARE
 
-//Route::get('/task_edit',function () {
-//    return view('task_edit');
-//});
-Route::get('/task_edit/{id}','TasksController@edit');
+//GRUP DE URLS PER USUARIS AUTENTICATS
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tasks','TasksController@index');
+    Route::post('/tasks','TasksController@store');
+    Route::delete('/tasks/{id}','TasksController@destroy');
+    Route::put('/tasks/{id}','TasksController@update');
 
-// Route::resource() com alternativa
+    Route::get('/task_edit/{id}','TasksController@edit');
 
+    Route::get('/about',function () {
+        return view('about');
+    });
 
-//Route::get('/tasks',function() {
-//    return view('tasks');
-//});
+    Route::view('/contact', 'contact');
 
+    //Complete
+    Route::post('/completed_task/{task}','CompletedTasksController@store');
 
-Route::get('/about',function () {
-    return view('about');
+    //Uncomplete
+    Route::delete('/completed_task/{task}','CompletedTasksController@destroy');
+
+    Route::get('/tasks_vue', 'TasksVueController@index');
+    Route::get('/home', 'TasksVueController@index');
 });
-
-Route::view('/contact', 'contact');
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-
-//Route::get('/prova','ProvaController@show');
-Route::get('/prova',function() {
-    $prova = 'asdasdasd';
-    dd($prova);
-});
-
-Route::redirect('/hola','/prova');
-
-
-//Complete
-Route::post('/completed_task/{task}','CompletedTasksController@store');
-
-//Uncomplete
-Route::delete('/completed_task/{task}','CompletedTasksController@destroy');
-
-//Route::get('/tasks_vue', function() {
-//   echo 'hola';
-//});
-Route::get('/tasks_vue', 'TasksVueController@index');
-Route::get('/home', 'TasksVueController@index');
-
-
-// index -> LIST
-// store -> create
-// delete -> destory
-// edit -> PUT

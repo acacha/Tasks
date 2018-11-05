@@ -7,12 +7,12 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class RegisterControllerTest extends TestCase
+class RegisterAltControllerTest extends TestCase
 {
     /** @test */
     public function can_register_a_user()
     {
-
+        $this->markTestSkipped('Profe no el fa');
         // Afegir register_alt a fitxer routers/web.php
         // Afegir Controller RegisterAltController i metode store
         // Dins del store:

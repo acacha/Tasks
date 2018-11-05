@@ -20,7 +20,6 @@ class TasksControllerTest extends TestCase
         $response = $this->json('GET','/api/v1/tasks/' . $task->id);
 
         $result = json_decode($response->getContent());
-        dd($result);
         $response->assertSuccessful();
         $this->assertEquals($task->name, $result->name);
         $this->assertEquals($task->completed, (boolean) $result->completed);

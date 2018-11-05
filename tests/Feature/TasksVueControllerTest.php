@@ -2,18 +2,18 @@
 
 use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 class TasksVueControllerTest extends TestCase{
-    use RefreshDatabase;
+    use RefreshDatabase,CanLogin;
 
     /**
      * @test
      */
     public function can_show_vue_tasks()
     {
-        $this->withoutExceptionHandling();
-        // 1 PREPARE
+        $this->login();
         create_example_tasks();
 
         // 2 EXECUTE

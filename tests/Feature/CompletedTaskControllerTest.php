@@ -4,21 +4,23 @@ namespace Tests\Feature;
 
 use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 class CompletedTaskControllerTest extends TestCase {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
 
     /**
      * @test
      */
     public function can_complete_a_task()
     {
-        $this->withoutExceptionHandling();
+        $this->login();
         $task= Task::create([
             'name' => 'comprar pa',
             'completed' => false
         ]);
+
         //2
         $response = $this->post('/completed_task/' . $task->id);
         //3 Dos opcions: 1) Comprovar base de dades directament
@@ -34,8 +36,8 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function cannot_complete_a_unexisting_task()
     {
+        $this->login();
         $response = $this->post('/completed_task/1');
-        //3 Assert
         $response->assertStatus(404);
     }
 
@@ -44,7 +46,7 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function can_uncomplete_a_task()
     {
-        //1
+        $this->login();
         $task= Task::create([
             'name' => 'comprar pa',
             'completed' => true
@@ -54,9 +56,9 @@ class CompletedTaskControllerTest extends TestCase {
         //3 Dos opcions: 1) Comprovar base de dades directament
         // 2) comprovar canvis al objecte $task
         $task = $task->fresh();
-        $this->assertEquals($task->completed, false);
-        $response->assertRedirect('/tasks');
-        $response->assertStatus('302');
+        $this->assertEquals((boolean) $task->completed, false);
+        $response->assertRedirect('/');
+        $response->assertStatus(302);
     }
 
     /**
@@ -64,10 +66,8 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function cannot_uncomplete_a_unexisting_task()
     {
-        // 1 -> no cal fer res
-        // 2 Execute
+        $this->login();
         $response= $this->delete('/completed_task/1');
-        //3 Assert
         $response->assertStatus(404);
     }
 }

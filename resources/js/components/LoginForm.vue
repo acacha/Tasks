@@ -34,8 +34,6 @@
 </template>
 
 <script>
-// import vuelidate from 'vuelidate'
-// validationMixin = vuelidate.validationMixin
 import { validationMixin } from 'vuelidate'
 import { required, email, minLength } from 'vuelidate/lib/validators'
 

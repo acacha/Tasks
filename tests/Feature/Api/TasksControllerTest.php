@@ -4,17 +4,19 @@ namespace Tests\Feature\Api;
 
 use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 class TasksControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
 
     /**
      * @test
      */
     public function can_show_a_task()
     {
+        $this->login('api');
         $task = factory(Task::class)->create();
 
         $response = $this->json('GET','/api/v1/tasks/' . $task->id);
@@ -30,18 +32,15 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_task()
     {
-        // 1
+        $this->login('api');
         $task = factory(Task::class)->create();
 
-        // 2
         $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
 
-        // 3
         $result = json_decode($response->getContent());
         $response->assertSuccessful();
         $this->assertEquals('', $result);
 
-//        $this->assertDatabaseMissing('tasks', $task);
         $this->assertNull(Task::find($task->id));
     }
 
@@ -50,11 +49,8 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_create_tasks_without_name()
     {
-        // Peticions HTTP és normal no és XHR -> Ajax
-//        $response = $this->post('/api/v1/tasks/',[
-//            'name' => ''
-//        ]);
-        // XHR -> JSON
+        $this->login('api');
+
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => ''
         ]);
@@ -66,6 +62,7 @@ class TasksControllerTest extends TestCase
      */
     public function can_create_task()
     {
+        $this->login('api');
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pa'
         ]);
@@ -84,7 +81,8 @@ class TasksControllerTest extends TestCase
      */
     public function can_list_tasks()
     {
-        //1
+        $this->login('api');
+
         create_example_tasks();
 
         $response = $this->json('GET','/api/v1/tasks');
@@ -109,7 +107,8 @@ class TasksControllerTest extends TestCase
      */
     public function can_edit_task()
     {
-        // 1
+        $this->login('api');
+
         $oldTask = factory(Task::class)->create([
             'name' => 'Comprar llet'
         ]);
@@ -119,12 +118,8 @@ class TasksControllerTest extends TestCase
             'name' => 'Comprar pa'
         ]);
 
-        // 3
         $result = json_decode($response->getContent());
         $response->assertSuccessful();
-
-//        $this->assertDatabaseMissing('tasks', $oldTask);
-//        $this->assertDatabaseHas('tasks', $newtask);
 
         $newTask = $oldTask->refresh();
         $this->assertNotNull($newTask);
@@ -137,17 +132,13 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_edit_task_without_name()
     {
-        // 1
-        $oldTask = factory(Task::class)->create();
+        $this->login('api');
 
-        // 2
+        $oldTask = factory(Task::class)->create();
         $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
             'name' => ''
         ]);
 
-        // 3
         $response->assertStatus(422);
     }
-
-
 }

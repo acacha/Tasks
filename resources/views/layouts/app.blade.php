@@ -99,9 +99,3 @@
 <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>
-<script>
-  import VList from "vuetify/lib/components/VList/VList"
-  export default {
-    components: {VList}
-  }
-</script>

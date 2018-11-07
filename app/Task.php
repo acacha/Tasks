@@ -68,6 +68,8 @@ class Task extends Model
             'completed' => $this->completed,
             'user_id' => $this->user_id,
             'user_name' => optional($this->user)->name,
+            'user_email' => optional($this->user)->email,
+            'user' => $this->user
 //            'tags' => $this->tags
 //            'file' => $this->file
         ];

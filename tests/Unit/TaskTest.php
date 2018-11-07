@@ -163,6 +163,19 @@ class TaskTest extends TestCase
      */
     public function map()
     {
-
+        $user = factory(User::class)->create();
+        $task = Task::create([
+            'name' => 'Comprar pa',
+            'completed' => false,
+            'user_id' => $user->id
+        ]);
+        $mappedTask = $task->map();
+        $this->assertEquals($mappedTask['id'],1);
+        $this->assertEquals($mappedTask['name'],'Comprar pa');
+        $this->assertEquals($mappedTask['completed'],false);
+        $this->assertEquals($mappedTask['user_id'],$user->id);
+        $this->assertEquals($mappedTask['user_name'],$user->name);
+        $this->assertEquals($mappedTask['user_email'],$user->email);
+        $this->assertTrue($user->is($mappedTask['user']));
     }
 }

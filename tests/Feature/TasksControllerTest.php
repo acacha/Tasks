@@ -117,7 +117,7 @@ class TasksControllerTest extends TestCase
     public function can_edit_a_task_todo_validation()
     {
         $this->login();
-        $this->markTestSkipped('TODO');
+//        $this->markTestSkipped('TODO');
         $this->withoutExceptionHandling();
         $task = Task::create([
             'name' => 'asdasdasd',

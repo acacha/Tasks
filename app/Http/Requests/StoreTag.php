@@ -24,7 +24,9 @@ class StoreTag extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required',
+            'color' => 'required'
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Tag;
 use App\Task;
 use App\User;
 
@@ -16,6 +17,27 @@ if (!function_exists('create_primary_user')) {
     }
 }
 
+if (!function_exists('create_example_tags')) {
+    function create_example_tags() {
+        Tag::create([
+            'name' => 'Tag1',
+            'description' => 'Bla bla bla',
+            'color' => '#123456'
+        ]);
+
+        Tag::create([
+            'name' => 'Tag2',
+            'description' => 'Bla bla bla',
+            'color' => '#123456'
+        ]);
+
+        Tag::create([
+            'name' => 'Tag3',
+            'description' => 'Bla bla bla',
+            'color' => '#123456'
+        ]);
+    }
+}
 
 if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {

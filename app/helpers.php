@@ -3,6 +3,7 @@
 use App\Tag;
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('create_primary_user')) {
     function create_primary_user() {
@@ -55,5 +56,14 @@ if (!function_exists('create_example_tasks')) {
             'name' => 'Estudiar PHP',
             'completed' => true
         ]);
+    }
+}
+
+if (!function_exists('create_mysql_database')) {
+    function create_mysql_database($name) {
+        // PDO
+        // MYSQL: CREATE DATABASE IF NOT EXISTS $name
+        $statement = "CREATE DATABASE IF NOT EXISTS $name";
+        DB::connection('mysqlroot')->getPdo()->exec($statement);
     }
 }

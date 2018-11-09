@@ -92,4 +92,24 @@ class UserTest extends TestCase
         $this->assertTrue($tasks[2]->is($task3));
     }
 
+    /**
+     * @test
+     */
+    public function haveTask()
+    {
+        // 2 Execute
+        $user->haveTask();
+    }
+
+    // https://laravel.com/docs/5.7/eloquent-relationships#inserting-and-updating-related-models
+
+    /**
+     * @test
+     */
+    public function removeTask()
+    {
+        // 2 Execute
+        $user->removeTask();
+    }
+
 }

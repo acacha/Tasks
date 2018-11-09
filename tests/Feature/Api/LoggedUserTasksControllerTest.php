@@ -16,6 +16,7 @@ class LoggedUserTasksControllerTest extends TestCase
      */
     public function can_list_logged_user_tasks()
     {
+        $this->withoutExceptionHandling();
         // 1 Preparació
         $user = $this->login('api');
 
@@ -32,9 +33,10 @@ class LoggedUserTasksControllerTest extends TestCase
 
         $result = json_decode($response->getContent());
 
-        $this->assertEquals($result[0]->is($task1));
-        $this->assertEquals($result[1]->is($task2));
-        $this->assertEquals($result[2]->is($task3));
+        $this->assertCount(3,$result);
+        $this->assertEquals($result[0]->id, $task1->id);
+        $this->assertEquals($result[1]->id, $task2->id);
+        $this->assertEquals($result[2]->id, $task3->id);
     }
 
     /**

@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class LoggedUserTasksController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 //        return Task::all();
 //        return Task::where('user_id',Auth::user()->id);
 //        $statement = 'SELECT * FROM user WHERE user_id=' . Auth::user()->id;
 //        $result = DB:getConnection('sqlite')->exec($statement);
 //        asdas
-        return Auth::user()->tasks;
+        dd($request->user('api'));
+        return $request->user('api')->tasks;
     }
 
     public function store(Request $request)

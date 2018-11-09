@@ -170,32 +170,7 @@ export default {
         rowsPerPage: 25
       },
       loading: false,
-      dataTasks: [
-        {
-          id: 1,
-          name: 'Comprar pa',
-          completed: false,
-          user_id: 1,
-          created_at: 'fa 1 minut',
-          updated_at: 'fa 1 minut'
-        },
-        {
-          id: 2,
-          name: 'Comprar llet',
-          completed: false,
-          user_id: 1,
-          created_at: 'fa 1 minut',
-          updated_at: 'fa 1 minut'
-        },
-        {
-          id: 3,
-          name: 'Estudiar PHP',
-          completed: true,
-          user_id: 2,
-          created_at: 'fa 1 minut',
-          updated_at: 'fa 1 minut'
-        }
-      ],
+      dataTasks: this.tasks,
       headers: [
         { text: 'Id', value: 'id' },
         { text: 'Name', value: 'name' },
@@ -205,6 +180,12 @@ export default {
         { text: 'Modificat', value: 'updated_at' },
         { text: 'Accions', sortable: false }
       ]
+    }
+  },
+  props: {
+    tasks: {
+      type: [],
+      required: true
     }
   },
   methods: {
@@ -232,9 +213,16 @@ export default {
     },
     refresh () {
       this.loading = true
-      setTimeout(() => { this.loading = false }, 5000)
-      // TODO -> AXIOS
-      console.log('TODO REFRESH')
+      // setTimeout(() => { this.loading = false }, 5000)
+      // OCO !! URL CANVIA SEGONS EL CAS!!! TODO
+      // window.axios.get('/api/v1/tasks').then().catch()
+      window.axios.get('/api/v1/user/tasks').then(response => {
+        // SHOW SNACKBAR MISSATGE OK: 'Les tasques s'han actualitzat correctament
+        this.dataTasks = response.data
+      }).catch(error => {
+        console.log(error)
+        // SHOW SNACKBAR ERROR TODO
+      })
     }
   }
 }

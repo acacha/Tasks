@@ -7,3 +7,7 @@
 - [ ] Crear mètode removeTask
 - [ ] Acabar i comprovar test Api/LoggedUserTaskController.php
 - [ ] Acabar i comprovar va bé controller Api/LoggedUserTaskController.php
+
+# Instal·lació Laravel passport:
+
+https://laravel.com/docs/5.7/passport

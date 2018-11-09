@@ -16,8 +16,7 @@ class LoggedUserTasksController extends Controller
 //        $statement = 'SELECT * FROM user WHERE user_id=' . Auth::user()->id;
 //        $result = DB:getConnection('sqlite')->exec($statement);
 //        asdas
-        dd($request->user('api'));
-        return $request->user('api')->tasks;
+        return $request->user()->tasks;
     }
 
     public function store(Request $request)

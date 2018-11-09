@@ -145,7 +145,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Tasques',
   data () {
@@ -219,8 +218,10 @@ export default {
       window.axios.get('/api/v1/user/tasks').then(response => {
         // SHOW SNACKBAR MISSATGE OK: 'Les tasques s'han actualitzat correctament
         this.dataTasks = response.data
+        this.loading = false
       }).catch(error => {
         console.log(error)
+        this.loading = false
         // SHOW SNACKBAR ERROR TODO
       })
     }

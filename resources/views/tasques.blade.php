@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <tasques></tasques>
+    <v-container fluid>
+        <v-layout>
+            <v-flex>
+                <tasques :tasks="{{ $tasks }}"></tasques>
+            </v-flex>
+        </v-layout>
+    </v-container>
 @endsection

@@ -24,7 +24,5 @@ class TasksVueControllerTest extends TestCase{
 
         $response->assertViewIs('tasks_vue');
         $response->assertViewHas('tasks',Task::all());
-
-
     }
 }

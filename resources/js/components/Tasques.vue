@@ -20,7 +20,7 @@
 
                       <v-btn
                               color="error darken-1"
-                              flat="flat"
+                              flat
                               @click="destroy"
                       >
                         Confirmar
@@ -31,6 +31,29 @@
         <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
                 PROVA
+            </v-card>
+        </v-dialog>
+        <v-dialog v-model="editDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
+            @keydown.esc="editDialog=false">
+            <v-toolbar color="blue darken-3" class="white--text">
+                <v-btn flat icon class="white--text" @click="editDialog=false">
+                    <v-icon class="mr-1">close</v-icon>
+                </v-btn>
+                <v-toolbar-title class="white--text">Editar Tasca</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn flat class="white--text" @click="editDialog=false">
+                    <v-icon class="mr-1">exit_to_app</v-icon>
+                    Sortir
+                </v-btn>
+                <v-btn flat class="white--text">
+                    <v-icon class="mr-1">save</v-icon>
+                    Guardar
+                </v-btn>
+            </v-toolbar>
+            <v-card>
+                <v-card-text>
+                    TODO AQUI EDIT DIALOG
+                </v-card-text>
             </v-card>
         </v-dialog>
 
@@ -111,15 +134,15 @@
                         <td>
                             <v-btn icon color="primary" flat title="Mostrar snackbar"
                                    @click="snackbar=true">
-                                <v-icon>delete</v-icon>
+                                <v-icon>info</v-icon>
                             </v-btn>
                             <v-btn icon color="primary" flat title="Mostrar la tasca"
                                    @click="show(task)">
-                                <v-icon>delete</v-icon>
+                                <v-icon>visibility</v-icon>
                             </v-btn>
                             <v-btn icon color="success" flat title="Canviar la tasca"
-                                   @click="update(task)">
-                                <v-icon>delete</v-icon>
+                                   @click="showUpdate(task)">
+                                <v-icon>edit</v-icon>
                             </v-btn>
                             <v-btn icon color="error" flat title="Eliminar la tasca"
                                     @click="showDestroy(task)">
@@ -151,6 +174,7 @@ export default {
     return {
       deleteDialog: false,
       createDialog: false,
+      editDialog: false,
       snackbar: true,
       user: '',
       users: [
@@ -183,11 +207,14 @@ export default {
   },
   props: {
     tasks: {
-      type: [],
+      type: Array,
       required: true
     }
   },
   methods: {
+    showUpdate () {
+      this.editDialog = true
+    },
     opcio1 () {
       console.log('OPCIO 1 REFRESH')
     },

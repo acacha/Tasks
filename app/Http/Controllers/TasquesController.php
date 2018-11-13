@@ -9,10 +9,7 @@ class TasquesController extends Controller
 {
     public function index()
     {
-        // MVC
         $tasks =  Task::orderBy('created_at','desc')->get();
-
-        return view('tasques',
-            compact('tasks'));
+        return view('tasques',compact('tasks'));
     }
 }

@@ -52,7 +52,23 @@
             </v-toolbar>
             <v-card>
                 <v-card-text>
-                    TODO AQUI EDIT DIALOG
+                    <v-form>
+                        <v-text-field v-model="name" label="Nom" hint="El nom de la tasca..." placeholder="Nom de la tasca"></v-text-field>
+                        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+
+                        <v-textarea v-model="description" label="Descripció" hint="bla bla bla..."></v-textarea>
+                        <v-autocomplete :items="dataUsers" label="Usuari" item-text="name"></v-autocomplete>
+                        <div class="text-xs-center">
+                            <v-btn @click="editDialog=false">
+                                <v-icon class="mr-1">exit_to_app</v-icon>
+                                Cancel·lar
+                            </v-btn>
+                            <v-btn color="success">
+                                <v-icon class="mr-1" >save</v-icon>
+                                Guardar
+                            </v-btn>
+                        </div>
+                    </v-form>
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -91,14 +107,17 @@
                         <v-select
                                 label="Filtres"
                                 :items="filters"
-                                v-model="filter">
+                                v-model="filter"
+                                item-text="name"
+                        >
                         </v-select>
                     </v-flex>
                     <v-flex lg4 class="mr-2">
                         <v-select
                                 label="User"
-                                :items="users"
+                                :items="dataUsers"
                                 v-model="user"
+                                item-text="name"
                                 clearable>
                         </v-select>
                     </v-flex>
@@ -121,6 +140,7 @@
                     :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
                     :loading="loading"
                     :pagination.sync="pagination"
+                    class="hidden-md-and-down"
             >
                 <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
                 <template slot="items" slot-scope="{item: task}">
@@ -152,6 +172,38 @@
                     </tr>
                 </template>
             </v-data-table>
+            <v-data-iterator class="hidden-lg-and-up"
+                             :items="dataTasks"
+                             :search="search"
+                             no-results-text="No s'ha trobat cap registre coincident"
+                             no-data-text="No hi han dades disponibles"
+                             rows-per-page-text="Tasques per pàgina"
+                             :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
+                             :loading="loading"
+                             :pagination.sync="pagination"
+            >
+                <v-flex
+                        slot="item"
+                        slot-scope="{item:task}"
+                        xs12
+                        sm6
+                        md4
+                >
+                    <v-card class="mb-1">
+                        <v-card-title v-text="task.name"></v-card-title>
+                        <v-list dense>
+                            <v-list-tile>
+                              <v-list-tile-content>Completed:</v-list-tile-content>
+                              <v-list-tile-content class="align-end">{{ task.completed }}</v-list-tile-content>
+                            </v-list-tile>
+                            <v-list-tile>
+                              <v-list-tile-content>User:</v-list-tile-content>
+                              <v-list-tile-content class="align-end">{{ task.user_id }}</v-list-tile-content>
+                            </v-list-tile>
+                        </v-list>
+                    </v-card>
+                </v-flex>
+            </v-data-iterator>
         </v-card>
         <v-btn
             @click="showCreate"
@@ -172,12 +224,16 @@ export default {
   name: 'Tasques',
   data () {
     return {
+      dataUsers: this.users,
+      completed: false,
+      name: '',
+      description: '',
       deleteDialog: false,
       createDialog: false,
       editDialog: false,
       snackbar: true,
       user: '',
-      users: [
+      usersold: [
         'Sergi Tur',
         'Pepe Pardo',
         'Maria Delahoz'
@@ -207,6 +263,10 @@ export default {
   },
   props: {
     tasks: {
+      type: Array,
+      required: true
+    },
+    users: {
       type: Array,
       required: true
     }

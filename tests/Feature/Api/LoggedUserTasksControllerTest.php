@@ -16,7 +16,6 @@ class LoggedUserTasksControllerTest extends TestCase
      */
     public function can_list_logged_user_tasks()
     {
-        $this->withoutExceptionHandling();
         // 1 Preparació
         $user = $this->login('api');
 
@@ -49,4 +48,51 @@ class LoggedUserTasksControllerTest extends TestCase
         $response = $this->json('GET','/user/tasks');
         $response->assertStatus(401);
     }
+
+    /**
+     * @test
+     */
+    public function cannot_edit_a_task_not_associated_to_user()
+    {
+        $user = $this->login('api');
+        $oldTask = factory(Task::class)->create([
+            'name' => 'Comprar llet'
+        ]);
+
+        // 2
+        $response = $this->json('PUT', '/api/v1/user/tasks/' . $oldTask->id, [
+            'name' => 'Comprar pa'
+        ]);
+        $response->assertStatus(404);
+    }
+
+        /**
+     * @test
+     */
+    public function can_edit_task()
+    {
+        $user = $this->login('api');
+
+        $oldTask = factory(Task::class)->create([
+            'name' => 'Comprar llet',
+            'description' => 'Bla bla bla'
+        ]);
+        $user->addTask($oldTask);
+
+        // 2
+        $response = $this->json('PUT','/api/v1/user/tasks/' . $oldTask->id, [
+            'name' => 'Comprar pa',
+            'description' => 'JORl jhorlsad asd'
+        ]);
+
+        $result = json_decode($response->getContent());
+        $response->assertSuccessful();
+        $newTask = $oldTask->refresh();
+        $this->assertNotNull($newTask);
+        $this->assertEquals($oldTask->id,$result->id);
+        $this->assertEquals('Comprar pa',$result->name);
+        $this->assertEquals('JORl jhorlsad asd',$result->description);
+        $this->assertFalse((boolean) $newTask->completed);
+    }
+
 }

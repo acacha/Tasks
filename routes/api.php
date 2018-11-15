@@ -36,5 +36,7 @@ Route::middleware('auth:api')->group(function() {
     Route::put('/v1/tags/{tag}','Api\TagsController@update');         // EDIT
 
     Route::get('/v1/user/tasks','Api\LoggedUserTasksController@index');
+    Route::put('/v1/user/tasks/{task}','Api\LoggedUserTasksController@update');
+
 });
 

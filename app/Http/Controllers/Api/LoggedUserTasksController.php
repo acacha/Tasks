@@ -11,23 +11,12 @@ class LoggedUserTasksController extends Controller
 {
     public function index(Request $request)
     {
-//        return Task::all();
-//        return Task::where('user_id',Auth::user()->id);
-//        $statement = 'SELECT * FROM user WHERE user_id=' . Auth::user()->id;
-//        $result = DB:getConnection('sqlite')->exec($statement);
-//        asdas
         return $request->user()->tasks;
     }
 
     public function store(Request $request)
     {
-//        return Auth::user()->tasks;
-//        Request::create([
-//            'name' => $request->name,
-//            'completed' => $request->completed
-//        ]);
         $task = Request::create($request->only(['name','completed']));
-//        return Auth::user()->tasks->save($task);
         return Auth::user()->addTask($task);
     }
 
@@ -37,19 +26,19 @@ class LoggedUserTasksController extends Controller
         return Auth::user()->removeTask($task);
     }
 
+    /**
+     * update.
+     * @param Request $request
+     * @param Task $task
+     * @return Task
+     */
     public function update(Request $request, Task $task)
     {
-//        findOrFail
         Auth::user()->tasks()->findOrFail($task->id);
-//        Tasks:all()->findOrFail($task->id);
         $task->name = $request->name;
+        $task->description = $request->description;
         $task->completed = $request->completed;
         $task->save();
-
-//        if (Auth::user()->haveTask($task)) {
-//            $task->name = $request->name;
-//            $task->completed = $request->completed;
-//            $task->save();
-//        }
+        return $task;
     }
 }

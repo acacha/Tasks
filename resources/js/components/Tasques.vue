@@ -304,6 +304,7 @@ export default {
       // window.axios.get('/api/v1/tasks').then().catch()
       // USERS TASKS O TOTES LES TASQUES?
       window.axios.get('/api/v1/user/tasks').then(response => {
+        console.log(response.data)
         // SHOW SNACKBAR MISSATGE OK: 'Les tasques s'han actualitzat correctament
         this.dataTasks = response.data
         this.loading = false

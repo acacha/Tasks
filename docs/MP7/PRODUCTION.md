@@ -45,6 +45,7 @@ El procediment és:
 
 ```
 Aturar npm run hot
+npm run dev
 git checkout master
 co
 git checkout production
@@ -54,6 +55,10 @@ git status -> net
 git commit -a "WIP"
 git checkout master
 git push --all origin 
+ssh SERVER
+cd DOMINI
+git checkout production
+git pull origin production
 ```
 
 ### Troubleshooting. Resolució de problemes

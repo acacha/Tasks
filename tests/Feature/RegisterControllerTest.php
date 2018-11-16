@@ -16,6 +16,7 @@ class RegisterControllerTest extends TestCase
     public function can_register_a_user()
     {
         $this->withoutExceptionHandling();
+        initialize_roles();
         $this->assertNull(Auth::user());
         // Execution
         $response = $this->post('/register', $user = [
@@ -35,5 +36,7 @@ class RegisterControllerTest extends TestCase
         $this->assertNotNull(Auth::user());
 
         $this->assertTrue(Hash::check($user['password'],Auth::user()->password));
+
+        $this->assertTrue(Auth::user()->hasRole('Tasks'));
     }
 }

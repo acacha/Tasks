@@ -25,6 +25,6 @@ class AddRolesToRegisterUser
      */
     public function handle($event)
     {
-        //
+        $event->user->assignRole('Tasks');
     }
 }

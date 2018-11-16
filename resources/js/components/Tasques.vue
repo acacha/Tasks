@@ -22,6 +22,8 @@
                               color="error darken-1"
                               flat
                               @click="destroy"
+                              :loading="removing"
+                              :disabled="removing"
                       >
                         Confirmar
                       </v-btn>
@@ -231,6 +233,7 @@ export default {
       deleteDialog: false,
       createDialog: false,
       editDialog: false,
+      taskBeingRemoved: null,
       snackbar: true,
       user: '',
       usersold: [
@@ -249,6 +252,9 @@ export default {
         rowsPerPage: 25
       },
       loading: false,
+      creating: false,
+      editing: false,
+      removing: false,
       dataTasks: this.tasks,
       headers: [
         { text: 'Id', value: 'id' },
@@ -280,10 +286,25 @@ export default {
     },
     showDestroy (task) {
       this.deleteDialog = true
+      this.taskBeingRemoved = task
     },
-    destroy (task) {
-      this.deleteDialog = false
-      console.log('TODO DELETE TASK ' + task.id)
+    removeTask (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
+    destroy () {
+      this.removing = true
+      window.axios.delete('/api/v1/user/tasks/' + this.taskBeingRemoved.id).then(() => {
+        // this.refresh() // Problema -> rendiment
+        this.removeTask(this.taskBeingRemoved)
+        this.deleteDialog = false
+        this.taskBeingRemoved = null
+        // TODO showSnackbar
+        this.removing = false
+      }).catch(error => {
+        console.log(error)
+        // TODO showSnackbar
+        this.removing = false
+      })
     },
     showCreate () {
       this.createDialog = true

@@ -5,7 +5,6 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-
 class UserTest extends TestCase
 {
     use RefreshDatabase;
@@ -98,7 +97,7 @@ class UserTest extends TestCase
     public function haveTask()
     {
         // 2 Execute
-        $user->haveTask();
+//        $user->haveTask();
     }
 
     // https://laravel.com/docs/5.7/eloquent-relationships#inserting-and-updating-related-models
@@ -109,7 +108,18 @@ class UserTest extends TestCase
     public function removeTask()
     {
         // 2 Execute
-        $user->removeTask();
+//        $user->removeTask();
     }
 
+    /**
+     * @test
+     */
+    public function isSuperAdmin()
+    {
+        $user = factory(User::class)->create();
+        $this->assertFalse($user->isSuperAdmin());
+        $user->admin = true;
+        $user->save();
+        $this->assertTrue($user->isSuperAdmin());
+    }
 }

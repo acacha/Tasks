@@ -15,9 +15,10 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_show_a_task()
+    public function task_manager_can_show_a_task()
     {
-        $this->login('api');
+        $user = $this->login('api');
+        // TODO add role Taskmanager al usuari
         $task = factory(Task::class)->create();
 
         $response = $this->json('GET','/api/v1/tasks/' . $task->id);
@@ -26,6 +27,36 @@ class TasksControllerTest extends TestCase
         $response->assertSuccessful();
         $this->assertEquals($task->name, $result->name);
         $this->assertEquals($task->completed, (boolean) $result->completed);
+    }
+
+    /**
+     * @test
+     */
+    public function superadmin_can_show_a_task()
+    {
+        $user = $this->login('api');
+        $user->admin = true;
+        $user->save();
+        $task = factory(Task::class)->create();
+
+        $response = $this->json('GET','/api/v1/tasks/' . $task->id);
+
+        $result = json_decode($response->getContent());
+        $response->assertSuccessful();
+        $this->assertEquals($task->name, $result->name);
+        $this->assertEquals($task->completed, (boolean) $result->completed);
+    }
+
+    /**
+     * @test
+     */
+    public function regular_user_cannot_show_a_task()
+    {
+        $this->login('api');
+        $task = factory(Task::class)->create();
+
+        $response = $this->json('GET','/api/v1/tasks/' . $task->id);
+        $response->assertStatus(403);
     }
 
     /**

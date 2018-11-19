@@ -15,11 +15,13 @@ if (!function_exists('create_primary_user')) {
     function create_primary_user() {
         $user = User::where('email', 'sergiturbadenas@gmail.com')->first();
         if (!$user) {
-            User::firstOrCreate([
+            $user = User::firstOrCreate([
                 'name' => 'Sergi Tur Badenas',
                 'email' => 'sergiturbadenas@gmail.com',
                 'password' => bcrypt(env('PRIMARY_USER_PASSWORD','123456'))
             ]);
+            $user->admin = true;
+            $user->save();
         }
     }
 }

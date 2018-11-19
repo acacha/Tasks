@@ -44,4 +44,12 @@ class User extends Authenticatable
     {
         $this->tasks()->saveMany($tasks);
     }
+
+    /**
+     * @return mixed
+     */
+    public function isSuperAdmin()
+    {
+        return $this->admin;
+    }
 }

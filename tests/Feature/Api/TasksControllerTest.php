@@ -17,7 +17,9 @@ class TasksControllerTest extends TestCase
      */
     public function task_manager_can_show_a_task()
     {
+        initialize_roles();
         $user = $this->login('api');
+        $user->assignRole('TaskManager');
         // TODO add role Taskmanager al usuari
         $task = factory(Task::class)->create();
 

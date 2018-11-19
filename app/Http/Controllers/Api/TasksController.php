@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreTask;
+use App\Http\Requests\TaskShow;
 use App\Http\Requests\UpdateTask;
 use App\Task;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class TasksController extends Controller
         return Task::orderBy('created_at')->get();
     }
 
-    public function show(Request $request, Task $task) // Route Model Binding
+    public function show(TaskShow $request, Task $task) // Route Model Binding
     {
         return $task->map();
     }

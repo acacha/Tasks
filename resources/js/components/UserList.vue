@@ -31,10 +31,9 @@ export default {
     }
   },
   created () {
-    if (this.users) this.dataUser = this.users
+    if (this.users) this.dataUsers = this.users
     else {
       window.axios.get('/api/v1/users').then(response => {
-        // this.users = response.data
         this.dataUsers = response.data
       }).catch(error => {
         console.log(error)

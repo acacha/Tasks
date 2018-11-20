@@ -83,14 +83,16 @@
                 clipped
                 app
         >
+            TODO PERFIL
+
             <v-card>
 
-                TODO PERFIL
+
 
                 Administrador:
 
                 Llista de tots els usuaris
-                <user-list></user-list>
+                <user-select></user-select>
 
 
             </v-card>

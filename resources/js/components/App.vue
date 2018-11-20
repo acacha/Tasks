@@ -5,6 +5,7 @@ export default {
   data () {
     return {
       drawer: null,
+      drawerRight: null,
       items: [
         { icon: 'home', text: 'Welcome', url: '/' },
         { icon: 'home', text: 'Home', url: '/home' },

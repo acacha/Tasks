@@ -75,10 +75,11 @@
             </v-card>
         </v-dialog>
 
-        <v-snackbar :timeout="3000" color="success" v-model="snackbar">
-            Això és un snackbar
+        <v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar">
+            {{ snackbarMessage }}
             <v-btn dark flat @click="snackbar=false">Tancar</v-btn>
         </v-snackbar>
+
         <v-toolbar color="blue darken-3">
             <v-menu>
                 <v-btn slot="activator" icon dark>
@@ -154,10 +155,6 @@
                         <td v-text="task.created_at"></td>
                         <td v-text="task.updated_at"></td>
                         <td>
-                            <v-btn icon color="primary" flat title="Mostrar snackbar"
-                                   @click="snackbar=true">
-                                <v-icon>info</v-icon>
-                            </v-btn>
                             <v-btn icon color="primary" flat title="Mostrar la tasca"
                                    @click="show(task)">
                                 <v-icon>visibility</v-icon>
@@ -226,6 +223,10 @@ export default {
   name: 'Tasques',
   data () {
     return {
+      snackbarMessage: 'Prova',
+      snackbarTimeout: 3000,
+      snackbarColor: 'success',
+      snackbar: false,
       dataUsers: this.users,
       completed: false,
       name: '',
@@ -234,7 +235,6 @@ export default {
       createDialog: false,
       editDialog: false,
       taskBeingRemoved: null,
-      snackbar: true,
       user: '',
       usersold: [
         'Sergi Tur',
@@ -298,14 +298,27 @@ export default {
         this.removeTask(this.taskBeingRemoved)
         this.deleteDialog = false
         this.taskBeingRemoved = null
-        // TODO showSnackbar
+        this.showMessage("S'ha esborrat correctament la tasca")
         this.removing = false
       }).catch(error => {
-        console.log(error)
-        // TODO showSnackbar
+        this.showError(error)
         this.removing = false
       })
     },
+
+    // SNACKBAR
+    showMessage (message) {
+      this.snackbarMessage = message
+      this.snackbarColor = 'success'
+      this.snackbar = true
+    },
+    showError (error) {
+      this.snackbarMessage = error.message
+      this.snackbarColor = 'error'
+      this.snackbar = true
+    },
+    // SNACKBAR END
+
     showCreate () {
       this.createDialog = true
     },

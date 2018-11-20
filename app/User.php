@@ -52,4 +52,23 @@ class User extends Authenticatable
     {
         return $this->admin;
     }
+
+    public function map()
+    {
+        return [
+            'name' => $this->name,
+            'email' => $this->email,
+            'avatar' => $this->avatar
+        ];
+    }
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getAvatarAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5($this->email);
+    }
 }

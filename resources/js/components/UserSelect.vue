@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: 'UserList',
+  name: 'UserSelect',
   data () {
     return {
       dataUsers: [],
@@ -42,6 +42,13 @@ export default {
   props: {
     users: {
       type: Array
+    }
+  },
+  watch: {
+    selectedUser (newValue) {
+      if (newValue) {
+        window.location.href = '/impersonate/take/' + newValue
+      }
     }
   },
   created () {

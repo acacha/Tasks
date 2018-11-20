@@ -34,7 +34,8 @@ export default {
     if (this.users) this.dataUser = this.users
     else {
       window.axios.get('/api/v1/users').then(response => {
-        this.users = response.data
+        // this.users = response.data
+        this.dataUsers = response.data
       }).catch(error => {
         console.log(error)
         // this.$snackbar.showError(error)

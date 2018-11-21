@@ -151,7 +151,7 @@
                         <td>{{ task.id }}</td>
                         <td v-text="task.name"></td>
                         <td v-text="task.user_id"></td>
-                        <td v-text="task.completed"></td>
+                        <td v-text="task.completed ? 'Completada' : 'Pendent'"></td>
                         <td v-text="task.created_at"></td>
                         <td v-text="task.updated_at"></td>
                         <td>

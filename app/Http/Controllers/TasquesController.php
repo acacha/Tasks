@@ -10,7 +10,7 @@ class TasquesController extends Controller
 {
     public function index()
     {
-        $tasks =  Task::orderBy('created_at','desc')->get();
+        $tasks =  map_collection(Task::orderBy('created_at','desc')->get());
         $users = User::all();
         return view('tasques',compact('tasks','users'));
     }

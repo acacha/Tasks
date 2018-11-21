@@ -65,13 +65,11 @@ class Task extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'completed' => $this->completed,
+            'completed' => (boolean) $this->completed,
             'user_id' => $this->user_id,
             'user_name' => optional($this->user)->name,
             'user_email' => optional($this->user)->email,
             'user' => $this->user
-//            'tags' => $this->tags
-//            'file' => $this->file
         ];
     }
 }

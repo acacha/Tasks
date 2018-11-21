@@ -83,8 +83,8 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_create_tasks_without_name()
     {
-        $this->login('api');
-
+//        $this->loginAsTaskManager('api');
+        $this->loginWithPermission('api','tasks.store');
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => ''
         ]);

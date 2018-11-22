@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Session;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -37,6 +38,21 @@ class User extends Authenticatable
     {
         return $this->isSuperAdmin();
     }
+
+    /**
+     * @return bool
+     */
+    public function canBeImpersonated()
+    {
+        return !$this->isSuperAdmin();
+    }
+
+    public function impersonatedBy()
+    {
+        if ($this->isImpersonated()) return User::findOrFail(Session::get('impersonated_by'));
+        return null;
+    }
+
 
     public function tasks()
     {

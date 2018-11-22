@@ -6,12 +6,12 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UsersControllerTest extends TestCase
+class RegularUsersControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function can_list_users()
+    public function can_list_regular_users()
     {
         $user1 = factory(User::class)->create([
             'name' => 'Pepe Pardo Jeans',
@@ -25,18 +25,19 @@ class UsersControllerTest extends TestCase
             'name' => 'Pepa Pig',
             'email' => 'pepapig@dibus.com'
         ]);
+        $user3->admin = true;
+        $user3->save();
         $this->actingAs($user1,'api');
-        $response = $this->json('GET','/api/v1/users');
+        $response = $this->json('GET','/api/v1/regular_users');
         $response->assertSuccessful();
         $result = json_decode($response->getContent());
+        $this->assertCount(2,$result);
         $this->assertEquals($result[0]->name,'Pepe Pardo Jeans');
         $this->assertEquals($result[0]->email,'pepepardo@jeans.com');
         $this->assertEquals($result[0]->avatar,'https://www.gravatar.com/avatar/' . md5('pepepardo@jeans.com'));
         $this->assertEquals($result[1]->name,'Pepa Parda Jeans');
         $this->assertEquals($result[1]->email,'pepaparda@jeans.com');
         $this->assertEquals($result[1]->avatar,'https://www.gravatar.com/avatar/' . md5('pepaparda@jeans.com'));
-        $this->assertEquals($result[2]->name,'Pepa Pig');
-        $this->assertEquals($result[2]->email,'pepapig@dibus.com');
-        $this->assertEquals($result[2]->avatar,'https://www.gravatar.com/avatar/' .  md5('pepapig@dibus.com'));
+//        $this->assertNull($result[2]);
     }
 }

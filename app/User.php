@@ -96,4 +96,14 @@ class User extends Authenticatable
     {
         return 'https://www.gravatar.com/avatar/' . md5($this->email);
     }
+
+    public function scopeRegular($query)
+    {
+        return $query->where('admin',false);
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->where('admin',true);
+    }
 }

@@ -4,6 +4,7 @@
             v-model="selectedUser"
             item-value="id"
             clearable
+            :label="label"
     >
         <template slot="selection" slot-scope="data">
             <v-chip>
@@ -43,6 +44,10 @@ export default {
     url: {
       type: String,
       default: '/api/v1/users'
+    },
+    label: {
+      type: String,
+      default: 'Usuaris'
     }
   },
   watch: {

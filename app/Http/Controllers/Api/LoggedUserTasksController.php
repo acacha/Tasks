@@ -11,7 +11,7 @@ class LoggedUserTasksController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->user()->tasks;
+        return map_collection($request->user()->tasks);
     }
 
     public function store(Request $request)

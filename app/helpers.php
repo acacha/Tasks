@@ -67,7 +67,7 @@ if (!function_exists('create_example_tasks')) {
         Task::create([
             'name' => 'Estudiar PHP',
             'completed' => true,
-            'description' => 'Bla bla bla',
+            'description' => 'JORL JORL JORL',
             'user_id' => 1
         ]);
     }

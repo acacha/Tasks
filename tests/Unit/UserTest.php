@@ -138,7 +138,7 @@ class UserTest extends TestCase
         $this->assertEquals($mappedUser['id'],1);
         $this->assertEquals($mappedUser['name'],'Pepe Pardo Jeans');
         $this->assertEquals($mappedUser['email'],'pepepardo@jeans.com');
-        $this->assertEquals($mappedUser['avatar'],'https://www.gravatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
+        $this->assertEquals($mappedUser['gravatar'],'https://www.gravatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
     }
 
     /** @test */

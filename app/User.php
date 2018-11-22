@@ -83,7 +83,7 @@ class User extends Authenticatable
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'avatar' => $this->avatar
+            'gravatar' => $this->gravatar
         ];
     }
 
@@ -92,7 +92,7 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getAvatarAttribute()
+    public function getGravatarAttribute()
     {
         return 'https://www.gravatar.com/avatar/' . md5($this->email);
     }

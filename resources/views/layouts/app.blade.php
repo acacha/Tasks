@@ -6,6 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <meta name="user" content="{{ logged_user() }}">
+
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <title>@yield('title','Put your title here')</title>
 </head>
@@ -92,6 +95,8 @@
                             <li>Nom : {{ Auth::user()->name }}</li>
                             <li>Email : {{ Auth::user()->email }}</li>
                             <li>Admin : {{ Auth::user()->admin }}</li>
+                            <li>Roles : {{ implode(',',Auth::user()->map()['roles']) }}</li>
+                            <li>Permissions : {{ implode(', ',Auth::user()->map()['permissions']) }}</li>
                         </ul>
                     </v-flex>
                 </v-layout>

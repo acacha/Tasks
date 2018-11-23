@@ -1,5 +1,9 @@
 @extends('layouts.landing')
 
+@section('title')
+ Aplicació de tasques
+@endsection
+
 @section('content')
     <v-app light>
         <v-toolbar class="white">

@@ -83,9 +83,14 @@ class User extends Authenticatable
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'gravatar' => $this->gravatar
+            'gravatar' => $this->gravatar,
+            'admin' => (boolean) $this->admin,
+            'roles' => $this->roles()->pluck('name')->unique()->toArray(),
+            'permissions' => $this->getAllPermissions()->pluck('name')->unique()->toArray()
         ];
     }
+
+
 
     /**
      * Get the user's full name.

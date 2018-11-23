@@ -3,6 +3,7 @@
 use App\Tag;
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
@@ -285,5 +286,12 @@ if (!function_exists('map_collection')) {
         return $collection->map(function ($item) {
             return $item->map();
         });
+    }
+}
+
+if (!function_exists('logged_user')) {
+    function logged_user()
+    {
+        return json_encode(optional(Auth::user())->map());
     }
 }

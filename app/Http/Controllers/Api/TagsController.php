@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\TagsStore;
-use App\Http\Requests\UpdateTag;
+use App\Http\Requests\TagsUpdate;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,7 +36,7 @@ class TagsController extends Controller
         return $tag->map();
     }
 
-    public function update(UpdateTag $request, Tag $tag)
+    public function update(TagsUpdate $request, Tag $tag)
     {
         $tag->name = $request->name;
         $tag->save();

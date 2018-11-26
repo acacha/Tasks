@@ -14,7 +14,7 @@ class TasksList extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('tasks.list');
+        return Auth::user()->can('tasks.index');
     }
 
     /**

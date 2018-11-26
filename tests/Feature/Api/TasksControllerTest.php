@@ -4,7 +4,7 @@ namespace Tests\Feature\Api;
 
 use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Gate;
+
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
@@ -17,10 +17,7 @@ class TasksControllerTest extends TestCase
      */
     public function task_manager_can_show_a_task()
     {
-        initialize_roles();
-        $user = $this->login('api');
-        $user->assignRole('TaskManager');
-        // TODO add role Taskmanager al usuari
+        $this->loginAsTaskManager('api');
         $task = factory(Task::class)->create();
 
         $response = $this->json('GET','/api/v1/tasks/' . $task->id);
@@ -36,9 +33,7 @@ class TasksControllerTest extends TestCase
      */
     public function superadmin_can_show_a_task()
     {
-        $user = $this->login('api');
-        $user->admin = true;
-        $user->save();
+        $this->loginAsSuperAdmin('api');
         $task = factory(Task::class)->create();
 
         $response = $this->json('GET','/api/v1/tasks/' . $task->id);
@@ -64,7 +59,58 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_delete_task()
+    public function tasks_manager_can_delete_task()
+    {
+        $this->loginAsTaskManager('api');
+        $task = factory(Task::class)->create();
+
+        $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
+
+        $result = json_decode($response->getContent());
+        $response->assertSuccessful();
+        $this->assertEquals($result->name, $task->name);
+
+        $this->assertNull(Task::find($task->id));
+    }
+
+    /**
+     * @test
+     */
+    public function superadmin_can_delete_task()
+    {
+        $this->loginAsSuperAdmin('api');
+        $task = factory(Task::class)->create();
+
+        $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
+
+        $result = json_decode($response->getContent());
+        $response->assertSuccessful();
+        $this->assertEquals($result->name, $task->name);
+
+        $this->assertNull(Task::find($task->id));
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_delete_owned_task()
+    {
+        $user = $this->login('api');
+        $task = factory(Task::class)->create();
+        $task->assignUser($user);
+        $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
+
+        $result = json_decode($response->getContent());
+        $response->assertSuccessful();
+        $this->assertEquals($result->name, $task->name);
+
+        $this->assertNull(Task::find($task->id));
+    }
+
+    /**
+     * @test
+     */
+    public function regular_user_cannot_delete_task()
     {
         $this->login('api');
         $task = factory(Task::class)->create();
@@ -72,10 +118,7 @@ class TasksControllerTest extends TestCase
         $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
 
         $result = json_decode($response->getContent());
-        $response->assertSuccessful();
-        $this->assertEquals('', $result);
-
-        $this->assertNull(Task::find($task->id));
+        $response->assertStatus(403);
     }
 
     /**

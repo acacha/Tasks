@@ -46,4 +46,13 @@ trait CanLogin
         $this->actingAs($user,$guard);
         return $user;
     }
+
+    protected function loginAsSuperAdmin($guard = null)
+    {
+        $user = factory(User::class)->create();
+        $user->admin = true;
+        $user->save();
+        $this->actingAs($user,$guard);
+        return $user;
+    }
 }

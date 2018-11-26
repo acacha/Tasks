@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreTag;
+use App\Http\Requests\TagsStore;
 use App\Http\Requests\UpdateTag;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class TagsController extends Controller
           $tag->delete();
     }
 
-    public function store(StoreTag $request)
+    public function store(TagsStore $request)
     {
         $tag = new Tag();
         $tag->name = $request->name;

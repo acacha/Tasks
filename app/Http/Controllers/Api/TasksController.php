@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreTask;
-use App\Http\Requests\TaskShow;
-use App\Http\Requests\UpdateTask;
+use App\Http\Requests\TasksDestroy;
+use App\Http\Requests\TasksStore;
+use App\Http\Requests\TasksShow;
+use App\Http\Requests\TasksList;
+use App\Http\Requests\TasksUpdate;
 use App\Task;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TasksController extends Controller
 {
-
-    public function index(Request $request)
+    public function index(TasksList $request)
     {
         return map_collection(Task::orderBy('created_at')->get());
     }
 
-    public function show(TaskShow $request, Task $task) // Route Model Binding
+    public function show(TasksShow $request, Task $task) // Route Model Binding
     {
         return $task->map();
     }
 
-    public function destroy(Request $request, Task $task)
+    public function destroy(TasksDestroy $request, Task $task)
     {
-          $task->delete();
+        $task->delete();
+        return $task;
     }
 
-    public function store(StoreTask $request)
+    public function store(TasksStore $request)
     {
         $task = new Task();
         $task->name = $request->name;
@@ -36,7 +37,7 @@ class TasksController extends Controller
         return $task->map();
     }
 
-    public function update(UpdateTask $request, Task $task)
+    public function update(TasksUpdate $request, Task $task)
     {
         $task->name = $request->name;
         $task->save();

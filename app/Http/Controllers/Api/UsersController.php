@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreTask;
-use App\Http\Requests\TaskShow;
-use App\Http\Requests\UpdateTask;
+use App\Http\Requests\TasksStore;
+use App\Http\Requests\TasksShow;
+use App\Http\Requests\TasksUpdate;
 use App\Task;
 use App\User;
 use Illuminate\Http\Request;

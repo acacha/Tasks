@@ -149,6 +149,13 @@ if (!function_exists('create_permission')) {
     }
 }
 
+if (!function_exists('initialize_gates')) {
+    function initialize_gates()
+    {
+
+    }
+}
+
 if (!function_exists('initialize_roles')) {
     function initialize_roles() {
         $roles = [
@@ -199,6 +206,7 @@ if (!function_exists('initialize_roles')) {
         }
     }
 }
+
 if (!function_exists('sample_users')) {
     function sample_users() {
         // Superadmin no cal -> soc jo mateix

@@ -22,7 +22,4 @@ class CompletedTasksController extends Controller
         $task->save();
         return redirect()->back();
     }
-
-
-
 }

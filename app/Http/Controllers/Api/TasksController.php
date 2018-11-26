@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\TasksDestroy;
 use App\Http\Requests\TasksStore;
 use App\Http\Requests\TasksShow;
-use App\Http\Requests\TasksList;
+use App\Http\Requests\TasksIndex;
 use App\Http\Requests\TasksUpdate;
 use App\Task;
 use App\Http\Controllers\Controller;
 
 class TasksController extends Controller
 {
-    public function index(TasksList $request)
+    public function index(TasksIndex $request)
     {
         return map_collection(Task::orderBy('created_at')->get());
     }

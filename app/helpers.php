@@ -160,7 +160,9 @@ if (!function_exists('initialize_roles')) {
     function initialize_roles() {
         $roles = [
             'TaskManager',
-            'Tasks'
+            'Tasks',
+            'Tagsmanager',
+            'Tags'
         ];
 
         foreach ($roles as $role) {
@@ -177,6 +179,16 @@ if (!function_exists('initialize_roles')) {
             'tasks.destroy'
             ];
 
+        $tagsManagerPermissions = [
+            'tags.index',
+            'tags.show',
+            'tags.store',
+            'tags.update',
+            'tags.complete',
+            'tags.uncomplete',
+            'tags.destroy'
+        ];
+
         $userTaskPermissions = [
             'user.tasks.index',
             'user.tasks.show',
@@ -187,7 +199,17 @@ if (!function_exists('initialize_roles')) {
             'user.tasks.destroy'
         ];
 
-        $permissions = array_merge($taskManagerPermissions, $userTaskPermissions);
+        $userTagsPermissions = [
+            'user.tags.index',
+            'user.tags.show',
+            'user.tags.store',
+            'user.tags.update',
+            'user.tags.complete',
+            'user.tags.uncomplete',
+            'user.tags.destroy'
+        ];
+
+        $permissions = array_merge($taskManagerPermissions, $userTaskPermissions, $tagsManagerPermissions, $userTagsPermissions);
 
         foreach ($permissions as $permission) {
             create_permission($permission);
@@ -195,7 +217,9 @@ if (!function_exists('initialize_roles')) {
 
         $rolePermissions = [
             'TaskManager' => $taskManagerPermissions,
-            'Tasks' => $userTaskPermissions
+            'Tasks' => $userTaskPermissions,
+            'TagsManager' => $tagsManagerPermissions,
+            'Tags' => $userTagsPermissions,
         ];
 
         foreach ($rolePermissions as $role => $rolePermission) {

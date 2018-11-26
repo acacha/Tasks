@@ -59,6 +59,17 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
+    public function guest_user_cannot_show_a_task()
+    {
+        $task = factory(Task::class)->create();
+
+        $response = $this->json('GET','/api/v1/tasks/' . $task->id);
+        $response->assertStatus(401);
+    }
+
+    /**
+     * @test
+     */
     public function tasks_manager_can_delete_task()
     {
         $this->loginAsTaskManager('api');

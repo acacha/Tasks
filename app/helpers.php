@@ -161,7 +161,7 @@ if (!function_exists('initialize_roles')) {
         $roles = [
             'TaskManager',
             'Tasks',
-            'Tagsmanager',
+            'TagsManager',
             'Tags'
         ];
 

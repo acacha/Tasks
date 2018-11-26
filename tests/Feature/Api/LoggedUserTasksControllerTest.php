@@ -54,12 +54,11 @@ class LoggedUserTasksControllerTest extends TestCase
      */
     public function cannot_edit_a_task_not_associated_to_user()
     {
-        $user = $this->login('api');
+        $this->login('api');
         $oldTask = factory(Task::class)->create([
             'name' => 'Comprar llet'
         ]);
 
-        // 2
         $response = $this->json('PUT', '/api/v1/user/tasks/' . $oldTask->id, [
             'name' => 'Comprar pa'
         ]);

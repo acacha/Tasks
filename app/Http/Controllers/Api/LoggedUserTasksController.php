@@ -40,6 +40,5 @@ class LoggedUserTasksController extends Controller
     {
         Auth::user()->tasks()->findOrFail($task->id);
         $task->delete();
-//        $user->removeTask(); // Contrari addTask
     }
 }

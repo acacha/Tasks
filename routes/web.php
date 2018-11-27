@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::impersonate();
 
+    // TAGS
+    Route::get('/tags','TagsController@index');
+
 });
 
 Route::get('/', function () {

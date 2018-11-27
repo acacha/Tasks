@@ -75,11 +75,6 @@
             </v-card>
         </v-dialog>
 
-        <v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar">
-            {{ snackbarMessage }}
-            <v-btn dark flat @click="snackbar=false">Tancar</v-btn>
-        </v-snackbar>
-
         <v-toolbar color="blue darken-3">
             <v-menu>
                 <v-btn slot="activator" icon dark>
@@ -231,14 +226,12 @@
 </template>
 
 <script>
+import EventBus from '../eventBus'
+
 export default {
   name: 'Tasques',
   data () {
     return {
-      snackbarMessage: 'Prova',
-      snackbarTimeout: 3000,
-      snackbarColor: 'success',
-      snackbar: false,
       dataUsers: this.users,
       completed: false,
       name: '',
@@ -310,27 +303,13 @@ export default {
         this.removeTask(this.taskBeingRemoved)
         this.deleteDialog = false
         this.taskBeingRemoved = null
-        this.showMessage("S'ha esborrat correctament la tasca")
+        EventBus.$emit('showMessage', "S'ha esborrat correctament la tasca")
         this.removing = false
       }).catch(error => {
-        this.showError(error)
+        EventBus.$emit('showError', error.message)
         this.removing = false
       })
     },
-
-    // SNACKBAR
-    showMessage (message) {
-      this.snackbarMessage = message
-      this.snackbarColor = 'success'
-      this.snackbar = true
-    },
-    showError (error) {
-      this.snackbarMessage = error.message
-      this.snackbarColor = 'error'
-      this.snackbar = true
-    },
-    // SNACKBAR END
-
     showCreate () {
       this.createDialog = true
     },
@@ -354,6 +333,7 @@ export default {
         // SHOW SNACKBAR MISSATGE OK: 'Les tasques s'han actualitzat correctament
         this.dataTasks = response.data
         this.loading = false
+        EventBus.$emit('showMessage', 'Tasques actualitzades correctament')
       }).catch(error => {
         console.log(error)
         this.loading = false

@@ -18,7 +18,6 @@ export default {
       this.$snackbar.showMessage('Missatge exemple')
     },
     showError () {
-      console.log('showERROR!!!!!!')
       this.$snackbar.showError('Error exemple')
     }
   }

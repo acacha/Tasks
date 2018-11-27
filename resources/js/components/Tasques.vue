@@ -226,8 +226,6 @@
 </template>
 
 <script>
-import EventBus from '../eventBus'
-
 export default {
   name: 'Tasques',
   data () {
@@ -303,10 +301,10 @@ export default {
         this.removeTask(this.taskBeingRemoved)
         this.deleteDialog = false
         this.taskBeingRemoved = null
-        EventBus.$emit('showMessage', "S'ha esborrat correctament la tasca")
+        this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
         this.removing = false
       }).catch(error => {
-        EventBus.$emit('showError', error.message)
+        this.$snackbar.showError(error.message)
         this.removing = false
       })
     },
@@ -333,7 +331,7 @@ export default {
         // SHOW SNACKBAR MISSATGE OK: 'Les tasques s'han actualitzat correctament
         this.dataTasks = response.data
         this.loading = false
-        EventBus.$emit('showMessage', 'Tasques actualitzades correctament')
+        this.showMessage('Tasques actualitzades correctament')
       }).catch(error => {
         console.log(error)
         this.loading = false

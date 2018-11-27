@@ -330,7 +330,7 @@ export default {
         console.log(response.data)
         this.dataTasks = response.data
         this.loading = false
-        this.showMessage('Tasques actualitzades correctament')
+        this.$snackbar.showMessage('Tasques actualitzades correctament')
       }).catch(error => {
         console.log(error)
         this.loading = false

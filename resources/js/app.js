@@ -12,13 +12,12 @@ import LoginForm from './components/LoginForm.vue'
 import UserList from './components/UserList'
 import UserSelect from './components/UserSelect'
 import permissions from './plugins/permissions'
-import Snackbar from './components/ui/Snackbar'
+import snackbar from './plugins/snackbar'
 
 window.Vue = Vue
 window.Vue.use(Vuetify)
 window.Vue.use(permissions)
-
-// window.Vue.use(Snackbar)
+window.Vue.use(snackbar)
 
 window.Vue.component('example-component', ExampleComponent)
 window.Vue.component('tasks', Tasks)
@@ -27,7 +26,6 @@ window.Vue.component('tags', Tags)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
-window.Vue.component('snackbar', Snackbar)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

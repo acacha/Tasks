@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import EventBus from '../eventBus'
 export default {
   name: 'Tags',
   data () {
@@ -16,10 +15,11 @@ export default {
   },
   methods: {
     showMessage () {
-      EventBus.$emit('showMessage', 'Missatge exemple')
+      this.$snackbar.showMessage('Missatge exemple')
     },
     showError () {
-      EventBus.$emit('showError', 'Error exemple')
+      console.log('showERROR!!!!!!')
+      this.$snackbar.showError('Error exemple')
     }
   }
 }

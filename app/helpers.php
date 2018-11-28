@@ -51,25 +51,26 @@ if (!function_exists('create_example_tags')) {
 
 if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
+        $user1= factory(User::class)->create();
         Task::create([
             'name' => 'comprar pa',
             'completed' => false,
             'description' => 'Bla bla bla',
-            'user_id' => 1
+            'user_id' => $user1->id
         ]);
 
         Task::create([
             'name' => 'comprar llet',
             'completed' => false,
             'description' => 'Bla bla bla',
-            'user_id' => 1
+            'user_id' => $user1->id
         ]);
 
         Task::create([
             'name' => 'Estudiar PHP',
             'completed' => true,
             'description' => 'JORL JORL JORL',
-            'user_id' => 1
+            'user_id' => $user1->id
         ]);
     }
 }
@@ -189,6 +190,9 @@ if (!function_exists('initialize_roles')) {
             'tags.destroy'
         ];
 
+        // user.tasks Who:
+        // Logged->user === Task->user_id &&
+        // També ha de tenir Rol Tasks
         $userTaskPermissions = [
             'user.tasks.index',
             'user.tasks.show',
@@ -264,6 +268,10 @@ if (!function_exists('sample_users')) {
 
         try {
             $homersimpson->assignRole('TaskManager');
+        } catch (Exception $e) {}
+
+        try {
+            $homersimpson->assignRole('Tasks');
         } catch (Exception $e) {}
     }
 }

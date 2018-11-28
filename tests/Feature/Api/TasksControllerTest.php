@@ -184,7 +184,7 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
-    public function regular_user_cannot_list_tasks()
+    public function regular_user_cannot_index_tasks()
     {
         $this->login('api');
 
@@ -195,7 +195,7 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
-    public function superadmin_can_list_tasks()
+    public function superadmin_can_index_tasks()
     {
         $this->loginAsSuperAdmin('api');
 
@@ -221,7 +221,7 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
-    public function task_manager_can_list_tasks()
+    public function task_manager_can_index_tasks()
     {
         $this->loginAsTaskManager('api');
 

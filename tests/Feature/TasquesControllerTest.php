@@ -11,14 +11,6 @@ class TasksControllerTest extends TestCase
 {
     use RefreshDatabase, CanLogin;
 
-    // Accés url /tasques: Ordre recomanat
-
-    // 1) Guest_user
-    // 2) regular User -> No té cap rol (Pep Pringao)
-    // 3) Superadmin (Sergi Tur Badenas)
-    // 4) TaskManager (Home Simpson)
-    // 5) Rol Tasks (Bart Simpson)
-
     /**
      * @test
      */
@@ -84,7 +76,7 @@ class TasksControllerTest extends TestCase
         create_example_tasks();
 
         $user = $this->loginAsTasksUser();
-        $task = Task::create([
+        Task::create([
             'name' => 'Tasca usuari logat',
             'completed' => false,
             'description' => 'Jorl',
@@ -100,5 +92,4 @@ class TasksControllerTest extends TestCase
                 $tasks[0]['name']==='Tasca usuari logat';
         });
     }
-
 }

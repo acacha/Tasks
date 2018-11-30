@@ -278,6 +278,10 @@ export default {
     users: {
       type: Array,
       required: true
+    },
+    uri: {
+      type: Array,
+      required: true
     }
   },
   methods: {
@@ -296,7 +300,7 @@ export default {
     },
     destroy () {
       this.removing = true
-      window.axios.delete('/api/v1/user/tasks/' + this.taskBeingRemoved.id).then(() => {
+      window.axios.delete(this.uri + this.taskBeingRemoved.id).then(() => {
         // this.refresh() // Problema -> rendiment
         this.removeTask(this.taskBeingRemoved)
         this.deleteDialog = false
@@ -326,7 +330,7 @@ export default {
       // OCO !! URL CANVIA SEGONS EL CAS!!! TODO
       // window.axios.get('/api/v1/tasks').then().catch()
       // USERS TASKS O TOTES LES TASQUES?
-      window.axios.get('/api/v1/user/tasks').then(response => {
+      window.axios.get(this.uri).then(response => {
         console.log(response.data)
         this.dataTasks = response.data
         this.loading = false

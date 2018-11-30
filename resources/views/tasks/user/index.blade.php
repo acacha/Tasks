@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <tasques :tasks="{{ $tasks }}"></tasques>
+    <tasques :tasks="{{ $tasks }}" :uri="{{ $uri }}"></tasques>
 @endsection

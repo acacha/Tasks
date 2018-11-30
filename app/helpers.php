@@ -5,6 +5,7 @@ use App\Task;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
@@ -51,6 +52,28 @@ if (!function_exists('create_example_tags')) {
 
 if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
+        $user1= factory(User::class)->create();
+        Task::create([
+            'name' => 'comprar pa',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+
+        Task::create([
+            'name' => 'comprar llet',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+
+        Task::create([
+            'name' => 'Estudiar PHP',
+            'completed' => true,
+            'description' => 'JORL JORL JORL',
+            'user_id' => $user1->id
+        ]);
+
         $user1= factory(User::class)->create();
         Task::create([
             'name' => 'comprar pa',
@@ -153,7 +176,9 @@ if (!function_exists('create_permission')) {
 if (!function_exists('initialize_gates')) {
     function initialize_gates()
     {
-
+        Gate::define('tasks.manage',function() {
+            return Auth::user()->isSuperAdmin() || Auth::user()->hasRole('TaskManager');
+        });
     }
 }
 

@@ -4,7 +4,7 @@
     <v-container fluid>
         <v-layout>
             <v-flex>
-                <tasques :tasks="{{ $tasks }}" :users="{{ $users }}" :uri="{{ $uri }}"></tasques>
+                <tasques :tasks="{{ $tasks }}" :users="{{ $users }}" uri="{{ $uri }}"></tasques>
                 {{--@if (Auth::user()->can('tasks.manage'))--}}
                 {{--<tasques :tasks="{{ $tasks }}" :uri="/api/v1/tasks"></tasques> // TOTES LES TASQUES--}}
                 {{--@else--}}

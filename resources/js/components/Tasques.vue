@@ -280,7 +280,7 @@ export default {
       required: true
     },
     uri: {
-      type: Array,
+      type: String,
       required: true
     }
   },
@@ -326,10 +326,6 @@ export default {
     },
     refresh () {
       this.loading = true
-      // setTimeout(() => { this.loading = false }, 5000)
-      // OCO !! URL CANVIA SEGONS EL CAS!!! TODO
-      // window.axios.get('/api/v1/tasks').then().catch()
-      // USERS TASKS O TOTES LES TASQUES?
       window.axios.get(this.uri).then(response => {
         console.log(response.data)
         this.dataTasks = response.data

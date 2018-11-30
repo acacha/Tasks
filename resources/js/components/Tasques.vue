@@ -153,7 +153,7 @@
                             </v-avatar>
                         </td>
                         <td>
-                          <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+                            <task-completed-toggle :task="task"></task-completed-toggle>
                         </td>
                         <td>
                             <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
@@ -166,7 +166,7 @@
                                    @click="show(task)">
                                 <v-icon>visibility</v-icon>
                             </v-btn>
-                            <v-btn v-can="tasks.update" icon color="success" flat title="Canviar la tasca"
+                            <v-btn v-if="$can('tasks.update',task)" icon color="success" flat title="Canviar la tasca"
                                    @click="showUpdate(task)">
                                 <v-icon>edit</v-icon>
                             </v-btn>
@@ -226,8 +226,12 @@
 </template>
 
 <script>
+import TaskCompletedToggle from './TaskCompletedToggle'
 export default {
   name: 'Tasques',
+  components: {
+    'task-completed-toggle': TaskCompletedToggle
+  },
   data () {
     return {
       dataUsers: this.users,
@@ -284,6 +288,15 @@ export default {
       required: true
     }
   },
+  // watch: {
+  //   dataTasks: {
+  //     handler: function (dataTasks, oldDataTasks) {
+  //       console.log(dataTasks)
+  //       console.log('MERDA MASSA DIFICIL')
+  //     },
+  //     deep: true
+  //   }
+  // },
   methods: {
     showUpdate () {
       this.editDialog = true

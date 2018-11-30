@@ -176,8 +176,8 @@ if (!function_exists('create_permission')) {
 if (!function_exists('initialize_gates')) {
     function initialize_gates()
     {
-        Gate::define('tasks.manage',function() {
-            return Auth::user()->isSuperAdmin() || Auth::user()->hasRole('TaskManager');
+        Gate::define('tasks.manage',function($user) {
+            return $user->isSuperAdmin() || $user->hasRole('TaskManager');
         });
     }
 }
@@ -260,8 +260,8 @@ if (!function_exists('initialize_roles')) {
     }
 }
 
-if (!function_exists('sample_users')) {
-    function sample_users() {
+if (!function_exists('sample_users_and_tasks')) {
+    function sample_users_and_tasks() {
         // Superadmin no cal -> soc jo mateix
 
         // Pepe Pringao -> No té cap permis ni cap rol
@@ -280,6 +280,20 @@ if (!function_exists('sample_users')) {
             ]);
         } catch (Exception $e) {}
 
+        Task::create([
+            'name' => 'Patinar pels carrers',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $bartsimpson->id
+        ]);
+
+        Task::create([
+            'name' => 'Escriure 100 vegades no...',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $bartsimpson->id
+        ]);
+
         try {
             $bartsimpson->assignRole('Tasks');
         } catch (Exception $e) {}
@@ -293,11 +307,26 @@ if (!function_exists('sample_users')) {
 
         try {
             $homersimpson->assignRole('TaskManager');
+            $homersimpson->assignRole('Tasks');
         } catch (Exception $e) {}
 
         try {
             $homersimpson->assignRole('Tasks');
         } catch (Exception $e) {}
+
+        Task::create([
+            'name' => 'Anar a treballar a la central nuclear',
+            'completed' => false,
+            'description' => 'quin pal',
+            'user_id' => $homersimpson->id
+        ]);
+
+        Task::create([
+            'name' => 'Gestionar les tasques',
+            'completed' => false,
+            'description' => 'Hey you!',
+            'user_id' => $homersimpson->id
+        ]);
     }
 }
 

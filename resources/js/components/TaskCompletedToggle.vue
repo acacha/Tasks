@@ -12,11 +12,14 @@ export default {
   },
   props: {
     task: {
-      type: Boolean,
+      type: Object,
       required: true
     }
   },
   watch: {
+    task (task) {
+      this.dataTask = task
+    },
     dataTask: {
       handler: function (dataTask) {
         if (dataTask.completed) this.completeTask()
@@ -27,6 +30,7 @@ export default {
   },
   methods: {
     completeTask () {
+      // REMEMBER LOADING I DISABLED
       // window.axios.post('/v1/completed_task/' + this.task.id) // TODO ACABAR
     },
     uncompleteTask () {

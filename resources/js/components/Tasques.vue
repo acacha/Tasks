@@ -1,35 +1,5 @@
 <template>
     <span>
-        <v-dialog v-model="deleteDialog">
-            <v-card>
-                <v-card-title class="headline">Esteu segurs?</v-card-title>
-
-                <v-card-text>
-                    Aquesta operació no es pot desfer.
-                </v-card-text>
-
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                      <v-btn
-                              color="green darken-1"
-                              flat="flat"
-                              @click="deleteDialog = false"
-                      >
-                        Cancel·lar
-                      </v-btn>
-
-                      <v-btn
-                              color="error darken-1"
-                              flat
-                              @click="destroy"
-                              :loading="removing"
-                              :disabled="removing"
-                      >
-                        Confirmar
-                      </v-btn>
-        </v-card-actions>
-        </v-card>
-        </v-dialog>
         <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
             <v-card>
                 PROVA
@@ -171,7 +141,8 @@
                                 <v-icon>edit</v-icon>
                             </v-btn>
                             <v-btn v-can="tasks.destroy" icon color="error" flat title="Eliminar la tasca"
-                                   @click="showDestroy(task)">
+                                   :loading="removing === task.id" :disabled="removing === task.id"
+                                   @click="destroy(task)">
                                 <v-icon>delete</v-icon>
                             </v-btn>
                         </td>
@@ -238,10 +209,8 @@ export default {
       completed: false,
       name: '',
       description: '',
-      deleteDialog: false,
       createDialog: false,
       editDialog: false,
-      taskBeingRemoved: null,
       user: '',
       usersold: [
         'Sergi Tur',
@@ -261,7 +230,7 @@ export default {
       loading: false,
       creating: false,
       editing: false,
-      removing: false,
+      removing: null,
       dataTasks: this.tasks,
       headers: [
         { text: 'Id', value: 'id' },
@@ -304,26 +273,43 @@ export default {
     opcio1 () {
       console.log('OPCIO 1 REFRESH')
     },
-    showDestroy (task) {
-      this.deleteDialog = true
-      this.taskBeingRemoved = task
-    },
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
-    destroy () {
-      this.removing = true
-      window.axios.delete(this.uri + this.taskBeingRemoved.id).then(() => {
-        // this.refresh() // Problema -> rendiment
-        this.removeTask(this.taskBeingRemoved)
-        this.deleteDialog = false
-        this.taskBeingRemoved = null
-        this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
-        this.removing = false
-      }).catch(error => {
-        this.$snackbar.showError(error.message)
-        this.removing = false
-      })
+    // destroyWithPromises () {
+    //   this.$confirm().then(
+    //     // Ok tirem endavant
+    //     window.axios.then(
+    //       window.axios.then(
+    //     ).catch
+    //   ).catch(
+    //     // No fer res
+    //   )
+    // },
+    async destroy (task) {
+      // ES6 async await
+      let result = await this.$confirm('Les tasques esborrades no es poden recuperar',
+        {
+          title: 'Esteu segurs?',
+          buttonTruetext: 'Eliminar',
+          buttonFalsetext: 'Cancel·lar',
+          // icon: '',
+          color: 'error'
+        })
+      if (result) {
+        this.removing = task.id
+        window.axios.delete(this.uri + '/' + task.id).then(() => {
+          // this.refresh() // Problema -> rendiment
+          this.removeTask(task)
+          this.deleteDialog = false
+          task = null
+          this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
+          this.removing = null
+        }).catch(error => {
+          this.$snackbar.showError(error.message)
+          this.removing = null
+        })
+      }
     },
     showCreate () {
       this.createDialog = true

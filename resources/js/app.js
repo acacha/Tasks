@@ -13,11 +13,13 @@ import UserList from './components/UserList'
 import UserSelect from './components/UserSelect'
 import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
+import confirm from './plugins/confirm'
 
 window.Vue = Vue
 window.Vue.use(Vuetify)
 window.Vue.use(permissions)
 window.Vue.use(snackbar)
+window.Vue.use(confirm)
 
 window.Vue.component('example-component', ExampleComponent)
 window.Vue.component('tasks', Tasks)

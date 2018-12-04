@@ -46,7 +46,7 @@ export default {
     },
     message: {
       type: String,
-      reqiured: true
+      required: true
     },
     title: {
       type: String

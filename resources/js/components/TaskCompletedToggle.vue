@@ -1,10 +1,10 @@
 <template>
-    <v-switch v-model="dataTask.completed" :label="dataTask.completed ? 'Completada' : 'Pendent'"></v-switch>
+    <v-switch v-model="dataTask.completed" :label="dataTask.comple ? 'Completada' : 'Pendent'"></v-switch>
 </template>
 
 <script>
 export default {
-  name: 'TaskcompletedToggle',
+  name: 'taskCompletedToggle',
   data () {
     return {
       dataTask: this.task
@@ -12,32 +12,25 @@ export default {
   },
   props: {
     task: {
-      type: Object,
+      type: Boolean,
       required: true
     }
   },
   watch: {
     dataTask: {
-      handler: function (dataTask, oldDataTask) {
+      handler: function (dataTask) {
         if (dataTask.completed) this.completeTask()
         else this.uncompleteTask()
       },
       deep: true
-    },
-    // dataTask (task) {
-    //   if (task.completed) this.completeTask()
-    //   else this.uncompleteTask()
-    // },
-    task (task) {
-      this.dataTask = task
     }
   },
   methods: {
-    uncompleteTask () {
-      console.log('TODO AXIOS UNCOMPLETE TASK')
-    },
     completeTask () {
-      console.log('TODO AXIOS COMPLETE TASK')
+      // window.axios.post('/v1/completed_task/' + this.task.id) // TODO ACABAR
+    },
+    uncompleteTask () {
+      // window.axios.delete('/v1/completed_task/' + this.task.id) // TODO ACABAR
     }
   }
 }

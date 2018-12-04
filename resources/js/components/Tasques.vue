@@ -123,6 +123,7 @@
                             </v-avatar>
                         </td>
                         <td>
+                            <!--<toggle :completed="task.completed" :id="task.id"></toggle>-->
                             <task-completed-toggle :task="task"></task-completed-toggle>
                         </td>
                         <td>
@@ -198,10 +199,13 @@
 
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
+import Toggle from './Toggle'
+
 export default {
   name: 'Tasques',
   components: {
-    'task-completed-toggle': TaskCompletedToggle
+    'task-completed-toggle': TaskCompletedToggle,
+    'toggle': Toggle
   },
   data () {
     return {
@@ -257,15 +261,6 @@ export default {
       required: true
     }
   },
-  // watch: {
-  //   dataTasks: {
-  //     handler: function (dataTasks, oldDataTasks) {
-  //       console.log(dataTasks)
-  //       console.log('MERDA MASSA DIFICIL')
-  //     },
-  //     deep: true
-  //   }
-  // },
   methods: {
     showUpdate () {
       this.editDialog = true

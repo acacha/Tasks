@@ -15,11 +15,18 @@ const disappear = (el, modifiers) => {
 
 const haveRole = (role) => {
   if (role == null) return true
-  if (window.laravel_user && window.laravel_user.admin) return true
-  const userRoles = window.laravel_user && window.laravel_user.roles
+  let roles = []
+  if (role.includes(',')) {
+    roles = role.split(',')
+  } else {
+    roles = [role]
+  }
+  if (window.user && window.user.isSuperAdmin) return true
+  const userRoles = window.user && window.user.roles
   if (userRoles) {
-    if (userRoles.indexOf(role) === -1) return false
-    else return true
+    return roles.some(role => {
+      return userRoles.indexOf(role.trim()) !== -1
+    })
   }
   return false
 }

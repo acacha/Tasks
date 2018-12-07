@@ -1,10 +1,5 @@
 <template>
     <span>
-        <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-            <v-card>
-                PROVA
-            </v-card>
-        </v-dialog>
         <v-dialog v-model="editDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
             @keydown.esc="editDialog=false">
             <v-toolbar color="blue darken-3" class="white--text">
@@ -183,29 +178,21 @@
                 </v-flex>
             </v-data-iterator>
         </v-card>
-        <v-btn
-            @click="showCreate"
-            fab
-            bottom
-            right
-            fixed
-            color="pink"
-            class="white--text"
-        >
-            <v-icon>add</v-icon>
-        </v-btn>
+        <task-create :users="users"></task-create>
     </span>
 </template>
 
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
 import Toggle from './Toggle'
+import TaskCreate from './TaskCreate'
 
 export default {
   name: 'Tasques',
   components: {
     'task-completed-toggle': TaskCompletedToggle,
-    'toggle': Toggle
+    'toggle': Toggle,
+    'task-create': TaskCreate
   },
   data () {
     return {
@@ -305,9 +292,6 @@ export default {
           this.removing = null
         })
       }
-    },
-    showCreate () {
-      this.createDialog = true
     },
     create (task) {
       console.log('TODO CREATE TASK')

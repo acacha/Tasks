@@ -11,6 +11,7 @@ import Tasques from './components/Tasques.vue'
 import LoginForm from './components/LoginForm.vue'
 import UserList from './components/UserList'
 import UserSelect from './components/UserSelect'
+import Impersonate from './components/Impersonate'
 import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
@@ -28,6 +29,7 @@ window.Vue.component('tags', Tags)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
+window.Vue.component('impersonate', Impersonate)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

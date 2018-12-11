@@ -7,7 +7,7 @@ use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TasksControllerTest extends TestCase
+class TasquesControllerTest extends TestCase
 {
     use RefreshDatabase, CanLogin;
 

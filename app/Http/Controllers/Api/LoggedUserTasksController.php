@@ -16,6 +16,7 @@ class LoggedUserTasksController extends Controller
 
     public function store(Request $request)
     {
+        dd('asdasd');
         $task = Request::create($request->only(['name','completed']));
         return Auth::user()->addTask($task);
     }

@@ -178,7 +178,8 @@
                 </v-flex>
             </v-data-iterator>
         </v-card>
-        <task-create :users="users"></task-create>
+
+        <task-create :users="users" :uri="uri" @created="refresh" ></task-create>
     </span>
 </template>
 
@@ -200,7 +201,6 @@ export default {
       completed: false,
       name: '',
       description: '',
-      createDialog: false,
       editDialog: false,
       user: '',
       usersold: [
@@ -305,7 +305,6 @@ export default {
     refresh () {
       this.loading = true
       window.axios.get(this.uri).then(response => {
-        console.log(response.data)
         this.dataTasks = response.data
         this.loading = false
         this.$snackbar.showMessage('Tasques actualitzades correctament')

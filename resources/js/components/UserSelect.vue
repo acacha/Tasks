@@ -33,17 +33,14 @@ export default {
   name: 'UserSelect',
   data () {
     return {
-      dataUsers: [],
+      dataUsers: this.users,
       selectedUser: null
     }
   },
   props: {
     users: {
-      type: Array
-    },
-    url: {
-      type: String,
-      default: '/api/v1/users'
+      type: Array,
+      required: true
     },
     label: {
       type: String,
@@ -53,17 +50,9 @@ export default {
   watch: {
     selectedUser (newValue) {
       this.$emit('selected', newValue)
-    }
-  },
-  created () {
-    if (this.users) this.dataUsers = this.users
-    else {
-      window.axios.get(this.url).then(response => {
-        this.dataUsers = response.data
-      }).catch(error => {
-        console.log(error)
-        // this.$snackbar.showError(error)
-      })
+    },
+    users () {
+      this.dataUsers = this.users
     }
   }
 }

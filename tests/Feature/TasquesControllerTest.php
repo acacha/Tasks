@@ -37,15 +37,23 @@ class TasquesControllerTest extends TestCase
     {
         create_example_tasks();
 
-        $this->loginAsSuperAdmin();
+        $user  = $this->loginAsSuperAdmin();
         $response = $this->get('/tasques');
         $response->assertSuccessful();
         $response->assertViewIs('tasques');
         $response->assertViewHas('tasks', function($tasks) {
-            return count($tasks)===3 &&
+            return count($tasks)===6 &&
                 $tasks[0]['name']==='comprar pa' &&
                 $tasks[1]['name']==='comprar llet' &&
                 $tasks[2]['name']==='Estudiar PHP';
+        });
+        $response->assertViewHas('users', function($users) use ($user) {
+            return count($users)===3 &&
+                $users[2]->map()['id']=== $user->id &&
+                $users[2]->map()['name']=== $user->name &&
+                $users[2]->map()['email']=== $user->email &&
+                $users[2]->map()['gravatar']=== $user->gravatar &&
+                $users[2]->map()['admin']=== $user->admin;
         });
     }
 

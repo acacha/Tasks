@@ -24,18 +24,6 @@ export default {
         { icon: 'public', text: 'About', url: '/about' }
       ]
     }
-  },
-  methods: {
-    impersonate (user) {
-      console.log('IMPERSONATE')
-      console.log('user:')
-      console.log(user)
-      if (user) {
-        window.location.href = '/impersonate/take/' + user
-      } else {
-        console.log('CACA')
-      }
-    }
   }
 }
 </script>

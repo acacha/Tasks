@@ -18,7 +18,7 @@ class TasquesController extends Controller
             $tasks =  map_collection($request->user()->tasks);
             $uri = '/api/v1/user/tasks';
         }
-        $users = User::all();
+        $users = map_collection(User::all());
         return view('tasques',compact('tasks','users','uri'));
     }
 }

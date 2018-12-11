@@ -1,5 +1,5 @@
 <template>
-    <user-select :users="dataUsers" :label="label"></user-select>
+    <user-select :users="dataUsers" :label="label" @selected="impersonate"></user-select>
 </template>
 
 <script>
@@ -26,6 +26,13 @@ export default {
     label: {
       type: String,
       default: 'Usuaris'
+    }
+  },
+  methods: {
+    impersonate (user) {
+      if (user) {
+        window.location.href = '/impersonate/take/' + user
+      }
     }
   },
   created () {

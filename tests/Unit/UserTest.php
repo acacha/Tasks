@@ -182,8 +182,9 @@ class UserTest extends TestCase
         try {
             $regularusers[2];
         } catch (Exception $e) {
-            dump($e);
+            $this->assertTrue(true);
+            return;
         }
-
+        $this->fail('Exception expected but never occurs');
     }
 }

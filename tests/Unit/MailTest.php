@@ -18,9 +18,7 @@ class MailTest extends TestCase {
      */
     public function send_markdown_email()
     {
-        dump(env('MAIL_DRIVER'));
         $user = factory(User::class)->create();
-        //2
         Mail::to($user)->send(new TestEmail());
         $this->assertTrue(true);
     }
@@ -30,9 +28,7 @@ class MailTest extends TestCase {
      */
     public function send_markdown_email_dinamic()
     {
-        dump(env('MAIL_DRIVER'));
         $user = factory(User::class)->create();
-        //2
         Mail::to($user)->send(new TestDinamicEmail($user));
         $this->assertTrue(true);
     }
@@ -42,9 +38,7 @@ class MailTest extends TestCase {
      */
     public function send_test_email()
     {
-        dump(env('MAIL_DRIVER'));
         $user = factory(User::class)->create();
-        //2
         Mail::to($user)->send(new TestTextEmail());
         $this->assertTrue(true);
     }

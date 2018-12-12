@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\WelcomeEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -27,8 +28,9 @@ class RegisterControllerTest extends TestCase
             'password' => 'secret',
             'password_confirmation' => 'secret'
         ]);
+
         Mail::assertSent(WelcomeEmail::class, function($mail) {
-            $mail->user->name == 'Pepe Pardo Jeans';
+            return $mail->user->name === 'Pepe Pardo Jeans';
         });
 
         $response->assertStatus(302);

@@ -15,9 +15,6 @@ class TasksController extends Controller
 
     public function store(Request $request)
     {
-//        dd(Request::input());
-        // Request::
-//        https://laravel.com/docs/5.7/requests
         Task::create([
             'name' => $request->name,
             'completed' => false

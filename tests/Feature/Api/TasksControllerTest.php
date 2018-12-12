@@ -12,6 +12,8 @@ class TasksControllerTest extends TestCase
 {
     use RefreshDatabase, CanLogin;
 
+    // *********************** SHOW *******************************************************
+
     /**
      * @test
      */
@@ -67,6 +69,8 @@ class TasksControllerTest extends TestCase
         $response->assertStatus(401);
     }
 
+    // *********************** DELETE *******************************************************
+
     /**
      * @test
      */
@@ -114,6 +118,9 @@ class TasksControllerTest extends TestCase
         $result = json_decode($response->getContent());
         $response->assertStatus(403);
     }
+
+    // *********************** CREATE *******************************************************
+
 
     /**
      * @test
@@ -181,6 +188,9 @@ class TasksControllerTest extends TestCase
         $response->assertStatus(403);
     }
 
+    // *********************** INDEX *******************************************************
+
+
     /**
      * @test
      */
@@ -244,6 +254,7 @@ class TasksControllerTest extends TestCase
         $this->assertTrue((boolean) $result[2]->completed);
     }
 
+    // *********************** EDIT *******************************************************
 
     /**
      * @test

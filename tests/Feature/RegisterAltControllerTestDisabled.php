@@ -7,7 +7,11 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class RegisterAltControllerTest extends TestCase
+/**
+ * Class RegisterAltControllerTest
+ * @package Tests\Feature
+ */
+class RegisterAltControllerTestDisabled extends TestCase
 {
     /** @test */
     public function can_register_a_user()

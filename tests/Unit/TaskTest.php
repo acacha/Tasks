@@ -44,7 +44,9 @@ class TaskTest extends TestCase
         ]);
 
         $tag = Tag::create([
-            'name' => 'home'
+            'name' => 'home',
+            'description' => 'bla bla',
+            'color' => 'blue'
         ]);
 
         // execució
@@ -66,14 +68,20 @@ class TaskTest extends TestCase
         ]);
 
         $tag1 = Tag::create([
-            'name' => 'home'
+            'name' => 'home',
+            'description' => 'bla bla bla',
+            'color' => 'blue'
         ]);
         $tag2 = Tag::create([
-            'name' => 'work'
+            'name' => 'work',
+            'description' => 'bla bla bla',
+            'color' => 'blue'
         ]);
 
         $tag3 = Tag::create([
-            'name' => 'studies'
+            'name' => 'studies',
+            'description' => 'bla bla bla',
+            'color' => 'blue'
         ]);
 
         $tags = [$tag1, $tag2, $tag3];

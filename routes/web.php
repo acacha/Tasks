@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoggedUserTasksController;
 use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'TasksVueController@index');
 
     // USER TASKS
-    Route::get('/user/tasks','LoggedUserTasksController@index');
+    Route::get('/user/tasks','\\'. LoggedUserTasksController::class . '@index');
 
     Route::impersonate();
 

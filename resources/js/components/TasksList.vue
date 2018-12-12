@@ -74,7 +74,8 @@
                         </td>
                         <td>
                             <v-avatar :title="task.user_name">
-                                <img :src="task.user_gravatar" alt="avatar">
+                                <img v-if="task.user_gravatar" :src="task.user_gravatar" alt="avatar">
+                                <img v-else src="https://www.gravatar.com/avatar/" alt="avatar">
                             </v-avatar>
                         </td>
                         <td>

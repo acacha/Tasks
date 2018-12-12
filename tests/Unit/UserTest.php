@@ -96,26 +96,6 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function haveTask()
-    {
-        // 2 Execute
-//        $user->haveTask();
-    }
-
-    // https://laravel.com/docs/5.7/eloquent-relationships#inserting-and-updating-related-models
-
-    /**
-     * @test
-     */
-    public function removeTask()
-    {
-        // 2 Execute
-//        $user->removeTask();
-    }
-
-    /**
-     * @test
-     */
     public function isSuperAdmin()
     {
         $user = factory(User::class)->create();

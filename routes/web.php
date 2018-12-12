@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
@@ -13,10 +14,10 @@ Route::post('/login_alt','Auth\LoginAltController@login');
 
 //GRUP DE URLS PER USUARIS AUTENTICATS
 Route::middleware(['auth'])->group(function () {
-    Route::get('/tasks','TasksController@index');
-    Route::post('/tasks','TasksController@store');
-    Route::delete('/tasks/{id}','TasksController@destroy');
-    Route::put('/tasks/{id}','TasksController@update');
+    Route::get('/tasks','\\'. TasksController::class . '@index');
+    Route::post('/tasks','\\'. TasksController::class . '@store');
+    Route::delete('/tasks/{id}','\\'. TasksController::class . '@destroy');
+    Route::put('/tasks/{id}','\\'. TasksController::class . '@update');
 
     Route::get('/task_edit/{id}','TasksController@edit');
 

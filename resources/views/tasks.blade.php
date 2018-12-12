@@ -5,12 +5,12 @@
     {{--LARAVEL BLADE--}}
     <ul>
         @foreach ($tasks as $task)
-            <li>{{ $task->name }} <button>Completar</button>
-                <a href="/task_edit/{{ $task->id }}">
+            <li>{{ $task['name'] }} <button>Completar</button>
+                <a href="/task_edit/{{ $task['id'] }}">
                     <button>Modificar</button>
                 </a>
 
-                <form action="/tasks/{{ $task->id }}" method="POST">
+                <form action="/tasks/{{ $task['id'] }}" method="POST">
                     @csrf
                     {{ method_field('DELETE') }}
                     <button>Eliminar</button>

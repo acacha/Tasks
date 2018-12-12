@@ -34,10 +34,10 @@ class RegularUsersControllerTest extends TestCase
         $this->assertCount(2,$result);
         $this->assertEquals($result[0]->name,'Pepe Pardo Jeans');
         $this->assertEquals($result[0]->email,'pepepardo@jeans.com');
-        $this->assertEquals($result[0]->avatar,'https://www.gravatar.com/avatar/' . md5('pepepardo@jeans.com'));
+        $this->assertEquals($result[0]->gravatar,'https://www.gravatar.com/avatar/' . md5('pepepardo@jeans.com'));
         $this->assertEquals($result[1]->name,'Pepa Parda Jeans');
         $this->assertEquals($result[1]->email,'pepaparda@jeans.com');
-        $this->assertEquals($result[1]->avatar,'https://www.gravatar.com/avatar/' . md5('pepaparda@jeans.com'));
+        $this->assertEquals($result[1]->gravatar,'https://www.gravatar.com/avatar/' . md5('pepaparda@jeans.com'));
 //        $this->assertNull($result[2]);
     }
 }

@@ -53,7 +53,7 @@ trait CanLogin
      */
     protected function loginAsTaskManager($guard = null)
     {
-        return $this->loginAsUsingRole($guard, ['TaskManager','Tasks','TagManager']);
+        return $this->loginAsUsingRole($guard, ['TaskManager','Tasks','TagsManager']);
     }
 
     protected function loginAsTagManager($guard = null)

@@ -18,8 +18,6 @@ class TasksControllerTest extends TestCase
      */
     public function can_show_tasks()
     {
-        $this->withoutExceptionHandling();
-
         create_example_tasks();
         $this->login();
 
@@ -31,6 +29,14 @@ class TasksControllerTest extends TestCase
         $response->assertSee('comprar pa');
         $response->assertSee('comprar llet');
         $response->assertSee('Estudiar PHP');
+
+        $response->assertViewIs('tasks');
+        $response->assertViewHas('tasks', function($tasks) {
+            return count($tasks)===6 &&
+                $tasks[0]['name']==='comprar pa' &&
+                $tasks[1]['name']==='comprar llet' &&
+                $tasks[2]['name']==='Estudiar PHP';
+        });
     }
 
     /**

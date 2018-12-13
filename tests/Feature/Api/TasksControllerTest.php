@@ -143,7 +143,8 @@ class TasksControllerTest extends TestCase
         $this->loginAsSuperAdmin('api');
 
         $response = $this->json('POST','/api/v1/tasks/',[
-            'name' => 'Comprar pa'
+            'name' => 'Comprar pa',
+            'description' => 'Bla bla bla'
         ]);
 
         $result = json_decode($response->getContent());
@@ -151,6 +152,7 @@ class TasksControllerTest extends TestCase
 
         $this->assertNotNull($task = Task::find($result->id));
         $this->assertEquals('Comprar pa',$result->name);
+        $this->assertEquals('Bla bla bla',$result->description);
         $this->assertFalse($result->completed);
     }
 

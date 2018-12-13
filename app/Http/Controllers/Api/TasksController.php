@@ -22,16 +22,11 @@ class TasksController extends Controller
         return $task->map();
     }
 
-    public function destroy(TasksDestroy $request, Task $task)
-    {
-        $task->delete();
-        return $task;
-    }
-
     public function store(TasksStore $request)
     {
         $task = new Task();
         $task->name = $request->name;
+        $task->description = $request->description;
         $task->completed = false;
         $task->save();
         return $task->map();
@@ -42,6 +37,12 @@ class TasksController extends Controller
         $task->name = $request->name;
         $task->save();
         return $task->map();
+    }
+
+    public function destroy(TasksDestroy $request, Task $task)
+    {
+        $task->delete();
+        return $task;
     }
 
 }

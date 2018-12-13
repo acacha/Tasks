@@ -93,10 +93,8 @@
                                    @click="show(task)">
                                 <v-icon>visibility</v-icon>
                             </v-btn>
-                            <v-btn v-if="$can('tasks.update',task)" icon color="success" flat title="Canviar la tasca"
-                                   @click="showUpdate(task)">
-                                <v-icon>edit</v-icon>
-                            </v-btn>
+
+                            <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
                             <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
                         </td>
                     </tr>
@@ -141,6 +139,7 @@
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
 import TaskDestroy from './TaskDestroy'
+import TaskUpdate from './TaskUpdate'
 
 export default {
   name: 'TasksList',
@@ -173,7 +172,8 @@ export default {
   },
   components: {
     'task-completed-toggle': TaskCompletedToggle,
-    'task-destroy': TaskDestroy
+    'task-destroy': TaskDestroy,
+    'task-update': TaskUpdate
   },
   props: {
     tasks: {
@@ -192,6 +192,17 @@ export default {
   methods: {
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
+    updateTask (task) {
+      // No tinc collons -> Si algú té ganes de jugar
+      // this.dataTasks[this.dataTasks.indexOf(task)] = task
+      // const foundTask = this.dataTasks.find((t) => {
+      //   return t.id === task.id
+      // })
+      // console.log(foundTask)
+      // this.dataTasks[foundTask] = task
+      // TODO
+      this.refresh()
     },
     refresh () {
       this.loading = true

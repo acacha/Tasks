@@ -10,6 +10,7 @@
                 @input="$v.name.$touch()"
                 @blur="$v.name.$touch()"
         ></v-text-field>
+
         <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
 
         <v-textarea v-model="description" label="Descripció" hint="Escriu la descripció de la tasca..."></v-textarea>
@@ -75,7 +76,7 @@ export default {
     reset () {
       this.name = ''
       this.description = ''
-      this.completed = ''
+      this.completed = false
       this.user_id = null
     },
     add () {

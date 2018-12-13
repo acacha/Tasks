@@ -14,7 +14,7 @@
         </v-toolbar>
             <v-card>
                 <v-card-text>
-                    TODO SHOW
+                    <task-show-form :task="task"></task-show-form>
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -27,8 +27,13 @@
 </template>
 
 <script>
+import TaskShowForm from './TaskShowForm'
+
 export default {
   name: 'TaskShow',
+  components: {
+    'task-show-form': TaskShowForm
+  },
   data () {
     return {
       dialog: false

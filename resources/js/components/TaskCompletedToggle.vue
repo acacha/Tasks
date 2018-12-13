@@ -1,5 +1,9 @@
 <template>
-    <v-switch v-model="dataTask.completed" :label="dataTask.comple ? 'Completada' : 'Pendent'"></v-switch>
+    <v-switch
+            v-model="dataTask.completed"
+            :label="dataTask.completed ? 'Completada' : 'Pendent'"
+            :loading="loading"
+    ></v-switch>
 </template>
 
 <script>
@@ -7,7 +11,8 @@ export default {
   name: 'taskCompletedToggle',
   data () {
     return {
-      dataTask: this.task
+      dataTask: this.task,
+      loading: false
     }
   },
   props: {
@@ -30,11 +35,22 @@ export default {
   },
   methods: {
     completeTask () {
-      // REMEMBER LOADING I DISABLED
-      // window.axios.post('/v1/completed_task/' + this.task.id) // TODO ACABAR
+      this.loading = true
+      window.axios.post('/api/v1/completed_task/' + this.task.id).then(() => {
+        this.loading = false
+      }).catch(error => {
+        this.loading = false
+        this.$snackbar.showError(error)
+      })
     },
     uncompleteTask () {
-      // window.axios.delete('/v1/completed_task/' + this.task.id) // TODO ACABAR
+      this.loading = true
+      window.axios.delete('/api/v1/completed_task/' + this.task.id).then(() => {
+        this.loading = false
+      }).catch(error => {
+        this.loading = false
+        this.$snackbar.showError(error)
+      })
     }
   }
 }

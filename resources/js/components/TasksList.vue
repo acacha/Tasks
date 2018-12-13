@@ -79,7 +79,6 @@
                             </v-avatar>
                         </td>
                         <td>
-                            <!--<toggle :completed="task.completed" :id="task.id"></toggle>-->
                             <task-completed-toggle :task="task"></task-completed-toggle>
                         </td>
                         <td>
@@ -189,11 +188,17 @@ export default {
       required: true
     }
   },
+  watch: {
+    tasks (newTasks) {
+      this.dataTasks = newTasks
+    }
+  },
   methods: {
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
     updateTask (task) {
+      // TODO
       // No tinc collons -> Si algú té ganes de jugar
       // this.dataTasks[this.dataTasks.indexOf(task)] = task
       // const foundTask = this.dataTasks.find((t) => {
@@ -201,7 +206,6 @@ export default {
       // })
       // console.log(foundTask)
       // this.dataTasks[foundTask] = task
-      // TODO
       this.refresh()
     },
     refresh () {

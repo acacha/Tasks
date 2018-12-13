@@ -79,7 +79,7 @@
                             </v-avatar>
                         </td>
                         <td>
-                            <task-completed-toggle :task="task"></task-completed-toggle>
+                            <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
                         </td>
                         <td>
                             <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
@@ -88,11 +88,7 @@
                             <span :title="task.updated_at_formatted">{{ task.updated_at_human}}</span>
                         </td>
                         <td>
-                            <v-btn icon color="primary" flat title="Mostrar la tasca"
-                                   @click="show(task)">
-                                <v-icon>visibility</v-icon>
-                            </v-btn>
-
+                            <task-show :task="task"></task-show>
                             <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
                             <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
                         </td>
@@ -136,9 +132,10 @@
 </template>
 
 <script>
-import TaskCompletedToggle from './TaskCompletedToggle'
+import Toggle from './Toggle'
 import TaskDestroy from './TaskDestroy'
 import TaskUpdate from './TaskUpdate'
+import TaskShow from './TaskShow'
 
 export default {
   name: 'TasksList',
@@ -170,9 +167,10 @@ export default {
     }
   },
   components: {
-    'task-completed-toggle': TaskCompletedToggle,
+    'toggle': Toggle,
     'task-destroy': TaskDestroy,
-    'task-update': TaskUpdate
+    'task-update': TaskUpdate,
+    'task-show': TaskShow
   },
   props: {
     tasks: {

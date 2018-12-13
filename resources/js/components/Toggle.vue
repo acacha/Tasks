@@ -1,43 +1,68 @@
 <template>
-    <v-switch v-model="dataCompleted" :label="dataCompleted ? 'Completada' : 'Pendent'"></v-switch>
+    <v-switch
+            v-model="dataValue"
+            :label="dataValue ? activeText : unactiveText"
+            :loading="loading"
+    ></v-switch>
 </template>
 
 <script>
 export default {
-  name: 'Toggle',
+  name: 'toggle',
   data () {
     return {
-      dataCompleted: this.completed
+      dataValue: this.value,
+      loading: false
     }
   },
   props: {
-    completed: {
+    activeText: {
+      type: String,
+      default: 'Active'
+    },
+    unactiveText: {
+      type: String,
+      default: 'Unactive'
+    },
+    uri: {
+      type: String,
+      required: true
+    },
+    value: {
       type: Boolean,
       required: true
     },
-    id: {
-      type: Number,
+    resource: {
+      type: Object,
       required: true
     }
   },
   watch: {
-    completed (completed) {
-      this.dataCompleted = completed
-    },
-    dataCompleted (dataCompleted, oldDataCompleted) {
-      console.log('dataCompleted ha canviat')
-      console.log('NOU:')
-      console.log(dataCompleted)
-      console.log('ANTIC:')
-      console.log(oldDataCompleted)
-      if (dataCompleted) {
-        // LOADING i disabled TODO
-        window.axios.post('/v1/completed_task/' + this.id) // TODO ACABAR
-        // Route::delete('/v1/completed_task/{task}','Api\CompletedTasksController@destroy');
-        // Route::post('/v1/completed_task/{task}','Api\CompletedTasksController@store');
-      } else {
-        // window.axios.delete('/v1/completed_task/{task}') // TODO ACABAR
+    dataValue (dataValue, oldDataValue) {
+      if (dataValue !== oldDataValue) {
+        if (dataValue) this.completeTask()
+        else this.uncompleteTask()
       }
+    }
+  },
+  methods: {
+    completeTask () {
+      this.loading = true
+      window.axios.post(this.uri + '/' + this.resource.id).then(() => {
+        this.loading = false
+      }).catch(error => {
+        this.loading = false
+        this.$snackbar.showError(error)
+      })
+    },
+    uncompleteTask () {
+      this.loading = true
+      window.axios.delete(this.uri + '/' + this.resource.id).then(() => {
+        this.loading = false
+      }).catch(error => {
+        this.loading = false
+        this.$snackbar.showError(error)
+      })
     }
   }
 }

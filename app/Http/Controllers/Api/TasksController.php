@@ -27,7 +27,7 @@ class TasksController extends Controller
         $task = new Task();
         $task->name = $request->name;
         $task->description = $request->description;
-        $task->completed = false;
+        $task->completed = $request->completed ? true : false;
         $task->save();
         return $task->map();
     }

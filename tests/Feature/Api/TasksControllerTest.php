@@ -144,7 +144,7 @@ class TasksControllerTest extends TestCase
 
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pa',
-            'description' => 'Bla bla bla'
+            'description' => 'Bla bla bla',
         ]);
 
         $result = json_decode($response->getContent());
@@ -154,6 +154,31 @@ class TasksControllerTest extends TestCase
         $this->assertEquals('Comprar pa',$result->name);
         $this->assertEquals('Bla bla bla',$result->description);
         $this->assertFalse($result->completed);
+    }
+
+    /**
+     * @test
+     */
+    public function superadmin_can_create_completed_task()
+    {
+        $this->loginAsSuperAdmin('api');
+
+        $response = $this->json('POST','/api/v1/tasks/',[
+            'name' => 'Comprar pa',
+            'description' => 'Bla bla bla',
+            'completed' => true,
+        ]);
+
+        $result = json_decode($response->getContent());
+        $response->assertSuccessful();
+
+        $this->assertNotNull($task = Task::find($result->id));
+        $this->assertEquals('Comprar pa',$result->name);
+        $this->assertEquals('Bla bla bla',$result->description);
+        $this->assertTrue($result->completed);
+        $this->assertEquals('Comprar pa',$task->name);
+        $this->assertEquals('Bla bla bla',$task->description);
+        $this->assertEquals(1,$task->completed);
     }
 
     /**

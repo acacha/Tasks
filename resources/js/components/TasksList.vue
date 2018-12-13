@@ -97,11 +97,7 @@
                                    @click="showUpdate(task)">
                                 <v-icon>edit</v-icon>
                             </v-btn>
-                            <v-btn v-can="tasks.destroy" icon color="error" flat title="Eliminar la tasca"
-                                   :loading="removing === task.id" :disabled="removing === task.id"
-                                   @click="destroy(task)">
-                                <v-icon>delete</v-icon>
-                            </v-btn>
+                            <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
                         </td>
                     </tr>
                 </template>
@@ -144,6 +140,7 @@
 
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
+import TaskDestroy from './TaskDestroy'
 
 export default {
   name: 'TasksList',
@@ -151,7 +148,6 @@ export default {
     return {
       user: '',
       loading: false,
-      removing: null,
       dataTasks: this.tasks,
       dataUsers: this.users,
       filter: 'Totes',
@@ -176,7 +172,8 @@ export default {
     }
   },
   components: {
-    'task-completed-toggle': TaskCompletedToggle
+    'task-completed-toggle': TaskCompletedToggle,
+    'task-destroy': TaskDestroy
   },
   props: {
     tasks: {
@@ -193,6 +190,9 @@ export default {
     }
   },
   methods: {
+    removeTask (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
     refresh () {
       this.loading = true
       window.axios.get(this.uri).then(response => {
@@ -203,33 +203,7 @@ export default {
         console.log(error)
         this.loading = false
       })
-    },
-    async destroy (task) {
-      // ES6 async await
-      let result = await this.$confirm('Les tasques esborrades no es poden recuperar',
-        {
-          title: 'Esteu segurs?',
-          buttonTruetext: 'Eliminar',
-          buttonFalsetext: 'Cancel·lar',
-          // icon: '',
-          color: 'error'
-        })
-      if (result) {
-        this.removing = task.id
-        window.axios.delete(this.uri + '/' + task.id).then(() => {
-          // this.refresh() // Problema -> rendiment
-          this.removeTask(task)
-          this.deleteDialog = false
-          task = null
-          this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
-          this.removing = null
-        }).catch(error => {
-          this.$snackbar.showError(error.message)
-          this.removing = null
-        })
-      }
     }
-
   }
 }
 </script>

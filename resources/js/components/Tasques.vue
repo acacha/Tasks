@@ -83,9 +83,6 @@ export default {
   methods: {
     add (task) {
       this.dataTasks.push(task)
-    },
-    removeTask (task) {
-      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     }
   }
 }

@@ -7,8 +7,7 @@
 
         <v-textarea v-model="description" label="Descripció" hint="bla bla bla..."></v-textarea>
 
-        <!--// TODO canviar a user-select-->
-        <v-autocomplete v-model="user" :items="dataUsers" label="Usuari" item-text="name"></v-autocomplete>
+        <user-select v-model="user" :users="dataUsers" label="Usuari"></user-select>
 
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
@@ -25,12 +24,13 @@
 
 <script>
 export default {
+  name: 'TaskUpdateForm',
   data () {
     return {
       name: this.task.name,
       description: this.task.description,
       completed: this.task.completed,
-      user: this.task.user,
+      user: null,
       dataUsers: this.users,
       working: false
     }
@@ -49,7 +49,17 @@ export default {
       required: true
     }
   },
+  watch: {
+    task (task) {
+      this.updateUser(task)
+    }
+  },
   methods: {
+    updateUser (task) {
+      this.user = this.users.find((user) => {
+        return parseInt(user.id) === parseInt(task.user_id)
+      })
+    },
     update () {
       this.working = true
       const newTask = {
@@ -67,6 +77,9 @@ export default {
         this.working = false
       })
     }
+  },
+  created () {
+    this.updateUser(this.task)
   }
 }
 </script>

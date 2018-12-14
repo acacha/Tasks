@@ -15,8 +15,19 @@
 
         <v-textarea v-model="description" label="Descripció" hint="Escriu la descripció de la tasca..."></v-textarea>
 
-        <user-select v-model="user_id" :users="dataUsers" label="asdasdas"></user-select>
+        <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuari"></user-select>
 
+        <!--<user-select v-model="variable"></user-select>-->
+
+        <!--<user-select :value="variable" @input="this.variable = $event.target.value"></user-select>-->
+        <!--<user-select v-bind:value="variable" v-on:input=""></user-select>-->
+
+
+        <!--v-model equivalent for <user-select v-model="user_id" ..> -->
+        <!--<user-select-->
+                <!--v-bind:value="user_id"-->
+                <!--v-on:input="user_id = $event.target.value"-->
+        <!--&gt;-->
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
                 <v-icon class="mr-1">exit_to_app</v-icon>
@@ -51,7 +62,7 @@ export default {
       description: '',
       dataUsers: this.users,
       loading: false,
-      user_id: null
+      user: null
     }
   },
   props: {
@@ -73,11 +84,18 @@ export default {
     }
   },
   methods: {
+    selectLoggedUser () {
+      if (window.laravel_user) {
+        this.user = this.users.find((user) => {
+          return parseInt(user.id) === parseInt(window.laravel_user.id)
+        })
+      }
+    },
     reset () {
       this.name = ''
       this.description = ''
       this.completed = false
-      this.user_id = null
+      this.user = null
     },
     add () {
       this.loading = true
@@ -85,7 +103,7 @@ export default {
         'name': this.name,
         'description': this.description,
         'completed': this.completed,
-        'user_id': this.user_id
+        'user_id': this.user.id
       }
       window.axios.post(this.uri, task).then(response => {
         this.$snackbar.showMessage('Tasca creada correctament')
@@ -98,6 +116,9 @@ export default {
         this.loading = false
       })
     }
+  },
+  created () {
+    this.selectLoggedUser()
   }
 }
 </script>

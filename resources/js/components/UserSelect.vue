@@ -45,7 +45,7 @@ export default {
   props: {
     itemValue: {
       type: String,
-      value: 'id'
+      default: 'id'
     },
     user: {
       type: Object,
@@ -67,7 +67,6 @@ export default {
       this.selectedUser = user
     },
     selectedUser (newValue) {
-      console.log('newValue:' + newValue)
       this.$emit('selected', newValue)
     },
     users () {

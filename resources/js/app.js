@@ -12,10 +12,11 @@ import LoginForm from './components/LoginForm.vue'
 import UserList from './components/UserList'
 import UserSelect from './components/UserSelect'
 import Impersonate from './components/Impersonate'
+import GitInfo from './components/git/GitInfoComponent'
+
 import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
-
 window.Vue = Vue
 window.Vue.use(Vuetify)
 window.Vue.use(permissions)
@@ -30,6 +31,7 @@ window.Vue.component('login-form', LoginForm)
 window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
 window.Vue.component('impersonate', Impersonate)
+window.Vue.component('git-info', GitInfo)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

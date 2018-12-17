@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GitController;
 use App\Http\Controllers\Api\TagsController;
 use App\Http\Controllers\Api\TasksController;
 use App\Task;
@@ -50,6 +51,8 @@ Route::middleware('auth:api')->group(function() {
     // Users
     Route::get('/v1/users','Api\UsersController@index');
     Route::get('/v1/regular_users','Api\RegularUsersController@index');
+
+    Route::get('/v1/git/info','\\' . GitController::class . '@index');
 
 });
 

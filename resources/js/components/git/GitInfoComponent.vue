@@ -1,5 +1,49 @@
 <template>
+    <span>
+        <v-dialog
+                v-model="dialog"
+                width="500"
+        >
+          <v-card>
+            <v-card-title
+                    class="headline grey lighten-2"
+                    primary-title
+            >
+              Informació versió de l'aplicació
+            </v-card-title>
 
+            <v-card-text>
+                <ul>
+                    <li>Branca: {{ dataGit.branch }}</li>
+                    <li>Commit: {{ dataGit.commit }}</li>
+                    <li>Commit_short: {{ dataGit.commit_short }}</li>
+                    <li>Autor: {{ dataGit.author_name }}</li>
+                    <li>Email: {{ dataGit.author_email }}</li>
+                    <li>Missatge: {{ dataGit.message }}</li>
+                    <li>Data: {{ dataGit.date_human }} | {{ dataGit.date_formatted }}</li>
+                    <li>Origin: {{ dataGit.origin }}</li>
+                    <li>Projecte Github: <a :href="githubURL()" target="_blank">{{ githubUri() }}</a></li>
+                    <li>Commits Github: <a :href="githubURLIssues()" target="_blank">{{ githubUri() }}</a></li>
+                </ul>
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn icon small title="Actualitzeu les dades/flush de la cache" @click="refresh"><v-icon>refresh</v-icon></v-btn>
+              <v-btn
+                      color="primary"
+                      flat
+                      @click="dialog = false"
+              >
+                Tancar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        Versió: <a href="#" click="dialog=true" class="white--text" @click="dialog = true">{{ dataGit.commit_short }}</a>
+    </span>
 </template>
 
 <script>

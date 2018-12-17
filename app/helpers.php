@@ -3,7 +3,9 @@
 use App\Tag;
 use App\Task;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
@@ -347,5 +349,104 @@ if (!function_exists('logged_user')) {
     function logged_user()
     {
         return json_encode(optional(Auth::user())->map());
+    }
+}
+
+
+if (! function_exists('git')) {
+    function git() {
+        return Cache::remember('git_info', 5, function () {
+            Carbon::setLocale(config('app.locale'));
+            return collect([
+                'branch' => git_current_branch(),
+                'commit' => git_current_commit(),
+                'commit_short' => git_current_commit(true),
+                'full_info' => git_current_commit_full_info(),
+                'author_name' => git_current_commit_author_name(),
+                'author_email' => git_current_commit_author_email(),
+                'message' => git_current_commit_message(),
+                'timestamp' => $timestamp = git_current_commit_timestamp(),
+                'date' => $carbonDate = Carbon::createFromTimestamp($timestamp),
+                'date_human_original' => git_current_commit_date_human(),
+                'date_human' => $carbonDate->diffForHumans(Carbon::now()),
+                'date_formatted' => $carbonDate->format('h:i:sA d-m-Y'),
+                'origin' => git_remote_origin_url()
+            ]);
+        });
+    }
+}
+
+if (! function_exists('git_current_branch')) {
+    function git_current_branch() {
+        exec('git name-rev --name-only HEAD', $output);
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_current_commit')) {
+    function git_current_commit($short = false) {
+        $short ? exec('git rev-parse --short HEAD', $output) : exec('git rev-parse HEAD', $output) ;
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_current_commit_full_info')) {
+    function git_current_commit_full_info() {
+        exec('git log -1', $output);
+        return $output;
+    }
+}
+
+if (! function_exists('git_current_commit_author_name')) {
+    function git_current_commit_author_name() {
+        exec("git log -1 --pretty=format:'%an'", $output);
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_current_commit_author_email')) {
+    function git_current_commit_author_email() {
+        exec("git log -1 --pretty=format:'%ae'", $output);
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_current_commit_message')) {
+    function git_current_commit_message()
+    {
+        exec("git log -1 --pretty=format:'%s'", $output);
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_current_commit_timestamp')) {
+    function git_current_commit_timestamp()
+    {
+        exec("git log -1 --pretty=format:'%at'", $output);
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_current_commit_date')) {
+    function git_current_commit_date()
+    {
+        exec("git log -1 --pretty=format:'%ad'", $output);
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_current_commit_date_human')) {
+    function git_current_commit_date_human()
+    {
+        exec("git log -1 --pretty=format:'%ar'", $output);
+        return $output[0];
+    }
+}
+
+if (! function_exists('git_remote_origin_url')) {
+    function git_remote_origin_url()
+    {
+        exec("git config --get remote.origin.url", $output);
+        return $output[0];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Tenants\Api;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Contracts\Console\Kernel;
 use Tests\Feature\Traits\CanLogin;

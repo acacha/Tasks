@@ -1,5 +1,6 @@
 <template>
     <v-autocomplete
+            :read-only="readOnly"
             :items="dataUsers"
             v-model="selectedUser"
             :item_value="itemValue"
@@ -43,6 +44,10 @@ export default {
     event: 'selected'
   },
   props: {
+    readOnly: {
+      type: Boolean,
+      default: false
+    },
     itemValue: {
       type: String,
       default: 'id'

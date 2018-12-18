@@ -14,7 +14,7 @@
         </v-toolbar>
             <v-card>
                 <v-card-text>
-                    <task-show-form :task="task"></task-show-form>
+                    <task-show-form :task="task" :users="users"></task-show-form>
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -42,6 +42,10 @@ export default {
   props: {
     task: {
       type: Object,
+      required: true
+    },
+    users: {
+      type: Array,
       required: true
     }
   }

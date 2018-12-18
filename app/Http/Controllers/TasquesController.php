@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserTasksIndex;
+use App\Tag;
 use App\Task;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class TasquesController extends Controller
             $uri = '/api/v1/user/tasks';
         }
         $users = map_collection(User::all());
-        return view('tasques',compact('tasks','users','uri'));
+        $tags = map_collection(Tag::all());
+        return view('tasques',compact('tasks','users','uri','tags'));
     }
 }

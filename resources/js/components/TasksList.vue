@@ -82,6 +82,9 @@
                             <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
                         </td>
                         <td>
+                            <tasks-tags :task="task" :tags="tags"></tasks-tags>
+                        </td>
+                        <td>
                             <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
                         </td>
                         <td>
@@ -136,6 +139,7 @@ import Toggle from './Toggle'
 import TaskDestroy from './TaskDestroy'
 import TaskUpdate from './TaskUpdate'
 import TaskShow from './TaskShow'
+import TasksTags from './TasksTags'
 
 export default {
   name: 'TasksList',
@@ -160,6 +164,7 @@ export default {
         { text: 'Name', value: 'name' },
         { text: 'User', value: 'user_id' },
         { text: 'Completat', value: 'completed' },
+        { text: 'Etiquetes', value: 'tags' },
         { text: 'Creat', value: 'created_at_timestamp' },
         { text: 'Modificat', value: 'updated_at_timestamp' },
         { text: 'Accions', sortable: false, value: 'full_search' }
@@ -170,10 +175,15 @@ export default {
     'toggle': Toggle,
     'task-destroy': TaskDestroy,
     'task-update': TaskUpdate,
-    'task-show': TaskShow
+    'task-show': TaskShow,
+    'tasks-tags': TasksTags
   },
   props: {
     tasks: {
+      type: Array,
+      required: true
+    },
+    tags: {
       type: Array,
       required: true
     },

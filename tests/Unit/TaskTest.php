@@ -175,12 +175,10 @@ class TaskTest extends TestCase
             'name' => 'Pepe Pardo Jeans',
             'email' => 'pepepardo@jeans.com'
         ]);
-        $task = Task::create([
-            'name' => 'Comprar pa',
-            'description' => 'Bla bla bla',
-            'completed' => false,
-        ]);
-        $task->assignUser($user);
+
+        $task  = create_sample_task($user);
+
+
         $mappedTask = $task->map();
         $this->assertEquals($mappedTask['id'],1);
         $this->assertEquals($mappedTask['name'],'Comprar pa');
@@ -199,6 +197,14 @@ class TaskTest extends TestCase
         $this->assertNotNull($mappedTask['updated_at_timestamp']);
         $this->assertEquals($mappedTask['user_gravatar'],'https://www.gravatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
         $this->assertEquals($mappedTask['full_search'],'1 Comprar pa Bla bla bla Pendent Pepe Pardo Jeans pepepardo@jeans.com');
+
+//        dump($mappedTask['tags'][0]);
+        $this->assertEquals($mappedTask['tags'][0]->name,'Tag1');
+        $this->assertEquals($mappedTask['tags'][0]->color,'blue');
+        $this->assertEquals($mappedTask['tags'][0]->description,'bla bla bla');
+        $this->assertEquals($mappedTask['tags'][1]->name,'Tag2');
+        $this->assertEquals($mappedTask['tags'][1]->color,'red');
+        $this->assertEquals($mappedTask['tags'][1]->description,'Jorl Jorl');
 
         // TODO fullsearch
         $this->assertTrue($user->is($mappedTask['user']));

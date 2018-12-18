@@ -42,6 +42,7 @@ class TagsControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertViewIs('tags');
         $response->assertViewHas('tags', function($tags) {
+            dd($tags);
             return count($tags)===3 &&
                 $tags[0]['name']==='Tag1' &&
                 $tags[1]['name']==='Tag2' &&

@@ -1,24 +1,33 @@
 <template>
-    <div>
-        TODO TAGS
-        <v-btn @click="showMessage">Show snackbar message</v-btn>
-        <v-btn @click="showError">Show snackbar error</v-btn>
-    </div>
+    <span>
+        <tags-list :tags="dataTags"></tags-list>
+        <tags-create @created="add" ></tags-create>
+    </span>
 </template>
 
 <script>
+import TagsList from './TagsList'
+import TagsCreate from './TagsCreate'
 export default {
   name: 'Tags',
+  components: {
+    'tags-list': TagsList,
+    'tags-create': TagsCreate
+  },
   data () {
     return {
+      dataTags: this.tags
+    }
+  },
+  props: {
+    tags: {
+      type: Array,
+      required: true
     }
   },
   methods: {
-    showMessage () {
-      this.$snackbar.showMessage('Missatge exemple')
-    },
-    showError () {
-      this.$snackbar.showError('Error exemple')
+    add (tag) {
+      this.dataTags.push(tag)
     }
   }
 }

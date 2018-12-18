@@ -14,7 +14,7 @@
                     </v-list-tile>
                 </v-list>
             </v-menu>
-            <v-toolbar-title class="white--text">Tasques</v-toolbar-title>
+            <v-toolbar-title class="white--text">Etiquetes</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn icon class="white--text">
                 <v-icon>settings</v-icon>
@@ -35,15 +35,6 @@
                         >
                         </v-select>
                     </v-flex>
-                    <v-flex lg4 class="mr-2">
-                        <v-select
-                                label="User"
-                                :items="dataUsers"
-                                v-model="user"
-                                item-text="name"
-                                clearable>
-                        </v-select>
-                    </v-flex>
                     <v-flex lg5>
                         <v-text-field
                                 append-icon="search"
@@ -55,73 +46,66 @@
             </v-card-title>
             <v-data-table
                     :headers="headers"
-                    :items="dataTasks"
+                    :items="dataTags"
                     :search="search"
                     no-results-text="No s'ha trobat cap registre coincident"
                     no-data-text="No hi han dades disponibles"
-                    rows-per-page-text="Tasques per pàgina"
+                    rows-per-page-text="Etiquetes per pàgina"
                     :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
                     :loading="loading"
                     :pagination.sync="pagination"
                     class="hidden-md-and-down"
             >
                 <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-                <template slot="items" slot-scope="{item: task}">
+                <template slot="items" slot-scope="{item: tag}">
                     <tr>
-                        <td>{{ task.id }}</td>
+                        <td>{{ tag.id }}</td>
                         <td>
-                            <span :title="task.description">{{ task.name }}</span>
+                            <span :title="tag.description">{{ tag.name }}</span>
+                        </td>
+                        <td v-text="tag.color">
                         </td>
                         <td>
-                            <v-avatar :title="task.user_name">
-                                <img v-if="task.user_gravatar" :src="task.user_gravatar" alt="avatar">
-                                <img v-else src="https://www.gravatar.com/avatar/" alt="avatar">
-                            </v-avatar>
+                            <span :title="tag.created_at_formatted">{{ tag.created_at_human}}</span>
                         </td>
                         <td>
-                            <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
+                            <span :title="tag.updated_at_formatted">{{ tag.updated_at_human}}</span>
                         </td>
                         <td>
-                            <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
-                        </td>
-                        <td>
-                            <span :title="task.updated_at_formatted">{{ task.updated_at_human}}</span>
-                        </td>
-                        <td>
-                            <task-show :users="users" :task="task"></task-show>
-                            <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
-                            <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
+                            <tag-show :tag="tag"></tag-show>
+                            <tag-update :tag="tag" @updated="updateTag"></tag-update>
+                            <tag-destroy :tag="tag" @removed="removeTag"></tag-destroy>
                         </td>
                     </tr>
                 </template>
             </v-data-table>
             <v-data-iterator class="hidden-lg-and-up"
-                             :items="dataTasks"
+                             :items="dataTags"
                              :search="search"
                              no-results-text="No s'ha trobat cap registre coincident"
                              no-data-text="No hi han dades disponibles"
-                             rows-per-page-text="Tasques per pàgina"
+                             rows-per-page-text="Etiquetes per pàgina"
                              :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
                              :loading="loading"
                              :pagination.sync="pagination"
             >
                 <v-flex
                         slot="item"
-                        slot-scope="{item:task}"
+                        slot-scope="{item:tag}"
                         xs12
                         sm6
                         md4
                 >
                     <v-card class="mb-1">
-                        <v-card-title v-text="task.name"></v-card-title>
+                        <v-card-title v-text="tag.name"></v-card-title>
                         <v-list dense>
                             <v-list-tile>
                                 <v-list-tile-content>Completed:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ task.completed }}</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ tag.completed }}</v-list-tile-content>
                             </v-list-tile>
                             <v-list-tile>
                                 <v-list-tile-content>User:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ task.user_id }}</v-list-tile-content>
+                                <v-list-tile-content class="align-end">{{ tag.user_id }}</v-list-tile-content>
                             </v-list-tile>
                         </v-list>
                     </v-card>
@@ -132,24 +116,20 @@
 </template>
 
 <script>
-import Toggle from './Toggle'
-import TaskDestroy from './TaskDestroy'
-import TaskUpdate from './TaskUpdate'
-import TaskShow from './TaskShow'
+import TagDestroy from './TagDestroy'
+import TagUpdate from './TagUpdate'
+import TagShow from './TagShow'
 
 export default {
-  name: 'TasksList',
+  name: 'TagsList',
   data () {
     return {
       user: '',
       loading: false,
-      dataTasks: this.tasks,
-      dataUsers: this.users,
+      dataTags: this.tags,
       filter: 'Totes',
       filters: [
-        'Totes',
-        'Completades',
-        'Pendents'
+        'Totes'
       ],
       search: '',
       pagination: {
@@ -158,8 +138,7 @@ export default {
       headers: [
         { text: 'Id', value: 'id' },
         { text: 'Name', value: 'name' },
-        { text: 'User', value: 'user_id' },
-        { text: 'Completat', value: 'completed' },
+        { text: 'Color', value: 'color' },
         { text: 'Creat', value: 'created_at_timestamp' },
         { text: 'Modificat', value: 'updated_at_timestamp' },
         { text: 'Accions', sortable: false, value: 'full_search' }
@@ -167,46 +146,37 @@ export default {
     }
   },
   components: {
-    'toggle': Toggle,
-    'task-destroy': TaskDestroy,
-    'task-update': TaskUpdate,
-    'task-show': TaskShow
+    'tag-destroy': TagDestroy,
+    'tag-update': TagUpdate,
+    'tag-show': TagShow
   },
   props: {
-    tasks: {
+    tags: {
       type: Array,
-      required: true
-    },
-    users: {
-      type: Array,
-      required: true
-    },
-    uri: {
-      type: String,
       required: true
     }
   },
   watch: {
-    tasks (newTasks) {
-      this.dataTasks = newTasks
+    tags (newTags) {
+      this.dataTags = newTags
     }
   },
   methods: {
-    removeTask (task) {
-      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
-    },
-    updateTask (task) {
+    updateTag (tag) {
       this.refresh()
+    },
+    removeTag (tag) {
+      this.dataTags.splice(this.dataTags.indexOf(tag), 1)
     },
     refresh () {
       this.loading = true
-      window.axios.get(this.uri).then(response => {
-        this.dataTasks = response.data
+      window.axios.get('/api/v1/tags').then(response => {
+        this.dataTags = response.data
         this.loading = false
-        this.$snackbar.showMessage('Tasques actualitzades correctament')
+        this.$snackbar.showMessage('Etiquetes actualitzades correctament')
       }).catch(error => {
-        console.log(error)
         this.loading = false
+        this.$snackbar.showError(error)
       })
     }
   }

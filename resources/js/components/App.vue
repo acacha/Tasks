@@ -17,7 +17,8 @@ export default {
           children: [
             { icon: 'build', text: 'Tasques amb PHP', url: '/tasks' },
             { icon: 'build', text: 'Tasques tailwind', url: '/tasks_vue' },
-            { icon: 'build', text: 'Tasques', url: '/tasques' }
+            { icon: 'build', text: 'Tasques', url: '/tasques' },
+            { icon: 'build', text: 'Tags', url: '/tags' }
           ]
         },
         { icon: 'help', text: 'Contact', url: '/contact' },

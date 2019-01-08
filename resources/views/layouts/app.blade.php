@@ -130,7 +130,7 @@
             </v-card>
         </v-navigation-drawer>
         <v-toolbar
-                color="indigo"
+                color="primary"
                 dark
                 app
                 clipped-left

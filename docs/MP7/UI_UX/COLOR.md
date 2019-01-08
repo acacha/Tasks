@@ -27,6 +27,7 @@
 - PWA -> Aplicació per a mòbils:
  - https://developers.google.com/web/updates/2015/08/using-manifest-to-set-sitewide-theme-color
  - Canviar el color de la system bar i de la barra de navegació del navegador 
+ 
 # Tools
 
 - PHPSTORM: https://www.jetbrains.com/help/phpstorm/color-picker.html: Ctrl+Shift+A -> Show Color Picker
@@ -61,7 +62,7 @@ https://material.io/design/color/#color-theme-creation
 
 # Paletes
 
-Quans colors utilitzar? Doncs al final es tracta de tenir un sistema predefinit que limiti la infinitat d'opcions:
+Quants colors utilitzar? Doncs al final es tracta de tenir un sistema predefinit que limiti la infinitat d'opcions:
 
 - Important: no sortir de la gama de colors escollida, evitar la dispersitat de valors
 - Degut a la norma anterior tampoc no ppodem agafar pocs colors (p.ex només primary, secondary, accent, error, warning, etc)

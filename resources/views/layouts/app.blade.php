@@ -10,6 +10,7 @@
     <meta name="user" content="{{ logged_user() }}">
     <meta name="git" content="{{ git() }}">
 
+    <link rel="manifest" href="/manifest.json">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <title>@yield('title','Put your title here')</title>
     <style>

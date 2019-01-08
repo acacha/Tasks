@@ -2,6 +2,10 @@
 
 - Refactoritzar aplicació de tasques per utilitzar els colors de forma concruent amb la teòria explicada:
 - Utilitzar colors semantics:
+  - [ ] Modificador de temes (settings):
+    - Es pot modificar tema programaticament:
+    - this.$vuetify.theme.primary = '#4caf50'
+    - Com guardar la configuració? LocalStorage: 
   - Primary i secondary: 
     - [ ] Toolbar background color
     - [ ] Footer background color
@@ -11,7 +15,7 @@
     - Alguns botons que es vulguin destacar: 
     - FAB (Floating Action Button)
     - Tabs seleccionades
-    - Alguns widgets de formulari com barras de progres, checkbox o switches, selectted items
+    - Alguns widgets de formulari com barras de progres, checkbox o switches, selected items
   - Canviar el color de fons:
     - [ ] CARDS Aplicar al background de les cards
   - Semantic Colors:

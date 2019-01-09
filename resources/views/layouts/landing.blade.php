@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2680C2"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title','Put your title here')</title>
     <style>

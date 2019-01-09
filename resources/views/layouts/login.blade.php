@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2680C2"/>
     <title>@yield('title','Put your title here')</title>
     <style>
         [v-cloak] { display: none }

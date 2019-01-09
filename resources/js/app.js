@@ -20,10 +20,14 @@ import confirm from './plugins/confirm'
 window.Vue = Vue
 window.Vuetify = Vuetify
 
+const PRIMARY_COLOR_KEY = 'primary_color_key'
+
+const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#2680C2'
+
 window.Vue.use(window.Vuetify, {
   theme: {
     primary: {
-      base: '#2680C2',
+      base: primaryColor,
       lighten1: '#4098D7',
       lighten2: '#62B0E8',
       lighten3: '#84C5F4',

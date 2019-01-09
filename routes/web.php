@@ -59,5 +59,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/auth/facebook', '\\'. LoginController::class . '@redirectToProvider');
-Route::get('/auth/facebook/callback', '\\'. LoginController::class . '@handleProviderCallback');
+Route::get('/auth/{provider}', '\\'. LoginController::class . '@redirectToProvider');
+Route::get('/auth/{provider}/callback', '\\'. LoginController::class . '@handleProviderCallback');
+

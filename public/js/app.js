@@ -80326,6 +80326,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -80459,7 +80460,11 @@ var render = function() {
               }
             },
             [_vm._v("Login")]
-          )
+          ),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { color: "primary", href: "/auth/facebook" } }, [
+            _vm._v("Login amb Facebook")
+          ])
         ],
         1
       )

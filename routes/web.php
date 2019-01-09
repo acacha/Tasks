@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LoggedUserTasksController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
@@ -57,3 +58,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/auth/facebook', '\\'. LoginController::class . '@redirectToProvider');
+Route::get('/auth/facebook/callback', '\\'. LoginController::class . '@handleProviderCallback');

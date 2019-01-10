@@ -91,8 +91,71 @@ Opcions:
 Utilitzar drive com unitat on guardar els fitxers
 - En aquest cas l'utilitzarem com unitat extra-> es guarda en local i també a drive
 
-Passos a seguir:
-- 
+```
+composer require nao-pon/flysystem-google-drive
+```
 
+CONFIG:
+
+A **config/filesystems.php**:
+
+```
+'google' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
+        ],
+```
+
+Crear un Provider:
+
+```
+php artisan make:provider GoogleDriveServiceProvider
+```
+
+a boot posar:
+
+```
+\Storage::extend('google', function ($app, $config) {
+    $client = new \Google_Client();
+    $client->setClientId($config['clientId']);
+    $client->setClientSecret($config['clientSecret']);
+    $client->refreshToken($config['refreshToken']);
+    $service = new \Google_Service_Drive($client);
+    $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, $config['folderId']);
+    return new \League\Flysystem\Filesystem($adapter);
+});
+```
+
+a **config/app.php** registrar el provider:
+
+
+
+Passos a seguir:
+- Logar-se a Google Drive amb un compte de Gmail
+- Anar a https://console.developers.google.com i crear un nou projecte (nom tasks)
+- Fer clic a Enable APIs and Services -> Buscar Google Drive
+- Activar la API fent click a Enable
+- Fer clic a Manage
+- Anar a credentials
+- Fer clic a Crear Credenciales
+  - ID de cliente de Oauth
+  - Configurar pantalla de consentimiento
+  - Posar nom a la app i el nom de domini i omplir totes les URL apuntant a la pàgina: http://tasks.sergitur.scool.cat (acapteu vostre cas)
+  - Tornar a Id de cliente oauth i continuar usant Aplicación Web
+  - Nom: Aplicació Tasques
+  - URLS consentimiento: http://tasks.test | https://developers.google.com/oauthplayground
+- Cal repetir procediment per a explotació
+- Guardar credencials a .env:
+
+GOOGLE_DRIVE_CLIENT_ID=20710478546-60h29mddnaogd9u13qhhda765q126aut.apps.googleusercontent.com
+GOOGLE_DRIVE_CLIENT_SECRET=tXJ78qwWb45qTMavmEiT_9nXXy
+
+- Guardar credencials a .env.production i pujar al servidor  	
+
+PROVES:
+- https://developers.google.com/oauthplayground/
 # TODO
 - /user/avatar -> Només mostrar imatge per defecte si no hi ha imatge Gravatar per l'usuari

@@ -75,3 +75,11 @@ URL: /profile
 - GET -> /user/photo Mostra només per als usuaris logats la photo de l'usuari logat
 - Afegir test, controlador i ruta i el que calgui per fer funcionar /user/photo
 - https://laravel.com/docs/5.7/responses#file-downloads
+
+# IMAGES CACHE AND REFRESH
+
+Si canviem la imatge Avatar/Photo cal fer Shift+F5 per actualitzar la cache:
+
+Opcions:
+- 
+

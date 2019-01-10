@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class LoggedUserPhotoController extends Controller
 {
-
     public function show(Request $request)
     {
-        $photo = $this->userPhotoExists($request->user()) ? $request->user()->photo : $this->defaultPhoto();
-        return response()->file(Storage::disk('local')->path($photo->url));
+        $photo = $this->userPhotoExists($request->user()) ? $request->user()->photo->url : $this->defaultPhoto();
+        return response()->file(Storage::disk('local')->path($photo), [
+            'Cache-Control' => 'no-cache, must-revalidate, no-store, max-age=0, private',
+            'Pragma' => 'no-cache'
+        ]);
     }
-
 
     protected function userPhotoExists($user)
     {

@@ -14,10 +14,15 @@ class PhotoController extends Controller
         $path = $request->file('photo')->storeAs(
             'photos', $request->user()->id. '.'. $extension
         );
-        Photo::firstOrCreate([
-            'url' => $path,
-            'user_id' => $request->user()->id
-        ]);
+        if ($photo = Photo::where('user_id',$request->user()->id)->first()) {
+            $photo->url = $path;
+            $photo->save();
+        } else {
+            Photo::create([
+                'url' => $path,
+                'user_id' => $request->user()->id
+            ]);
+        }
         return back();
     }
 

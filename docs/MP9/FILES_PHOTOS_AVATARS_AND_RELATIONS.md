@@ -1,3 +1,5 @@
+https://medium.com/@sergiturbadenas/uploading-utilitzant-vuetify-i-javascript-e7fdfb887632
+
 # Usuaris, avatars i Photos
 
 La idea és fer un sistema complet per forçar provar tot tipus de relacions
@@ -41,3 +43,25 @@ Canvis al model User
   - Afegiu test addAvatar a userTest: 
    - [ ] Executeu test addAvatar. Us donarà errors pq no hi ha la relació avatars i el mètode addAvatar a User. Afegiu
    
+# User Profile
+
+URL: /profile
+
+- Afegiu el test tests/Feature/ProfileControllerTest
+- Afegiur la ruta /profile a web.php
+- Afegiu el controlador: ProfileController
+- Afegiu la vista: profile
+- Afegiu el component: profile i registreu-lo a app.js
+- Components secundaris: material-card
+
+# UPLOAD FILE
+
+- Docs: https://laravel.com/docs/5.7/filesystem#file-uploads
+- Testing docs: https://laravel.com/docs/5.4/http-tests#testing-file-uploads
+
+## WEB
+- Copieu el test PhotoControllerTest
+- Copieu la ruta POST (web.php) /photo
+- Copieu el controlador
+
+## API JSON

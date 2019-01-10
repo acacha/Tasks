@@ -13,6 +13,7 @@ import UserList from './components/UserList'
 import UserSelect from './components/UserSelect'
 import Impersonate from './components/Impersonate'
 import GitInfo from './components/git/GitInfoComponent'
+import Profile from './components/Profile'
 
 import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
@@ -115,6 +116,7 @@ window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
 window.Vue.component('impersonate', Impersonate)
 window.Vue.component('git-info', GitInfo)
+window.Vue.component('profile', Profile)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

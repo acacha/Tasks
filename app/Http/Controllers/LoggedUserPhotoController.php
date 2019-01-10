@@ -12,12 +12,13 @@ class LoggedUserPhotoController extends Controller
     public function show(Request $request)
     {
         $photo = $this->userPhotoExists($request->user()) ? $request->user()->photo : $this->defaultPhoto();
-        return response()->file(storage_path('app/' . $photo));
+        return response()->file(Storage::disk('local')->path($photo->url));
     }
+
 
     protected function userPhotoExists($user)
     {
-        return $user->photo && Storage::exists($user->photo);
+        return $user->photo && Storage::disk('local')->exists($user->photo->url);
     }
 
     protected function defaultPhoto()

@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use App\Photo;
 use App\User;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use File;
 
 class LoggedUserPhotoControllerTest extends TestCase
 {
@@ -17,11 +17,10 @@ class LoggedUserPhotoControllerTest extends TestCase
     /**
      * @test
      */
-    public function show_logged_user_photo()
+    public function show_logged_user_default_photo()
     {
-        $user = $this->login();
+        $this->login();
         $response = $this->get('/user/photo');
-        dump($response->baseResponse->getFile()->getPathName());
         $this->assertEquals(storage_path(User::DEFAULT_PHOTO_PATH), $response->baseResponse->getFile()->getPathName());
         $response->assertSuccessful();
     }
@@ -29,35 +28,25 @@ class LoggedUserPhotoControllerTest extends TestCase
     /** @test */
     public function show_user_photo()
     {
+        $this->withoutExceptionHandling();
         Storage::fake('local');
 
-        Storage::disk('local')->put(
-            'tenant_test/user_photos/default.png',
-            File::get(base_path('tests/__Fixtures__/photos/users/default.png'))
-        );
-
         $user = factory(User::class)->create();
-        $response = $this->get('/user/' . $user->getRouteKey() . '/photo');
-        $response->assertSuccessful();
-        $this->assertEquals(public_path(User::DEFAULT_PHOTO_PATH), $response->baseResponse->getFile()->getPathName());
-//        $this->assertFileEquals(Storage::disk('local')->path('tenant_test/' . User::DEFAULT_PHOTO_PATH), $response->baseResponse->getFile()->getPathName());
-        $this->assertFileEquals(public_path(User::DEFAULT_PHOTO_PATH), $response->baseResponse->getFile()->getPathName());
-
-        $user2 = factory(User::class)->create([
-            'name' => 'Pepe Pardo Jeans',
-            'email' => 'pepepardo@jeans.com'
-        ]);
 
         Storage::disk('local')->put(
-            'tenant_test/teacher_photos/sergi.jpg',
-            File::get(base_path('tests/__Fixtures__/photos/users/sergi.jpg'))
+            '/photos/' . $user->id . '.jpg',
+            File::get(base_path('tests/__Fixtures__/photos/sergi.jpg'))
         );
+        $photo = Photo::create([
+            'url' => 'photos/' . $user->id . '.jpg',
+        ]);
+        $user->assignPhoto($photo);
 
-        $user2->assignPhoto('tenant_test/teacher_photos/sergi.jpg','tenant_test');
-        $response = $this->get('/user/' . $user2->getRouteKey() . '/photo');
-
-        $this->assertEquals(Storage::disk('local')->path('tenant_test/user_photos/' . $user2->id . '_pepe-pardo-jeans_pepepardo-at-jeanscom.jpg'), $response->baseResponse->getFile()->getPathName());
-        $this->assertFileEquals(Storage::disk('local')->path('tenant_test/user_photos/' . $user2->id . '_pepe-pardo-jeans_pepepardo-at-jeanscom.jpg'), $response->baseResponse->getFile()->getPathName());
+        $this->actingAs($user,'web');
+        $response = $this->get('/user/photo');
+        $response->assertSuccessful();
+        $this->assertEquals(Storage::disk('local')->path('photos/' . $user->id . '.jpg'), $response->baseResponse->getFile()->getPathName());
+        $this->assertFileEquals(Storage::disk('local')->path('photos/' . $user->id . '.jpg'), $response->baseResponse->getFile()->getPathName());
 
         $response->assertSuccessful();
 

@@ -63,5 +63,15 @@ URL: /profile
 - Copieu el test PhotoControllerTest
 - Copieu la ruta POST (web.php) /photo
 - Copieu el controlador
+- Afegiu window.csrf_token a app.js
+- Prepareu la base de dades php artisan migrate:fresh --seed -v
+- Proveu el formulari POST que us proporciono
 
 ## API JSON
+
+# LOCAL vs PUBLIC
+- Molt de compte amb public: per seguretat no posar fitxers amb dades personals o fitxers confidencials
+- Els fitxers de local es poden mostrar "públicament" però de forma controlada a partir d'un controlador
+- GET -> /user/photo Mostra només per als usuaris logats la photo de l'usuari logat
+- Afegir test, controlador i ruta i el que calgui per fer funcionar /user/photo
+- https://laravel.com/docs/5.7/responses#file-downloads

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
@@ -59,6 +60,13 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::post('/photo', '\\'. PhotoController::class . '@store');
+
+
+    Route::get('/user/photo', '\\'. LoggedUserPhotoController::class . '@show');
+
+
+
+    //    Route::post('/avatar', '\\'. AvatarController::class . '@store');
 
 });
 

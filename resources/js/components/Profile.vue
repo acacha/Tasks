@@ -142,7 +142,11 @@
                     </v-avatar>
                     <v-card-text class="text-xs-center">
                         <p>Username here</p>
-                        <input type="file" name="photo" id="photo-file-input" ref="avatar" accept="image/*">
+                        <form action="/photo" method="POST" enctype="multipart/form-data">
+                            <input type="file" name="photo" id="photo-file-input" ref="avatar" accept="image/*">
+                            <input type="hidden" name="_token" :value="csrf_token">
+                            <input type="submit" value="Pujar">
+                        </form>
                         <v-btn
                                 color="success"
                                 round
@@ -161,6 +165,9 @@ export default {
   name: 'Profile',
   components: {
     'material-card': MaterialCard
+  },
+  created () {
+    this.csrf_token = window.csrf_token
   }
 }
 </script>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Avatar;
+use App\Photo;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +12,40 @@ use Tests\TestCase;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @test
+     */
+    public function assignPhoto()
+    {
+        $user = factory(User::class)->create();
+        $this->assertNull($user->photo);
+        $photo = Photo::create([
+            'url' => '/photo1.png',
+        ]);
+        $user->assignPhoto($photo);
+        $user = $user->fresh();
+        $this->assertNotNull(1,$user->photo);
+        $this->assertEquals('/photo1.png',$user->photo->url);
+        $this->assertEquals($user->id,$user->photo->id);
+    }
+
+    /**
+     * @test
+     */
+    public function addAvatar()
+    {
+        $user = factory(User::class)->create();
+        $this->assertCount(0,$user->avatars);
+        $avatar = Avatar::create([
+            'url' => '/avatar.png',
+        ]);
+        $user->addTask($avatar);
+        $user = $user->fresh();
+        $this->assertCount(1,$user->avatars);
+        $this->assertEquals('/avatar.png',$user->avatars[0]->url);
+        $this->assertEquals($user->id,$user->avatars[0]->id);
+    }
 
     /**
      * @test

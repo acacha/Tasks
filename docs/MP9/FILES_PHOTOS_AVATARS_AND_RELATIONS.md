@@ -131,7 +131,7 @@ a boot posar:
 
 a **config/app.php** registrar el provider:
 
-
+Ara configureu Google:
 
 Passos a seguir:
 - Logar-se a Google Drive amb un compte de Gmail
@@ -147,15 +147,28 @@ Passos a seguir:
   - Tornar a Id de cliente oauth i continuar usant Aplicación Web
   - Nom: Aplicació Tasques
   - URLS consentimiento: http://tasks.test | https://developers.google.com/oauthplayground
+- Aneu al vostre compte d'usuari i afegiu una carpeta a Google Drive. Entreu a la carpeta i copieu de la URL el ID:
+
+GOOGLE_DRIVE_FOLDER_ID=1Q57lZ5qV43z8bfAfs6JutEQcGh__NFHL
+  
 - Cal repetir procediment per a explotació
 - Guardar credencials a .env:
 
 GOOGLE_DRIVE_CLIENT_ID=20710478546-60h29mddnaogd9u13qhhda765q126aut.apps.googleusercontent.com
 GOOGLE_DRIVE_CLIENT_SECRET=tXJ78qwWb45qTMavmEiT_9nXXy
 
-- Guardar credencials a .env.production i pujar al servidor  	
+- Guardar credencials a .env.production i pujar al servidor
+
+Finalment per comprovar si funciona:
+
+```php
+php artisan tinker     
+>>> Storage::disk('google')->makeDirectory('prova');
+```  	
 
 PROVES:
 - https://developers.google.com/oauthplayground/
+
+
 # TODO
 - /user/avatar -> Només mostrar imatge per defecte si no hi ha imatge Gravatar per l'usuari

@@ -69,6 +69,8 @@ URL: /profile
 
 ## API JSON
 
+- TODO UPLOAD AVATAR PERO AMB JSON
+
 # LOCAL vs PUBLIC
 - Molt de compte amb public: per seguretat no posar fitxers amb dades personals o fitxers confidencials
 - Els fitxers de local es poden mostrar "públicament" però de forma controlada a partir d'un controlador
@@ -81,5 +83,16 @@ URL: /profile
 Si canviem la imatge Avatar/Photo cal fer Shift+F5 per actualitzar la cache:
 
 Opcions:
+- Cache headers: no cache -> poc eficient
+- Canviar la URL: La url sigui diferent cada cop canvia imatge -> hash de la imatge
+
+# Google Drive
+
+Utilitzar drive com unitat on guardar els fitxers
+- En aquest cas l'utilitzarem com unitat extra-> es guarda en local i també a drive
+
+Passos a seguir:
 - 
 
+# TODO
+- /user/avatar -> Només mostrar imatge per defecte si no hi ha imatge Gravatar per l'usuari

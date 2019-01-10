@@ -26,7 +26,7 @@ class PhotoControllerTest extends TestCase
         ]);
         $response->assertSuccessful();
 
-        Storage::disk('local')->assertExists($photoUrl = 'photos/' . $user->id);
+        Storage::disk('local')->assertExists($photoUrl = 'photos/' . $user->id . '.jpg');
 
         $photo = Photo::first();
         $this->assertEquals($photoUrl, $photo->url);

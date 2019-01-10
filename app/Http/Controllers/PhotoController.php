@@ -11,8 +11,9 @@ class PhotoController extends Controller
     public function store(PhotoStore $request)
     {
         //CustomFileName with extension
+        $extension = $request->file('photo')->getClientOriginalExtension();
         $path = $request->file('photo')->storeAs(
-            'photos', $request->user()->id
+            'photos', $request->user()->id. '.'. $extension
         );
         return Photo::create([
             'url' => $path,

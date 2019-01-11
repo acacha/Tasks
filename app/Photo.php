@@ -21,13 +21,14 @@ class Photo extends Model
 
     public function user()
     {
-//        return $this->hasOne(User::class);    -> Camp users.photo_id -> No és el que volem, no embrutar taula principal
+//        return $this->hasOne(User::class);  //  -> Camp users.photo_id -> No és el que volem, no embrutar taula principal
         return $this->belongsTo(User::class);
     }
 
     public function setUser(User $user)
     {
-        $this->user_id = $user->id;
+        $this->user()->associate($this);
+//        $this->user_id = $user->id;
         $this->save();
         return $this;
     }

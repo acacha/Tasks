@@ -19,18 +19,15 @@ class LoggedUserPhotoControllerTest extends TestCase
      */
     public function show_logged_user_default_photo()
     {
-        $this->withoutExceptionHandling();
         $this->login();
         $response = $this->get('/user/photo');
         $response->assertSuccessful();
         $this->assertEquals(storage_path(User::DEFAULT_PHOTO_PATH), $response->baseResponse->getFile()->getPathName());
-        $response->assertSuccessful();
     }
 
     /** @test */
     public function show_user_photo()
     {
-        $this->withoutExceptionHandling();
         Storage::fake('local');
 
         $user = factory(User::class)->create();
@@ -49,8 +46,6 @@ class LoggedUserPhotoControllerTest extends TestCase
         $response->assertSuccessful();
         $this->assertEquals(Storage::disk('local')->path('photos/' . $user->id . '.jpg'), $response->baseResponse->getFile()->getPathName());
         $this->assertFileEquals(Storage::disk('local')->path('photos/' . $user->id . '.jpg'), $response->baseResponse->getFile()->getPathName());
-
-        $response->assertSuccessful();
 
     }
 

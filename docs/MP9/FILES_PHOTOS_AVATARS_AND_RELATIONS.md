@@ -8,7 +8,7 @@ La idea és fer un sistema complet per forçar provar tot tipus de relacions
 - Avatar: Relació 1 a n -> Pugui guardar una llista avatars però només hi hagui un sigui el activat
 - Gravatar: sistema de fallback sinó té fotos ni avatars aleshores utilitzar Gravatar 
 
-# Images
+# Images/Files
 
 - https://laravel.com/docs/5.7/eloquent-relationships#polymorphic-relationships
 - Provar relacions polimorfiques, múltiples recursos (tasques, usuaris, tags, etc) poden tenir imatges relacionades

@@ -12,8 +12,9 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     const DEFAULT_PHOTO = 'default.png';
-//    const PHOTOS_PATH = 'user_photos';
-    const DEFAULT_PHOTO_PATH = 'app/photos/' . self::DEFAULT_PHOTO;
+//    const PHOTOS_PATH = 'app/photos';
+    const DEFAULT_PHOTO_PATH1 = 'photos/' . self::DEFAULT_PHOTO;
+    const DEFAULT_PHOTO_PATH = 'app/' . self::DEFAULT_PHOTO_PATH1;
 
     use HasRoles,Notifiable, HasApiTokens,Impersonate;
 

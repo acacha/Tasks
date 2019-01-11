@@ -15,7 +15,7 @@ class PhotoController extends Controller
             'photos', $request->user()->id. '.'. $extension
         );
         $request->file('photo')->storeAs(
-            $request->user()->id. '.'. $extension,'google'
+            '',$request->user()->id. '.'. $extension,'google'
         );
         if ($photo = Photo::where('user_id',$request->user()->id)->first()) {
             $photo->url = $path;

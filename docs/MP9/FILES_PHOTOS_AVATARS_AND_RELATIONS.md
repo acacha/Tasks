@@ -88,6 +88,8 @@ Opcions:
 
 # Google Drive
 
+https://medium.com/@dennissmink/laravel-backup-database-to-your-google-drive-f4728a2b74bd
+
 Utilitzar drive com unitat on guardar els fitxers
 - En aquest cas l'utilitzarem com unitat extra-> es guarda en local i també a drive
 

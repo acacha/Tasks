@@ -27,6 +27,19 @@ Oco petaran tots els testos. Cal posar a **phpunit.xml**:
 
 ## Changelog
 
+Codi que us aporta el professor (heu de copiar del projecte de tasques del professor):
+- Model i migracions taula log on guardar els esdeveniments
+- Test unitari model Log
+- Feature Test de la web /changelog:
+  - Controlador web
+  - Request objects
+  - helpers.php: sample_logs() i noves Gates
+  - Vista
+  - Component (oco el component depèn altres components que també haureu instal·lar i de mòduls npm nous)
+- Feature Test api: refresh del changelog  
+- Variacions de la mateixa llista per veure només logs d'un recurs concret o d'un usuari concret.
+
+Notes:
 - Portar un registre de les operacions CRUD que es realitzen amb les tasques
 - Característiques:
   - Consultable desde diferents perspectives:

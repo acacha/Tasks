@@ -1,3 +1,46 @@
+# Tasques a realitzar
+
+## Changelog
+
+- Portar un registre de les operacions CRUD que es realitzen amb les tasques
+- Característiques:
+  - Consultable desde diferents perspectives:
+  - Administrador/Manager/Admin: pot veure tots els esdeveniments que succeixen al sistema (accés al registre complet)
+  - Usuari normal: Pot veure els canvis només de les seves tasques
+  - Perspectiva del recurs modificat: historial de canvis per a una tasca concreta 
+  
+Base de dades:
+- Relació polimorfica entre taula log i recurs que estem logant
+- Cada log té un text associat (l'establirà el event Listener)
+- Modificacions: nou_valor i valor antic
+- Usuari que realitza l'operació
+- Tipus operació (CRUD -> Create, Retrieve, Update, Delete, Show...)
+- Extres: icona i color
+
+```
+Schema::create('logs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('text');
+            $table->datetime('time');
+            $table->string('action_type');
+            $table->string('module_type');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->string('old_value')->nullable();
+            $table->string('new_value')->nullable();
+            $table->nullableMorphs('loggable');
+            $table->json('old_loggable')->nullable();
+            $table->json('new_loggable')->nullable();
+            $table->string('icon');
+            $table->string('color');
+            $table->timestamps();
+        });  
+```
+
+## Notificacions
+- Enviar una notificació per a cada operació del sistema
+- De moment les notificacions seran Emails però val la pena tenir el sistema preparat per poder notificar via altres sistemes (SMS, missatges Chat: telegram o altres ...)
+
+
 # Events
 
 - En resum és un mecanisme que permet "connectar" dos fragments de codi de forma controlada -> Evitant copy/paste o Spaghetti Code 

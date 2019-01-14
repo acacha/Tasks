@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
+use App\Http\Controllers\ChangelogController;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
@@ -63,10 +64,15 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/user/photo', '\\'. LoggedUserPhotoController::class . '@show');
+//    Route::post('/avatar', '\\'. AvatarController::class . '@store');
+
+    //Changelog
+    Route::get('/changelog','\\'. ChangelogController::class . '@index');
+//    Route::get('/changelog/module/{module}','Tenant\Web\ChangelogModuleController@index');
+//    Route::get('/changelog/user/{user}','Tenant\Web\ChangelogUserController@index');
+//    Route::get('/changelog/loggable/{loggable}/{loggableId}','Tenant\Web\ChangelogLoggableController@index');
 
 
-
-    //    Route::post('/avatar', '\\'. AvatarController::class . '@store');
 
 });
 

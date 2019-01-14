@@ -1,5 +1,6 @@
 <?php
 
+use App\Log;
 use App\Tag;
 use App\Task;
 use App\User;
@@ -8,10 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Spatie\Permission\Exceptions\PermissionAlreadyExists;
-use Spatie\Permission\Exceptions\PermissionDoesNotExist;
-use Spatie\Permission\Exceptions\RoleAlreadyExists;
-use Spatie\Permission\Exceptions\RoleDoesNotExist;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -247,6 +244,11 @@ if (!function_exists('initialize_gates')) {
     {
         Gate::define('tasks.manage',function($user) {
             return $user->isSuperAdmin() || $user->hasRole('TaskManager');
+        });
+
+        // Changelog
+        Gate::define('changelog.list', function ($user) {
+            return $user->hasRole('ChangelogManager');
         });
     }
 }
@@ -545,3 +547,61 @@ if (! function_exists('create_sample_task')) {
     }
 }
 
+if (! function_exists('sample_logs')) {
+    function sample_logs()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+
+        $task = Task::create([
+            'name' => 'Comprar pa',
+        ]);
+        $task->assignUser($user1);
+
+        $log1 = Log::create([
+            'text' => 'Ha creat la incidència TODO_LINK_INCIDENCIA',
+            'time' => Carbon::now(),
+            'action_type' => 'update',
+            'module_type' => 'Tasks',
+            'loggable_id' => $task->id,
+            'loggable_type' => Task::class,
+            'user_id' => $user1->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        $log2 = Log::create([
+            'text' => 'Ha modificat la incidència TODO_LINK_INCIDENCIA',
+            'time' => Carbon::now(),
+            'action_type' => 'update',
+            'module_type' => 'Tasks',
+            'loggable_id' => 1,
+            'loggable_type' => Task::class,
+            'user_id' => $user2->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        $log3 = Log::create([
+            'text' => 'Ha modificat la incidència TODO_LINK_INCIDENCIA',
+            'time' => Carbon::now(),
+            'action_type' => 'update',
+            'module_type' => 'Tasks',
+            'loggable_id' => 1,
+            'loggable_type' => Task::class,
+            'user_id' => $user2->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        $log4 = Log::create([
+            'text' => 'BLA BLA BLA',
+            'time' => Carbon::now(),
+            'action_type' => 'update',
+            'module_type' => 'OtherModule',
+            'loggable_id' => 1,
+            'loggable_type' => User::class,
+            'user_id' => $user2->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        return [$log1,$log2,$log3,$log4];
+    }
+}

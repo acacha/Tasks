@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Changelog\ChangelogController;
 use App\Http\Controllers\Api\GitController;
 use App\Http\Controllers\Api\TagsController;
 use App\Http\Controllers\Api\TasksController;
@@ -53,6 +54,12 @@ Route::middleware('auth:api')->group(function() {
     Route::get('/v1/regular_users','Api\RegularUsersController@index');
 
     Route::get('/v1/git/info','\\' . GitController::class . '@index');
+
+    //Changelog
+    Route::get('/v1/changelog','\\' . ChangelogController::class . '@index');
+//    Route::get('/v1/changelog/module/{module}','Tenant\Api\Changelog\ChangelogModuleController@index');
+//    Route::get('/v1/changelog/user/{user}','Tenant\Api\Changelog\ChangelogUserController@index');
+//    Route::get('/v1/changelog/loggable/{loggable}/{loggableId}','Tenant\Api\Changelog\ChangelogLoggableController@index');
 
 });
 

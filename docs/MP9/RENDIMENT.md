@@ -1,6 +1,8 @@
 # Tasques a realitzar
 
 ## Instal·lar Laravel Telescope
+ 
+ https://laravel.com/docs/5.7/telescope
 
 Oco petaran tots els testos. Cal posar a **phpunit.xml**:
 

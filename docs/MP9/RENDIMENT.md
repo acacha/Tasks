@@ -1,5 +1,14 @@
 # Tasques a realitzar
 
+## Instal·lar Laravel Telescope
+
+Oco petaran tots els testos. Cal posar a **phpunit.xml**:
+
+```
+<env name="TELESCOPE_ENABLED" value="false"/>
+```
+
+
 ## Changelog
 
 - Portar un registre de les operacions CRUD que es realitzen amb les tasques

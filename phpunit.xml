@@ -29,7 +29,7 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
-
+        <env name="TELESCOPE_ENABLED" value="false"/>
         <!--<env name="MAIL_DRIVER" value="smtp"/>-->
         <!--<env name="MAIL_HOST" value="smtp.mailtrap.io"/>-->
         <!--<env name="MAIL_PORT" value="2525"/>-->

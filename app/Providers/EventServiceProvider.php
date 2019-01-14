@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
             AddRolesToRegisterUser::class
         ],
+        'App\Events\OrderShipped' => [
+            'App\Listeners\SendShipmentNotification',
+        ],
     ];
 
     /**

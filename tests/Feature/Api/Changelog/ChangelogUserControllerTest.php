@@ -1,37 +1,48 @@
 <?php
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature\Tenants\Api\Incidents;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Role;
-use Tests\TestCase;
+use Tests\BaseTenantTest;
+use Illuminate\Contracts\Console\Kernel;
 
 /**
- * Class ChangelogControllerTest.
+ * Class ChangelogUserControllerTest.
  *
  * @package Tests\Feature\Tenants\Api
  */
-class ChangelogControllerTest extends TestCase {
+class ChangelogUserControllerTest extends BaseTenantTest {
 
     use RefreshDatabase;
 
     /**
+     * Refresh the in-memory database.
+     *
+     * @return void
+     */
+    protected function refreshInMemoryDatabase()
+    {
+        $this->artisan('migrate',[
+            '--path' => 'database/migrations/tenant'
+        ]);
+
+        $this->app[Kernel::class]->setArtisan(null);
+    }
+
+    /**
      * @test
      */
-    public function can_list_logs()
+    public function can_list_logs_for_an_specific_user()
     {
         $logs = sample_logs();
-        $user = factory(User::class)->create();
-        $role = Role::firstOrCreate(['name' => 'ChangelogManager']);
-        $user->assignRole($role);
+        $user = User::findOrFail(1);
         $this->actingAs($user,'api');
 
-        $response =  $this->json('GET','/api/v1/changelog');
+        $response =  $this->json('GET','/api/v1/changelog/user/' . $user->id);
         $response->assertSuccessful();
         $result = json_decode($response->getContent());
-//        dump($result);
-        $this->assertCount(4,$result);
+        $this->assertCount(1,$result);
 
         $this->assertEquals($logs[0]->id,$result[0]->id);
         $this->assertEquals($logs[0]->text,$result[0]->text);
@@ -39,7 +50,6 @@ class ChangelogControllerTest extends TestCase {
         $this->assertNotNull($result[0]->human_time);
         $this->assertNotNull($result[0]->timestamp);
         $this->assertEquals($logs[0]->action_type, $result[0]->action_type);
-        $this->assertEquals($logs[0]->module, $result[0]->module);
         $this->assertEquals($logs[0]->user_id, $result[0]->user_id);
         $this->assertEquals($logs[0]->user->name, $result[0]->user_name);
         $this->assertEquals($logs[0]->user->email, $result[0]->user_email);
@@ -48,24 +58,26 @@ class ChangelogControllerTest extends TestCase {
         $this->assertEquals($logs[0]->color, $result[0]->color);
     }
 
-
     /**
      * @test
      */
-    public function guest_cannot_list_logs()
-    {
-        $response =  $this->json('GET','/api/v1/changelog');
-        $response->assertStatus(401);
-    }
-
-    /**
-     * @test
-     */
-    public function regular_user_cannot_list_logs()
+    public function cannot_list_logs_for_an_unexisting_user()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user,'api');
-        $response =  $this->json('GET','/api/v1/changelog');
-        $response->assertStatus(403);
+
+        $response =  $this->json('GET','/api/v1/changelog/user/nonexistinguser');
+        $response->assertStatus(404);
     }
+
+    /**
+     * @test
+     */
+    public function guest_cannot_list_logs_for_an_specific_user()
+    {
+        $user = factory(User::class)->create();
+        $response =  $this->json('GET','/api/v1/changelog/user/' . $user->id);
+        $response->assertStatus(401);
+    }
+
 }

@@ -18,12 +18,24 @@ import Changelog from './components/changelog/ChangelogComponent.vue'
 import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
+import VueTimeago from 'vue-timeago'
+import TreeView from 'vue-json-tree-view'
+
 window.Vue = Vue
 window.Vuetify = Vuetify
 
 const PRIMARY_COLOR_KEY = 'primary_color_key'
 
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#2680C2'
+
+window.Vue.use(VueTimeago, {
+  locale: 'ca', // Default locale
+  locales: {
+    'ca': require('date-fns/locale/ca')
+  }
+})
+
+window.Vue.use(TreeView)
 
 window.Vue.use(window.Vuetify, {
   theme: {

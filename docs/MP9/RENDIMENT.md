@@ -1,5 +1,19 @@
 # Tasques a realitzar
 
+# Components Vue a instal·lar
+
+https://github.com/egoist/vue-timeago
+
+```
+npm i vue-timeago
+```
+
+https://www.npmjs.com/package/vue-json-tree-view
+```
+import TreeView from 'vue-json-tree-view'
+window.Vue.use(TreeView)
+```
+
 ## Instal·lar Laravel Telescope
  
  https://laravel.com/docs/5.7/telescope

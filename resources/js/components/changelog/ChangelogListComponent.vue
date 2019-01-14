@@ -195,10 +195,11 @@ export default {
       })
     },
     activeRealTime () {
-      window.Echo.private(this.channel)
-        .listen('LogCreated', (e) => {
-          this.dataLogs.push(e.log)
-        })
+      // TODO NOTIFICATIONs
+      // window.Echo.private(this.channel)
+      //   .listen('LogCreated', (e) => {
+      //     this.dataLogs.push(e.log)
+      //   })
     },
     disableRealTime () {
       window.Echo.leave(this.channel)

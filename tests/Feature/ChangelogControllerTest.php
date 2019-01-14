@@ -19,7 +19,7 @@ class ChangelogControllerTest extends TestCase
     /** @test */
     public function show_changelog()
     {
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
         $logs = sample_logs();
         $user = factory(User::class)->create();
         $role = Role::firstOrCreate(['name' => 'ChangelogManager']);
@@ -32,12 +32,12 @@ class ChangelogControllerTest extends TestCase
             return
                 $returnedLogs[0]['user_name']=== $logs[0]['user']->name &&
                 $returnedLogs[0]['color'] === 'teal' &&
-                $returnedLogs[0]['action_type'] === 'update' &&
-                $returnedLogs[0]['text'] === "Ha creat la incidència TODO_LINK_INCIDENCIA" &&
+                $returnedLogs[0]['action_type'] === 'store' &&
+                $returnedLogs[0]['text'] === "Ha creat la tasca TODO_LINK_TASCA" &&
                 $returnedLogs[0]['icon'] === 'home' &&
-                $returnedLogs[1]['text'] === "Ha modificat la incidència TODO_LINK_INCIDENCIA" &&
+                $returnedLogs[1]['text'] === "Ha modificat la tasca TODO_LINK_TASCA" &&
                 $returnedLogs[1]['action_type'] === 'update' &&
-                $returnedLogs[2]['text'] === "Ha modificat la incidència TODO_LINK_INCIDENCIA" &&
+                $returnedLogs[2]['text'] === "Ha modificat la tasca TODO_LINK_TASCA" &&
                 $returnedLogs[2]['action_type'] === 'update' &&
                 $returnedLogs[3]['text'] === "BLA BLA BLA";
         });

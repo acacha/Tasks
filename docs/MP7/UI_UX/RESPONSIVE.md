@@ -65,7 +65,7 @@ Utilitzat en pàgines estàtiques, principalment són ajustos del text:
 
 ```
  <style>
-e      .c1 {
+      .c1 {
         padding: 10px;
         width: 100%;
       }

@@ -85,6 +85,7 @@ e      .c1 {
     </style>
 ```
 https://github.com/acacha/responsive-examples/blob/master/tiny-tweaks.html
+https://acacha.github.io/responsive-examples/tiny-tweaks.html
 
 ### Mostly fluid
 

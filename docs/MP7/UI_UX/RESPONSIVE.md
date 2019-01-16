@@ -5,7 +5,7 @@
 - https://material.io/design/components/data-tables.html#anatomy
 - Utilitzar data iterator per mostrar stackades/Apilades les tasques com una llista de v-cards:
   - https://vuetifyjs.com/en/components/data-iterator
-  - Visibilitat només a partir de ceta mida cap abaix
+  - Visibilitat només a partir de certa mida cap abaix
   - https://vuetifyjs.com/en/framework/display 
   - OCO: No abusar dels labels Pag 41 LABELS ARE A LAST RESORT
 

@@ -1,12 +1,12 @@
 @component('mail::message')
-# Introduction
+# Tasca pendent
 
-The body of your message.
+S'ha marcat com a pendent la tasca: {{ $task->name }}
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => url('/tasques')])
+Veure tasca
 @endcomponent
 
-Thanks,<br>
+Gracies,<br>
 {{ config('app.name') }}
 @endcomponent

@@ -72,7 +72,6 @@ class CompletedTaskControllerTest extends TestCase {
 
         // Comprovar enviament Email
         Mail::assertSent(TaskUncompleted::class, function ($mail) use ($task, $user) {
-//            return $mail->task->id === $task->id;
             return $mail->task->is($task) &&
                    $mail->hasTo($user->email) &&
                    $mail->hasCc(config('tasks.manager_email'));

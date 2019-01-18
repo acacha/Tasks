@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Log;
+use App\Mail\TaskUncompleted;
 use App\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CompletedTasksController
 {
@@ -29,6 +31,17 @@ class CompletedTasksController
             'old_value' => true,
             'new_value' => false
         ]);
+
+        // ENVIO EMAIL
+        Mail::to($request->user())
+            ->cc(config('tasks.manager_email'))
+            ->send(new TaskUncompleted($task))
+            ->subject($this->subject);
+    }
+
+    protected function subject()
+    {
+        return ellipsis('Tasca pendent (' . $this->task->id . '): ' . $this->task->name, 80);
     }
 
     public function store(Request $request, Task $task)

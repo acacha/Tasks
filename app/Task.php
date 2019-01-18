@@ -95,4 +95,9 @@ class Task extends Model
         $useremail = optional($this->user)->email;
         return "$this->id $this->name $this->description $state $username $useremail";
     }
+
+    public function subject()
+    {
+        return ellipsis('Tasca pendent (' . $this->id . '): ' . $this->name, 80);
+    }
 }

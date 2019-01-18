@@ -27,9 +27,10 @@ class SendMailTaskUncompleted
      */
     public function handle($event)
     {
-        Mail::to($event->task->user())
+        $subject = $event->task->subject();
+        Mail::to($event->task->user)
             ->cc(config('tasks.manager_email'))
             ->send(new TaskUncompleted($event->task))
-            ->subject($this->subject($event->task));
+            ->subject($subject);
     }
 }

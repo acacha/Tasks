@@ -16,11 +16,6 @@ class CompletedTasksController
         event(new TaskUncompleted($task));
     }
 
-    protected function subject($task)
-    {
-        return ellipsis('Tasca pendent (' . $task->id . '): ' . $task->name, 80);
-    }
-
     public function store(Request $request, Task $task)
     {
         $task->completed=true;

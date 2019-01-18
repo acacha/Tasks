@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Mail\TaskUncompleted;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 
 class SendMailTaskUncompleted
 {
@@ -30,7 +30,6 @@ class SendMailTaskUncompleted
         $subject = $event->task->subject();
         Mail::to($event->task->user)
             ->cc(config('tasks.manager_email'))
-            ->send(new TaskUncompleted($event->task))
-            ->subject($subject);
+            ->send((new TaskUncompleted($event->task))->subject($subject));
     }
 }

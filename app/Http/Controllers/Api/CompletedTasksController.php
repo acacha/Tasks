@@ -36,12 +36,12 @@ class CompletedTasksController
         Mail::to($request->user())
             ->cc(config('tasks.manager_email'))
             ->send(new TaskUncompleted($task))
-            ->subject($this->subject);
+            ->subject($this->subject($task));
     }
 
-    protected function subject()
+    protected function subject($task)
     {
-        return ellipsis('Tasca pendent (' . $this->task->id . '): ' . $this->task->name, 80);
+        return ellipsis('Tasca pendent (' . $task->id . '): ' . $task->name, 80);
     }
 
     public function store(Request $request, Task $task)

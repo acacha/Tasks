@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Api;
 
-use App\Log;
-use App\Mail\TaskUncompleted;
+use App\Events\TaskUncompleted;
 use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Event;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
@@ -51,31 +50,16 @@ class CompletedTaskControllerTest extends TestCase {
             'completed' => true
         ]);
         //2
-        Mail::fake();
+        Event::fake();
         $response = $this->json('DELETE','/api/v1/completed_task/' . $task->id);
         $response->assertSuccessful();
         $task = $task->fresh();
         $this->assertEquals((boolean) $task->completed, false);
 
-        // Test log is inserted
-        $log  = Log::find(1);
-        $this->assertEquals($log->text,"S'ha marcat com a pendent la tasca 'comprar pa'");
-        $this->assertEquals($log->action_type,'descompletar');
-        $this->assertEquals($log->module_type,'Tasques');
-        $this->assertEquals($log->user_id,$user->id);
-        $this->assertEquals($log->old_value,true);
-        $this->assertEquals($log->new_value,0);
-        $this->assertEquals($log->loggable_id,$task->id);
-        $this->assertEquals($log->loggable_type,Task::class);
-        $this->assertEquals($log->icon,'lock_open');
-        $this->assertEquals($log->color,'primary');
-
-        // Comprovar enviament Email
-        Mail::assertSent(TaskUncompleted::class, function ($mail) use ($task, $user) {
-            return $mail->task->is($task) &&
-                   $mail->hasTo($user->email) &&
-                   $mail->hasCc(config('tasks.manager_email'));
+        Event::assertDispatched(TaskUncompleted::class, function ($event) use ($task) {
+            return $event->task->is($task);
         });
+
     }
 
     /**

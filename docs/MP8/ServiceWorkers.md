@@ -3,8 +3,8 @@
 - Instal·lar/Registrar un service worker a la app
 - A on: ho podriem fer a app.js però també es pot fer al mètode created()/mounted() d'un component Vue
   - Millor mounted: després del render
-- Refactorització App component per tal contingui tot el codi inclus codi app.blade.php (facilitarà gestió menu)
-  - Utilitzar slots
+- Refactorització Layout:
+  - Navigation menu de l'esquerra a un nou component per facilitar la programació de marcar el menñu seleccionat
 # Conèixement previs
 
 ## Programació asíncrona Javascript 

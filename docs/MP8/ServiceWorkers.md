@@ -3,8 +3,13 @@
 - Instal·lar/Registrar un service worker a la app
 - A on: ho podriem fer a app.js però també es pot fer al mètode created()/mounted() d'un component Vue
   - Millor mounted: després del render
+  - Crearem un component dedicat de moment que posarem a app.blade.php (com snackbar)
 - Refactorització Layout:
   - Navigation menu de l'esquerra a un nou component per facilitar la programació de marcar el menñu seleccionat
+  - Observar ús de v-model per comunicar-se entre components (variable compartida drawer)
+  - Fer el mateix amb el drawer de la dreta
+- Instal·lar Ligthouse
+- https://developers.google.com/web/fundamentals/app-install-banners/  
 # Conèixement previs
 
 ## Programació asíncrona Javascript 

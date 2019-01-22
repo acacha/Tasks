@@ -22,6 +22,7 @@
 <div id="app" v-cloak>
     <v-app>
         <snackbar></snackbar>
+        <service-worker></service-worker>
         <navigation v-model="drawer"></navigation>
         <v-navigation-drawer
                 v-model="drawerRight"

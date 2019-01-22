@@ -88,6 +88,8 @@ Igual que els web workers:
 ```
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js');
+} else {
+  console.log('missatge d'error')
 }
 ```
 

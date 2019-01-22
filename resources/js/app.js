@@ -21,6 +21,7 @@ import confirm from './plugins/confirm'
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
 import Navigation from './components/Navigation'
+import ServiceWorker from './components/ServiceWorker'
 
 window.Vue = Vue
 window.Vuetify = Vuetify
@@ -133,6 +134,7 @@ window.Vue.component('profile', Profile)
 // Changelog
 window.Vue.component('changelog', Changelog)
 window.Vue.component('navigation', Navigation)
+window.Vue.component('service-worker', ServiceWorker)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

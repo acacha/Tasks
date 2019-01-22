@@ -1,0 +1,3 @@
+- https://developers.google.com/speed/
+- https://gtmetrix.com/
+- https://tools.pingdom.com/

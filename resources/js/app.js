@@ -20,6 +20,7 @@ import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
+import Navigation from './components/Navigation'
 
 window.Vue = Vue
 window.Vuetify = Vuetify
@@ -131,6 +132,7 @@ window.Vue.component('git-info', GitInfo)
 window.Vue.component('profile', Profile)
 // Changelog
 window.Vue.component('changelog', Changelog)
+window.Vue.component('navigation', Navigation)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

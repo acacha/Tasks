@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\Changelog\ChangelogController;
 use App\Http\Controllers\Api\GitController;
 use App\Http\Controllers\Api\TagsController;
 use App\Http\Controllers\Api\TasksController;
-use App\Task;
+use App\Http\Controllers\Api\TasksTagsController;
 use Illuminate\Http\Request;
 
 /*
@@ -60,6 +60,9 @@ Route::middleware('auth:api')->group(function() {
 //    Route::get('/v1/changelog/module/{module}','Tenant\Api\Changelog\ChangelogModuleController@index');
 //    Route::get('/v1/changelog/user/{user}','Tenant\Api\Changelog\ChangelogUserController@index');
 //    Route::get('/v1/changelog/loggable/{loggable}/{loggableId}','Tenant\Api\Changelog\ChangelogLoggableController@index');
+
+    Route::put('/v1/tasks/{task}/tags', '\\' . TasksTagsController::class . '@update' );
+//    Route::put('/v1/tasks/{task}/tags', 'TasksTagsController@update' );
 
 });
 

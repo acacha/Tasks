@@ -14,6 +14,6 @@
 # Background colors
 
 - Utilitzar l'escala de grisos que hem definit
-- Es pot utilitzar un gradienr com a scool
+- Es pot utilitzar un gradient com a scool
 - Patrons/icones svg -> per les pàgines Landing Pages o les pàgines d'estat zero
 - Pàgina de Login i registre: colors de fons

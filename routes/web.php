@@ -82,3 +82,7 @@ Route::get('/', function () {
 Route::get('/auth/{provider}', '\\'. LoginController::class . '@redirectToProvider');
 Route::get('/auth/{provider}/callback', '\\'. LoginController::class . '@handleProviderCallback');
 
+Route::get('/prova_cua', function () {
+    dump('SHIt!');
+   \App\Jobs\SleepJob::dispatch();
+});

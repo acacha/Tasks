@@ -13,6 +13,7 @@
     - Overlay: http://jsfiddle.net/VsHyD/
     - Opacity: 0.5;
     - .v-parallax__image-container
+
 # Imatges de fons
 
 ## Component Gallery
@@ -45,6 +46,8 @@ Solucions:
 ## Testimonials
 - [ ] Llista d'usuaris i fotos al twitter (per exemple) amb el que han dit de la nostra aplicació
   - https://laracasts.com/  com exemple
+  
+## Pricing Pages
   
 ## Footer
 

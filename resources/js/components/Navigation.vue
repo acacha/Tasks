@@ -87,6 +87,8 @@ export default {
             { icon: 'build', text: 'Tags', url: '/tags' }
           ]
         },
+        { icon: 'help', text: 'Telescope', url: '/telescope' },
+        { icon: 'help', text: 'Changelog', url: '/changelog' },
         { icon: 'help', text: 'Contact', url: '/contact' },
         { icon: 'public', text: 'About', url: '/about' }
       ]

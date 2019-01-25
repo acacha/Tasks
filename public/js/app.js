@@ -86415,7 +86415,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         text: 'Tasques',
         model: true,
         children: [{ icon: 'build', text: 'Tasques amb PHP', url: '/tasks' }, { icon: 'build', text: 'Tasques tailwind', url: '/tasks_vue' }, { icon: 'build', text: 'Tasques', url: '/tasques' }, { icon: 'build', text: 'Tags', url: '/tags' }]
-      }, { icon: 'help', text: 'Contact', url: '/contact' }, { icon: 'public', text: 'About', url: '/about' }]
+      }, { icon: 'help', text: 'Telescope', url: '/telescope' }, { icon: 'help', text: 'Changelog', url: '/changelog' }, { icon: 'help', text: 'Contact', url: '/contact' }, { icon: 'public', text: 'About', url: '/about' }]
     };
   },
 

@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "lab404/laravel-impersonate": "^1.2",
         "laravel/framework": "5.7.*",
+        "laravel/horizon": "^2.0",
         "laravel/passport": "^7.0",
         "laravel/socialite": "^4.0",
         "laravel/telescope": "^1.0",

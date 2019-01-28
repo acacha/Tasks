@@ -55,3 +55,17 @@ user=sergi
 redirect_stderr=true
 stdout_logfile=/home/sergi/Code/acacha/tasks/storage/logs/horizon.log
 ```
+
+EXPLOTACIÓ
+
+```
+[program:horizon-tasks-sergitur-scool-cat]
+process_name=%(program_name)s
+command=php /home/forge/tasks.sergitur.scool.cat/artisan horizon
+autostart=true
+autorestart=true
+user=forge
+redirect_stderr=true
+stdout_logfile=/home/forge/tasks.sergitur.scool.cat/storage/logs/horizon.log
+```
+

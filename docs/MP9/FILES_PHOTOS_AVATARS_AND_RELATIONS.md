@@ -1,5 +1,29 @@
 https://medium.com/@sergiturbadenas/uploading-utilitzant-vuetify-i-javascript-e7fdfb887632
 
+# CONTROL/MODIFICACIó DE LA INTERFÍCIE UPLOAD
+
+CONTROL MANUAL/PER PROGRAMACIÓ:
+- https://medium.com/@sergiturbadenas/uploading-utilitzant-vuetify-i-javascript-e7fdfb887632
+- https://github.com/acacha/scool/blob/master/resources/tenant_js/components/ui/UserAvatarComponent.vue
+
+MOBILE:
+- https://whatwebcando.today/camera-microphone.html
+- Facilitar/crear icona que detecti si setem aun mòbil o sistema amb webcam i captar directe foto de camera
+
+EXTRA:
+- Concepte de Drop Area / DROP ZONE o similars:
+ - Múltiples llibreries Jquery i per Vue i altres frameworks
+ - https://www.dropzonejs.com/
+ - https://github.com/rowanwins/vue-dropzone
+ - https://www.sitepoint.com/10-jquery-file-uploads/
+ - Vuetify: Front-end pack: https://github.com/vuetifyjs/vuetify/milestone/8
+ 
+PROFILE: https://tasks.test/profile
+- Controlar naltros quan volem mostrar menú seleccionar imatge a pujar:
+  - Click o dblclick a la imatge avatar
+  - Click a un botó específic
+  
+   
 # Usuaris, avatars i Photos
 
 La idea és fer un sistema complet per forçar provar tot tipus de relacions

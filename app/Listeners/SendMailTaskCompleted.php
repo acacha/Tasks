@@ -7,7 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Mail;
 
-class SendMailTaskUncompleted
+class SendMailTaskUncompleted implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -27,12 +27,11 @@ class SendMailTaskUncompleted
      */
     public function handle($event)
     {
-//        $subject = $event->task->subject();
-        \App\Jobs\SendMailTaskUncompleted::dispatch($event->task);
+        $subject = $event->task->subject();
 
-//        Mail::to($event->task->user)
-//            ->cc(config('tasks.manager_email'))
-//            ->send((new TaskUncompleted($event->task))->subject($subject));
+        Mail::to($event->task->user)
+            ->cc(config('tasks.manager_email'))
+            ->send((new TaskCompleted($event->task))->subject($subject));
 
     }
 }

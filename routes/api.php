@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\GitController;
 use App\Http\Controllers\Api\TagsController;
 use App\Http\Controllers\Api\TasksController;
 use App\Http\Controllers\Api\TasksTagsController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Http\Request;
 
 /*
@@ -64,5 +65,6 @@ Route::middleware('auth:api')->group(function() {
     Route::put('/v1/tasks/{task}/tags', '\\' . TasksTagsController::class . '@update' );
 //    Route::put('/v1/tasks/{task}/tags', 'TasksTagsController@update' );
 
+    Route::post('/v1/user/photo', '\\' . PhotoController::class . '@store');
 });
 

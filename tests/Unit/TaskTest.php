@@ -120,6 +120,14 @@ class TaskTest extends TestCase
         $this->assertTrue($tags[0]->is($tag1));
         $this->assertTrue($tags[1]->is($tag2));
         $this->assertTrue($tags[2]->is($tag3));
+
+        // execució
+        try {
+            $task->addTags([$tag1]);
+        } catch (\Exception $e) {
+            $this->fail('Error. No hauria de petar si afegim una etiqueta ja afegida');
+        }
+
     }
 
 

@@ -33,14 +33,23 @@ class Task extends Model
 
     public function addTags($tags)
     {
-        $this->tags()->saveMany($tags);
+        try {
+            $this->tags()->saveMany($tags);
+        } catch(\Exception $e) {
+
+        }
+
     }
 
     public function addTag($tag)
     {
 //        !is_int($tag) ?: $tag = Tag::find($tag);
         if (is_int($tag)) $tag = Tag::find($tag);
-        $this->tags()->save($tag);
+        try {
+            $this->tags()->save($tag);
+        } catch (\Exception $e) {
+
+        }
         return $this;
 
     }

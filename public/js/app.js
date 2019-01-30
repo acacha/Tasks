@@ -79977,12 +79977,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TasksTags',
   data: function data() {
     return {
       dialog: false,
+      loading: false,
       selectedTags: []
     };
   },
@@ -79998,11 +80001,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
+    formatTag: function formatTag() {
+      var value = this.selectedTags[this.selectedTags.length - 1];
+      if (typeof value === 'string') {
+        this.selectedTags[this.selectedTags.length - 1] = {
+          'color': 'grey',
+          'name': this.selectedTags[this.selectedTags.length - 1]
+        };
+      }
+    },
     removeTag: function removeTag() {
       var _this = this;
 
       // TODO ASYNC PRIMER EXECUTAR UN CONFIRM
-      console.log('TODO REMOVE TAG');
       window.axios.delete('/api/v1/tasks/' + this.task.id + '/tag/' + this.tag).then(function (response) {
         _this.$snackbar.showMessage('Etiqueta eliminada correctament');
       }).catch(function (error) {
@@ -80012,12 +80023,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addTag: function addTag() {
       var _this2 = this;
 
-      console.log('TODO ADD TAG');
-      var tag = {};
-      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag', tag).then(function (response) {
-        _this2.$snackbar.showMessage('Etiqueta afegida correctament');
+      // pluck colleccion Laravel
+      // this.selectedTags
+      // console.log(this.selectedTags)
+      // console.log(this.selectedTags.map(tag => tag.id))
+      this.loading = true;
+      window.axios.put('/api/v1/tasks/' + this.task.id + '/tags', {
+        tags: this.selectedTags.map(function (tag) {
+          if (tag.id) return tag.id;else return tag.name;
+        })
+      }).then(function (response) {
+        _this2.$snackbar.showMessage('Etiqueta/s afegida/es correctament');
+        _this2.dialog = false;
+        _this2.loading = false;
       }).catch(function (error) {
         _this2.$snackbar.showError(error);
+        _this2.loading = false;
       });
     }
   }
@@ -80099,6 +80120,7 @@ var render = function() {
                       chips: "",
                       "item-text": "name"
                     },
+                    on: { change: _vm.formatTag },
                     scopedSlots: _vm._u([
                       {
                         key: "selection",
@@ -80110,6 +80132,7 @@ var render = function() {
                                 key: JSON.stringify(data.item),
                                 staticClass: "v-chip--select-multi",
                                 attrs: {
+                                  color: data.item.color,
                                   selected: data.selected,
                                   disabled: data.disabled
                                 },
@@ -80153,7 +80176,11 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { flat: "" },
+                      attrs: {
+                        flat: "",
+                        loading: _vm.loading,
+                        disabled: _vm.loading
+                      },
                       on: {
                         click: function($event) {
                           _vm.dialog = false

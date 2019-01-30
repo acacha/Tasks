@@ -27,19 +27,27 @@ class TasksTagsControllerTest extends TestCase {
             'description' => 'bla bla',
             'color' => 'blue'
         ]);
+        $tag2 = Tag::create([
+            'name' => 'prova',
+            'description' => 'bla bla',
+            'color' => 'green'
+        ]);
         $this->assertCount(0,$task->tags);
         $response = $this->json('PUT','/api/v1/tasks/' . $task->id . '/tags/', [
-            'tags' => [$tag->id]
+            'tags' => [$tag->id, $tag2->id]
         ]);
 
         $response->assertSuccessful();
 
         $task = $task->fresh();
 
-        $this->assertCount(1,$task->tags);
+        $this->assertCount(2,$task->tags);
         $this->assertEquals('home',$task->tags[0]->name);
         $this->assertTrue($task->tags[0]->is($tag));
         $this->assertEquals($task->tags[0]->id, $tag->id);
+        $this->assertEquals('prova',$task->tags[1]->name);
+        $this->assertTrue($task->tags[1]->is($tag2));
+        $this->assertEquals($task->tags[1]->id, $tag2->id);
     }
 
     /**

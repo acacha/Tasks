@@ -78558,11 +78558,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     refresh: function refresh() {
       var _this = this;
 
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
       this.loading = true;
       window.axios.get(this.uri).then(function (response) {
         _this.dataTasks = response.data;
         _this.loading = false;
-        _this.$snackbar.showMessage('Tasques actualitzades correctament');
+        if (message) _this.$snackbar.showMessage('Tasques actualitzades correctament');
       }).catch(function (error) {
         console.log(error);
         _this.loading = false;
@@ -79986,7 +79988,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       loading: false,
-      selectedTags: []
+      selectedTags: [],
+      dataTaskTags: this.taskTags
     };
   },
 
@@ -79995,9 +79998,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       type: Object,
       required: true
     },
+    taskTags: {
+      type: Object,
+      required: true
+    },
     tags: {
       type: Array,
       required: true
+    }
+  },
+  watch: {
+    taskTags: function taskTags(_taskTags) {
+      this.dataTaskTags = _taskTags;
     }
   },
   methods: {
@@ -80036,6 +80048,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.$snackbar.showMessage('Etiqueta/s afegida/es correctament');
         _this2.dialog = false;
         _this2.loading = false;
+        _this2.$emit('change', _this2.selectedTags);
       }).catch(function (error) {
         _this2.$snackbar.showError(error);
         _this2.loading = false;
@@ -80055,7 +80068,7 @@ var render = function() {
   return _c(
     "span",
     [
-      _vm._l(_vm.task.tags, function(tag) {
+      _vm._l(_vm.taskTags, function(tag) {
         return _c("v-chip", {
           key: tag.id,
           attrs: { color: tag.color },
@@ -80466,7 +80479,16 @@ var render = function() {
                           "td",
                           [
                             _c("tasks-tags", {
-                              attrs: { task: task, tags: _vm.tags }
+                              attrs: {
+                                task: task,
+                                "task-tags": task.tags,
+                                tags: _vm.tags
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.refresh(false)
+                                }
+                              }
                             })
                           ],
                           1

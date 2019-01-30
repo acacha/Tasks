@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-chip v-for="tag in task.tags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag"></v-chip>
+        <v-chip v-for="tag in taskTags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag"></v-chip>
         <v-btn icon @click="dialog = true"><v-icon>add</v-icon></v-btn>
         <v-btn icon @click="dialog = true"><v-icon>remove</v-icon></v-btn>
         <v-dialog v-model="dialog" width="500">
@@ -48,7 +48,8 @@ export default {
     return {
       dialog: false,
       loading: false,
-      selectedTags: []
+      selectedTags: [],
+      dataTaskTags: this.taskTags
     }
   },
   props: {
@@ -56,9 +57,18 @@ export default {
       type: Object,
       required: true
     },
+    taskTags: {
+      type: Object,
+      required: true
+    },
     tags: {
       type: Array,
       required: true
+    }
+  },
+  watch: {
+    taskTags (taskTags) {
+      this.dataTaskTags = taskTags
     }
   },
   methods: {
@@ -94,6 +104,7 @@ export default {
         this.$snackbar.showMessage('Etiqueta/s afegida/es correctament')
         this.dialog = false
         this.loading = false
+        this.$emit('change', this.selectedTags)
       }).catch(error => {
         this.$snackbar.showError(error)
         this.loading = false

@@ -41,7 +41,7 @@ class PhotoControllerTest extends TestCase
     }
 
     /**
-     * @test
+     * @ test
      */
     public function upload_photo_update()
     {

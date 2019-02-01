@@ -24,8 +24,8 @@ class EventServiceProvider extends ServiceProvider
             AddRolesToRegisterUser::class
         ],
         TaskUncompleted::class => [
-            LogTaskUncompleted::class,
-            SendMailTaskUncompleted::class
+//            LogTaskUncompleted::class,
+//            SendMailTaskUncompleted::class
         ]
     ];
 

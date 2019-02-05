@@ -9,6 +9,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
 use App\Http\Controllers\ChangelogController;
+use App\Task;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
@@ -85,4 +86,13 @@ Route::get('/auth/{provider}/callback', '\\'. LoginController::class . '@handleP
 Route::get('/prova_cua', function () {
     dump('SHIt!');
    \App\Jobs\SleepJob::dispatch();
+});
+
+Route::get('/omplir', function () {
+    // 10 000
+    for ($i = 1; $i <= 10000; $i++) {
+        Task::create([
+           'name' => 'Prova'
+        ]);
+    }
 });

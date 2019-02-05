@@ -1,5 +1,18 @@
 # FRONTEND
 
+## USER PHOTOS AMB URL
+
+- Test: copieu UserPhotoControllerTest
+- Copieu els fixtures
+- Afegiu rutes a web.php
+- Copieu el route bind
+- TODO
+
+## NotificationsWidget
+
+- Borreu el que vam començar
+- Poseu el que us proporciono
+
 ## Components Vue
 
 - Copieu tots els components de la carpeta notifications
@@ -33,6 +46,7 @@
 - Executeu testos i aneu arreglant problemes:
   - api.php: Cal afegir Rutes api 
   - Copie controladors: NotificationsController, UserNotificationsController i SimpleNotificationsController
+
 ## USER AVATAR
 
 ```

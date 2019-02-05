@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-md text-xs-center>
+    <v-container grid-list-md text-xs-center fluid >
         <v-layout row wrap fluid>
             <v-flex xs12>
                 <user-notifications-list :notifications="userNotifications"></user-notifications-list>

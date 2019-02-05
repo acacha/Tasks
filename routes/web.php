@@ -10,10 +10,20 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
 use App\Http\Controllers\ChangelogController;
+use App\Http\Controllers\UserPhotoController;
 use App\Task;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
+
+Route::bind('hashuser', function($value, $route)
+{
+    $hashids = new Hashids\Hashids(config('scool.salt'));
+    $id = $hashids->decode($value)[0];
+
+    return User::findOrFail($id);
+});
 
 // TODO
 Route::post('/login_alt','Auth\LoginAltController@login');
@@ -75,7 +85,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/notifications', '\\' . NotificationController::class . '@index');
 
-
+    // User photos
+    Route::get('/user/{hashuser}/photo','\\' . UserPhotoController::class . '@show')->name('user.photo.show');
+    Route::get('/user/{hashuser}/photo/download', '\\' . UserPhotoController::class . '@download')->name('user.photo.download');
 });
 
 Route::get('/', function () {

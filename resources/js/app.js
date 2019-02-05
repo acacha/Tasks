@@ -22,8 +22,8 @@ import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
 import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker'
-import NotificationsWidget from './components/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
+import NotificationsWidget from './components/notifications/NotificationsWidget'
 
 window.Vue = Vue
 window.Vuetify = Vuetify
@@ -137,7 +137,9 @@ window.Vue.component('profile', Profile)
 window.Vue.component('changelog', Changelog)
 window.Vue.component('navigation', Navigation)
 window.Vue.component('service-worker', ServiceWorker)
+
 window.Vue.component('notifications-widget', NotificationsWidget)
+
 
 // Notifications
 window.Vue.component('notifications', Notifications)

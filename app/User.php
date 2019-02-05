@@ -139,4 +139,25 @@ class User extends Authenticatable
     {
         return $query->where('admin',true);
     }
+
+    /**
+     * Hashed key.
+     * @return string
+     */
+    protected function hashedKey()
+    {
+        $hashids = new \Hashids\Hashids(config('tasks.salt'));
+        return $hashids->encode($this->getKey());
+    }
+
+    /**
+     * Get the photo path prefix.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getHashIdAttribute($value)
+    {
+        return $this->hashedKey();
+    }
 }

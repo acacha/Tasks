@@ -10,6 +10,7 @@
         "barryvdh/laravel-ide-helper": "^2.5",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
+        "hashids/hashids": "^3.0",
         "lab404/laravel-impersonate": "^1.2",
         "laravel/framework": "5.7.*",
         "laravel/horizon": "^2.0",

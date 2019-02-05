@@ -11,4 +11,15 @@ return [
     |
     */
     'manager_email' => env('TASKS_MANAGER_EMAIL', 'tasksmanager@miempresa.com'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | SALT
+    |--------------------------------------------------------------------------
+    |
+    | Used with hashids.
+    |
+    */
+
+    'salt' => env('TASKS_SALT','Your random salt here'),
 ];

@@ -223,4 +223,12 @@ class UserTest extends TestCase
         }
         $this->fail('Exception expected but never occurs');
     }
+
+    /** @test */
+    public function hash_id()
+    {
+        $user = factory(User::class)->create();
+        $hashids = new \Hashids\Hashids(config('tasks.salt'));
+        $this->assertEquals($user->hashid,$hashids->encode($user->getKey()));
+    }
 }

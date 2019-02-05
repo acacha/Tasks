@@ -85,12 +85,12 @@ class DatabaseNotification extends LaravelDatabaseNotification
             'read_at_diff' => $this->read_at_diff,
             'created_at' => $this->created_at,
             'created_at_timestamp' => $this->created_at_timestamp,
-            'formatted_created_at' => $this->formatted_created_at,
-            'formatted_created_at_diff' => $this->formatted_created_at_diff,
+            'created_at_formatted' => $this->created_at_formatted,
+            'created_at_human' => $this->created_at_human,
             'updated_at' => $this->updated_at,
             'updated_at_timestamp' => $this->updated_at_timestamp,
-            'formatted_updated_at' => $this->formatted_updated_at,
-            'formatted_updated_at_diff' => $this->formatted_updated_at_diff,
+            'updated_at_formatted' => $this->updated_at_formatted,
+            'updated_at_human' => $this->updated_at_human,
             'api_uri' => $this->api_uri,
         ];
         if ($this->notifiable_type === User::class) {

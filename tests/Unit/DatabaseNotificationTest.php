@@ -31,8 +31,6 @@ class DatabaseNotificationTest extends TestCase
         $notification = DatabaseNotification::first();
 
         $mappedNotification = $notification->mapSimple();
-//        dd($mappedNotification);
-//        dd($mappedNotification['created_at_formatted']);
 
         $this->assertTrue(is_valid_uuid($mappedNotification['id']));
         $this->assertEquals('App\Notifications\SimpleNotification',$mappedNotification['type']);
@@ -86,10 +84,10 @@ class DatabaseNotificationTest extends TestCase
         $this->assertNotNull($mappedNotification['updated_at']);
         $this->assertNotNull($mappedNotification['created_at_timestamp']);
         $this->assertNotNull($mappedNotification['updated_at_timestamp']);
-        $this->assertNotNull($mappedNotification['formatted_created_at']);
-        $this->assertNotNull($mappedNotification['formatted_updated_at']);
-        $this->assertNotNull($mappedNotification['formatted_created_at_diff']);
-        $this->assertNotNull($mappedNotification['formatted_updated_at_diff']);
+        $this->assertNotNull($mappedNotification['created_at_formatted']);
+        $this->assertNotNull($mappedNotification['updated_at_formatted']);
+        $this->assertNotNull($mappedNotification['created_at_human']);
+        $this->assertNotNull($mappedNotification['updated_at_human']);
 
         $this->assertEquals('MX', $mappedNotification['user_hashid']);
         $this->assertEquals('Pepe Pardo Jeans', $mappedNotification['user_name']);

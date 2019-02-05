@@ -19,7 +19,7 @@ class NotificationsIndex extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->can('notifications.index');
     }
 
     /**

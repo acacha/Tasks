@@ -268,7 +268,7 @@ if (!function_exists('initialize_roles')) {
             'TaskManager',
             'Tasks',
             'TagsManager',
-            'TagsManager',
+            'NotificationsManager',
             'Tags'
         ];
 
@@ -296,6 +296,13 @@ if (!function_exists('initialize_roles')) {
             'tags.destroy'
         ];
 
+        $notificationsManagerPermissions = [
+            'notifications.index',
+            'notifications.destroy',
+            'notifications.destroyMultiple',
+            'notifications.simple.store'
+        ];
+
         // user.tasks Who:
         // Logged->user === Task->user_id &&
         // També ha de tenir Rol Tasks
@@ -319,7 +326,13 @@ if (!function_exists('initialize_roles')) {
             'user.tags.destroy'
         ];
 
-        $permissions = array_merge($taskManagerPermissions, $userTaskPermissions, $tagsManagerPermissions, $userTagsPermissions);
+        $permissions = array_merge(
+            $taskManagerPermissions,
+            $userTaskPermissions,
+            $tagsManagerPermissions,
+            $userTagsPermissions,
+            $notificationsManagerPermissions
+        );
 
         foreach ($permissions as $permission) {
             create_permission($permission);
@@ -330,6 +343,7 @@ if (!function_exists('initialize_roles')) {
             'Tasks' => $userTaskPermissions,
             'TagsManager' => $tagsManagerPermissions,
             'Tags' => $userTagsPermissions,
+            'NotificationsManager' => $notificationsManagerPermissions,
         ];
 
         foreach ($rolePermissions as $role => $rolePermission) {

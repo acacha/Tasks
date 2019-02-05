@@ -30,8 +30,9 @@
 ## API
 - Nou Rol: Afegiu rol: NotificationsManager
 - Copieu tots els testos api de notificacions (carpeta Api/Notificacions): NotificationsControllerTest
-
-
+- Executeu testos i aneu arreglant problemes:
+  - api.php: Cal afegir Rutes api 
+  - Copie controladors: NotificationsController, UserNotificationsController i SimpleNotificationsController
 ## USER AVATAR
 
 ```

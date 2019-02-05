@@ -3,7 +3,7 @@
 namespace Tests\Feature\Api\People;
 
 use App\User;
-use App\Notifications\SampleNotification;
+use App\Notifications\SimpleNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
@@ -31,11 +31,11 @@ class NotificationsControllerTest extends TestCase
         $result = json_decode($response->getContent());
         $this->assertCount(3,$result);
         $this->assertEquals('Notification 1',$result[0]->data->title);
-        $this->assertEquals(SampleNotification::class,$result[0]->type);
+        $this->assertEquals(SimpleNotification::class,$result[0]->type);
         $this->assertEquals('Notification 2',$result[1]->data->title);
-        $this->assertEquals(SampleNotification::class,$result[1]->type);
+        $this->assertEquals(SimpleNotification::class,$result[1]->type);
         $this->assertEquals('Notification 3',$result[2]->data->title);
-        $this->assertEquals(SampleNotification::class,$result[2]->type);
+        $this->assertEquals(SimpleNotification::class,$result[2]->type);
     }
 
     /**

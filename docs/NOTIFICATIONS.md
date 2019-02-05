@@ -3,9 +3,14 @@
 ## Components Vue
 
 - Copieu tots els components de la carpeta notifications
+- Copieu component UserSelectComponent
 - Registreu els components a app.js (veure fitxer professor)
-- 
+ 
 ## VISTES
+
+## Menú/Mòdul nou
+- Creeu la entrada de menu Notificacions apuntant a la URL /notifications
+   - Fitxer Navigation.vue
 
 ## /notifications
 
@@ -19,13 +24,13 @@
   - Copieu controlador: NotificationController
   - Copieu els objectes Request
   - Copieu la vista
-## Menú/Mòdul nou
-- Creeu la entrada de menu Notificacions apuntant a la URL /notifications
-   - Fitxer Navigation.vue
 
 # BACKEND
 
 ## API
+- Nou Rol: 
+- Copieu tots els testos api de notificacions (carpeta Api/Notificacions): NotificationsControllerTest
+
 
 ## USER AVATAR
 

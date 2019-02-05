@@ -23,7 +23,6 @@ class NotificationsControllerTest extends TestCase
      */
     public function show_notifications_module()
     {
-        $this->withoutExceptionHandling();
         factory(User::class)->create([
             'name' => 'Pepe Pardo Jeans',
             'email' => 'pepepardo@jeans.com'
@@ -75,7 +74,7 @@ class NotificationsControllerTest extends TestCase
         $response = $this->get('/notifications');
         $response->assertSuccessful();
 
-        $response->assertViewIs('tenants.notifications.index');
+        $response->assertViewIs('notifications.index');
         $response->assertViewHas('userNotifications', function ($returnedUserNotifications) {
             return
                 count($returnedUserNotifications) === 3 &&

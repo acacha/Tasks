@@ -1,36 +1,22 @@
 <?php
 
-namespace Tests\Feature\Tenants\Api\People;
+namespace Tests\Feature\Tenants\Api\Notifications;
 
-use App\Models\User;
-use App\Notifications\SampleNotification;
+use App\User;
+use App\Notifications\SimpleNotification;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\BaseTenantTest;
-use Tests\Feature\Tenants\Traits\CanLogin;
+use Tests\TestCase;
+use Tests\Feature\Traits\CanLogin;
 
 /**
  * Class UserUnreadNotificationsControllerTest.
  *
  * @package Tests\Feature
  */
-class UserUnreadNotificationsControllerTest extends BaseTenantTest
+class UserUnreadNotificationsControllerTest extends TestCase
 {
     use RefreshDatabase, CanLogin;
-
-    /**
-     * Refresh the in-memory database.
-     *
-     * @return void
-     */
-    protected function refreshInMemoryDatabase()
-    {
-        $this->artisan('migrate',[
-            '--path' => 'database/migrations/tenant'
-        ]);
-
-        $this->app[Kernel::class]->setArtisan(null);
-    }
 
     /**
      * @test
@@ -46,9 +32,9 @@ class UserUnreadNotificationsControllerTest extends BaseTenantTest
         $result = json_decode($response->getContent());
         $this->assertCount(2,$result);
         $this->assertEquals('Notification 1',$result[0]->data->title);
-        $this->assertEquals(SampleNotification::class,$result[0]->type);
+        $this->assertEquals(SimpleNotification::class,$result[0]->type);
         $this->assertEquals('Notification 3',$result[1]->data->title);
-        $this->assertEquals(SampleNotification::class,$result[1]->type);
+        $this->assertEquals(SimpleNotification::class,$result[1]->type);
     }
 
     /**
@@ -75,9 +61,9 @@ class UserUnreadNotificationsControllerTest extends BaseTenantTest
         $result = json_decode($response->getContent());
         $this->assertCount(2,$result);
         $this->assertEquals('Notification 1',$result[0]->data->title);
-        $this->assertEquals(SampleNotification::class,$result[0]->type);
+        $this->assertEquals(SimpleNotification::class,$result[0]->type);
         $this->assertEquals('Notification 3',$result[1]->data->title);
-        $this->assertEquals(SampleNotification::class,$result[1]->type);
+        $this->assertEquals(SimpleNotification::class,$result[1]->type);
     }
 
     /**

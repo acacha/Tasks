@@ -89,7 +89,8 @@ class DatabaseNotificationTest extends TestCase
         $this->assertNotNull($mappedNotification['created_at_human']);
         $this->assertNotNull($mappedNotification['updated_at_human']);
 
-        $this->assertEquals('MX', $mappedNotification['user_hashid']);
+        $hashids = new \Hashids\Hashids(config('tasks.salt'));
+        $this->assertEquals($hashids->encode(1), $mappedNotification['user_hashid']);
         $this->assertEquals('Pepe Pardo Jeans', $mappedNotification['user_name']);
 
         $notification->markAsRead();

@@ -21,5 +21,5 @@ return [
     |
     */
 
-    'salt' => env('TASKS_SALT','Your random salt here'),
+    'salt' => env('TASKS_SALT'),
 ];

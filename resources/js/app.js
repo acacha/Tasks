@@ -23,6 +23,7 @@ import TreeView from 'vue-json-tree-view'
 import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker'
 import NotificationsWidget from './components/NotificationsWidget'
+import Notifications from './components/notifications/Notifications'
 
 window.Vue = Vue
 window.Vuetify = Vuetify
@@ -137,6 +138,9 @@ window.Vue.component('changelog', Changelog)
 window.Vue.component('navigation', Navigation)
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('notifications-widget', NotificationsWidget)
+
+// Notifications
+window.Vue.component('notifications', Notifications)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

@@ -3,7 +3,8 @@
 ## Components Vue
 
 - Copieu tots els components de la carpeta notifications
-
+- Registreu els components a app.js (veure fitxer professor)
+- 
 ## VISTES
 
 ## /notifications

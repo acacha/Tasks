@@ -268,6 +268,7 @@ if (!function_exists('initialize_roles')) {
             'TaskManager',
             'Tasks',
             'TagsManager',
+            'TagsManager',
             'Tags'
         ];
 
@@ -628,10 +629,10 @@ if (! function_exists('is_valid_uuid')) {
     /**
      * Check if a given string is a valid UUID
      *
-     * @param   string  $uuid   The string to check
+     * @param   string $uuid The string to check
      * @return  boolean
      */
-    function is_valid_uuid( $uuid )
+    function is_valid_uuid($uuid)
     {
 
         if (!is_string($uuid) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $uuid) !== 1)) {
@@ -639,27 +640,27 @@ if (! function_exists('is_valid_uuid')) {
         }
         return true;
     }
+}
 
-    if (! function_exists('set_sample_notifications_to_user')) {
-        function set_sample_notifications_to_user($user) {
-            $user->notify(new SimpleNotification('Notification 1'));
-            $user->notify(new SimpleNotification('Notification 2'));
-            $user->notify(new SimpleNotification('Notification 3'));
-        }
+if (! function_exists('set_sample_notifications_to_user')) {
+    function set_sample_notifications_to_user($user) {
+        $user->notify(new SimpleNotification('Notification 1'));
+        $user->notify(new SimpleNotification('Notification 2'));
+        $user->notify(new SimpleNotification('Notification 3'));
     }
+}
 
-    if (! function_exists('sample_notifications')) {
-        function sample_notifications() {
-            $user1 = factory(User::class)->create([
-                'name' => 'Homer Simpson',
-                'email' => 'homer@lossimpsons.com'
-            ]);
-            $user2 = factory(User::class)->create([
-                'name' => 'Bart Simpson',
-                'email' => 'bart@lossimpsons.com'
-            ]);
-            $user1->notify(new SimpleNotification('Sample Notification 1'));
-            $user2->notify(new SimpleNotification('Sample Notification 2'));
-        }
+if (! function_exists('sample_notifications')) {
+    function sample_notifications() {
+        $user1 = factory(User::class)->create([
+            'name' => 'Homer Simpson',
+            'email' => 'homer@lossimpsons.com'
+        ]);
+        $user2 = factory(User::class)->create([
+            'name' => 'Bart Simpson',
+            'email' => 'bart@lossimpsons.com'
+        ]);
+        $user1->notify(new SimpleNotification('Sample Notification 1'));
+        $user2->notify(new SimpleNotification('Sample Notification 2'));
     }
 }

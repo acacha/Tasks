@@ -61,6 +61,11 @@ trait CanLogin
         return $this->loginAsUsingRole($guard, ['TagsManager']);
     }
 
+    protected function loginAsNotificationsManager($guard = null)
+    {
+        return $this->loginAsUsingRole($guard, ['NotificationsManager']);
+    }
+
     /**
      * @param null $guard
      * @return mixed

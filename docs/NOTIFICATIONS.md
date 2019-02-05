@@ -28,7 +28,7 @@
 # BACKEND
 
 ## API
-- Nou Rol: 
+- Nou Rol: Afegiu rol: NotificationsManager
 - Copieu tots els testos api de notificacions (carpeta Api/Notificacions): NotificationsControllerTest
 
 

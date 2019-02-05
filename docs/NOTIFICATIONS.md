@@ -1,4 +1,32 @@
-USER AVATAR
+# FRONTEND
+
+## Components Vue
+
+- Copieu tots els components de la carpeta notifications
+
+## VISTES
+
+## /notifications
+
+- Afegiu dos helpers:
+  - set_sample_notifications_to_user($user);
+  - sample_notifications();
+  - map_simple_collection
+- Copieu Test web: NotificationsControllerTest
+  - Executeu i aneu arreglant problemes:
+  - Afegiu ruta web a routes/web.php
+  - Copieu controlador: NotificationController
+  - Copieu els objectes Request
+  - Copieu la vista
+## Menú/Mòdul nou
+- Creeu la entrada de menu Notificacions apuntant a la URL /notifications
+   - Fitxer Navigation.vue
+
+# BACKEND
+
+## API
+
+## USER AVATAR
 
 ```
 composer require hashids/hashids
@@ -13,8 +41,19 @@ Classe UserTest:
 Class user
 - Mètodes: hashedKey i getHashIdAttribute
 
+## SimpleNotification
 
-Helpers:
+Copieu la notificació simple App\Notifications\SimpleNotification
+
+Instal·leu les notificacions de base de dades Laravel:
+
+```
+php artisan notifications:table
+php artisan migrate
+```
+
+
+# Helpers:
 
 - function is_valid_uuid
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagsController;
@@ -72,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
 //    Route::get('/changelog/user/{user}','Tenant\Web\ChangelogUserController@index');
 //    Route::get('/changelog/loggable/{loggable}/{loggableId}','Tenant\Web\ChangelogLoggableController@index');
 
+    Route::get('/notifications', '\\' . NotificationController::class . '@index');
 
 
 });

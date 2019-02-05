@@ -75,6 +75,7 @@ export default {
       items: [
         { icon: 'home', text: 'Welcome', url: '/' },
         { icon: 'home', text: 'Home', url: '/home' },
+        { icon: 'notifications', text: 'Notificacions', url: '/notifications' },
         {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',

@@ -1,8 +1,22 @@
 - Convertir les imatges a webp. Suport progressiu (component Vue i detecció Javascript del suport) per navegadors no suporten
 - Fonts Google inline: 
 
+# Does not provide fallback content when JavaScript is not available
+
+Utilitzar etiqueta noscript: 
+
+Exemple: http://tutsplus.github.io/blur-image-load/index.html
+
+Com provar a devtools?
+
+Click the ⋮ menu in the corner of the Developer Tools, click Settings, then check Disable Javascript under Debugger.
+
+- https://stackoverflow.com/questions/13405383/how-to-disable-javascript-in-chrome-developer-tools
 # Altres temes performance:
 
+- https://flaviocopes.com/javascript-async-defer/#the-position-matters
+- scripts amb defer async i al header en comptes del final del body
+- https://stackoverflow.com/questions/436411/where-should-i-put-script-tags-in-html-markup/24070373#24070373
 - FUOC: POsar als headers de les plantilles:
 
 ```

@@ -12,6 +12,7 @@ Com provar a devtools?
 Click the ⋮ menu in the corner of the Developer Tools, click Settings, then check Disable Javascript under Debugger.
 
 - https://stackoverflow.com/questions/13405383/how-to-disable-javascript-in-chrome-developer-tools
+
 # Altres temes performance:
 
 - https://flaviocopes.com/javascript-async-defer/#the-position-matters
@@ -35,7 +36,9 @@ Click the ⋮ menu in the corner of the Developer Tools, click Settings, then ch
     </style>
 ```
 
-Posar directiva v-cloak
+# Posar directiva v-cloak
+
+- EVITAR FUOC: Flash Of Unestyled Content 
 
 ```
 <v-app id="app" v-cloak style="background: #F0F4F8;background: -webkit-linear-gradient(to right, #F0F4F8, #D9E2EC, #BCCCDC);

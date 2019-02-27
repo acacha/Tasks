@@ -37,7 +37,7 @@ MP7
   - https://css-tricks.com/using-webp-images/
   - https://medium.com/@andysolomon/converting-your-images-to-webp-with-imagemagick-a9c56cf6b579
 ```  
-sudo apt-get intsall webp
+sudo apt-get install webp
 convert section.jpg section.webp
 <picture>
   <source srcset="img/awesomeWebPImage.webp" type="image/webp">

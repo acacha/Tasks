@@ -78,7 +78,7 @@ A /etc/nginx/sites-available cadascú al seu fitxer cal afegir:
 ```
 # browser caching of static assets
 location ~*  \.(jpg|jpeg|png|webp|gif|ico|css|js|pdf)$ {
-    expires 7d;
+    expires 365d;
 }
 location = /sw.js {
     add_header 'Cache-Control' 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
@@ -96,7 +96,7 @@ Com comprovar si hi ha cache o no:
 curl -I -L URL | grep cache-control
 ```
 
-Ha de sortir 604800 = 7dies
+Ha de sortir 604800 = 7dies o 31536000 | = 365d
 
 - Crec que per defecte la cache guarda els fitxers 1 dia?
 - https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=es

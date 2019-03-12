@@ -1,5 +1,62 @@
+# ACCESSIBILITAT
+
+## Buttons do not have an accessible name
+
+- https://dequeuniversity.com/rules/axe/3.1/button-name?application=lighthouse
+- aria-label no buit si l'interior del button és un text complex
+
+## Color Contrast Is Satisfactory
+- https://dequeuniversity.com/rules/axe/3.1/color-contrast?application=lighthouse
+    
+# Preconnect to required origins -> Resource Hints
+
+IMPORTANT UTILITZAR DNS-PREFETCH i PRECONNECT AL MATEIX TEMPS PERÔ PRECONNECT ABANS
+
+```
+<link rel="preconnect dns-prefetch" href="https://somewhere.tls" crossorigin>
+```
+o
+```
+<rel="preconnect" href="https://somewhere.tls" crossorigin> <rel="dns-prefetch" href="https://somewhere.tls">
+```
+
+```
+<link rel="preload" as="script" href="super-important.js">
+<link rel="preconnect" href="https://example-domain.com/">
+```
+
+Preconnect to required origins
+- https://caniuse.com/#search=dns-prefetch
+- https://caniuse.com/#search=preconnect
+- URL Potential Savings (ms) https://smartlock.google.com 300 ms
+- https://developers.google.com/web/fundamentals/performance/resource-prioritization#preconnect
+- https://caniuse.com/#search=preload
+- https://medium.com/@soorajchandran/speeding-up-your-website-using-prefetching-techniques-8077058b7418
+- https://stackoverflow.com/questions/47875337/dns-prefetch-and-preconnect-one-or-both-fallback
+
+# Altres
 - Convertir les imatges a webp. Suport progressiu (component Vue i detecció Javascript del suport) per navegadors no suporten
 - Fonts Google inline: 
+
+## DNS PREFETCH:
+
+```
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+```
+
+- https://www.keycdn.com/blog/resource-hints
+- https://www.keycdn.com/blog/resource-hints#3-prerendering
+
+## PRERENDERING
+
+- https://caniuse.com/#search=prerender
+
+## Prefetch
+
+- [ ] La idea és que amb baixa prioritat baixi possibles recursos futurs
+- [  ] S'ha de provar 
+- https://developers.google.com/web/fundamentals/performance/resource-prioritization#preconnect
+- https://caniuse.com/#search=prefetch
 
 # Does not provide fallback content when JavaScript is not available
 

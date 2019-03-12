@@ -24,6 +24,7 @@ import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker'
 import Notifications from './components/notifications/Notifications'
 import NotificationsWidget from './components/notifications/NotificationsWidget'
+import Clock from './components/ui/Clock'
 
 window.Vue = Vue
 window.Vuetify = Vuetify
@@ -143,6 +144,7 @@ window.Vue.component('notifications-widget', NotificationsWidget)
 
 // Notifications
 window.Vue.component('notifications', Notifications)
+window.Vue.component('clock', Clock)
 
 // eslint-disable-next-line no-unused-vars
 const app = new window.Vue(AppComponent)

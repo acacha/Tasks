@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ClockController;
 use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
 use App\Http\Controllers\NotificationController;
@@ -88,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
     // User photos
     Route::get('/user/{hashuser}/photo','\\' . UserPhotoController::class . '@show')->name('user.photo.show');
     Route::get('/user/{hashuser}/photo/download', '\\' . UserPhotoController::class . '@download')->name('user.photo.download');
+
+    Route::get('/clock', '\\' . ClockController::class . '@index'); // CRUDDY BY DESIGN
 });
 
 Route::get('/', function () {

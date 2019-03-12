@@ -77,7 +77,7 @@ A /etc/nginx/sites-available cadascú al seu fitxer cal afegir:
 
 ```
 # browser caching of static assets
-location ~*  \.(jpg|jpeg|png|webp|gif|ico|css|js|pdf)$ {
+location ~*  \.(jpg|jpeg|png|woff|woff2|ttf|eot|webp|gif|ico|css|js|pdf)$ {
     expires 365d;
 }
 location = /sw.js {
@@ -86,6 +86,7 @@ location = /sw.js {
     proxy_no_cache 1;
 }
 ```
+
 Reiniciar nginx i veure no us heu carregat el servidor
 
 - En local no té sentit: i ho rebentem continuament amb Shift+F5

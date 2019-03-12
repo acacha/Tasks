@@ -9,6 +9,12 @@ export default {
     drawClock (ctx, radius) {
       this.drawFace(ctx, radius)
       this.drawNumbers(ctx, radius)
+      // console.log('drawClock')
+      var fps = 60
+      setTimeout(() => {
+        window.requestAnimationFrame(() => this.drawClock(ctx, radius))
+        // Drawing code goes here
+      }, 1000 / fps)
       this.drawTime(ctx, radius)
     },
     drawTime (ctx, radius) {
@@ -16,6 +22,7 @@ export default {
       var hour = now.getHours()
       var minute = now.getMinutes()
       var second = now.getSeconds()
+      var millis = now.getMilliseconds()
       // hour
       hour = hour % 12
       hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60))
@@ -25,7 +32,12 @@ export default {
       this.drawHand(ctx, minute, radius * 0.8, radius * 0.07)
       // second
       second = (second * Math.PI / 30)
+      // console.log(second)
       this.drawHand(ctx, second, radius * 0.9, radius * 0.02)
+
+      millis = (millis * Math.PI / 30000) + second
+      console.log(millis)
+      this.drawHand(ctx, millis, radius * 0.9, radius * 0.02)
     },
     drawHand (ctx, pos, length, width) {
       ctx.beginPath()
@@ -85,11 +97,9 @@ export default {
     ctx.arc(0, 0, radius, 0, 2 * Math.PI)
     ctx.fillStyle = 'white'
     ctx.fill()
-    // setInterval(() => {
-    //   this.drawClock(ctx, radius)
-    // }, 1000
-    // )
-    window.requestAnimationFrame(() => this.drawClock(ctx, radius))
+    this.drawFace(ctx, radius)
+    this.drawNumbers(ctx, radius)
+    this.drawClock(ctx, radius)
   }
 }
 </script>

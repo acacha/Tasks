@@ -7,14 +7,14 @@ export default {
   name: 'Clock',
   methods: {
     drawClock (ctx, radius) {
-      this.drawFace(ctx, radius)
-      this.drawNumbers(ctx, radius)
       // console.log('drawClock')
       var fps = 60
       setTimeout(() => {
         window.requestAnimationFrame(() => this.drawClock(ctx, radius))
-        // Drawing code goes here
       }, 1000 / fps)
+      // window.requestAnimationFrame(() => this.drawClock(ctx, radius))
+      this.drawFace(ctx, radius)
+      this.drawNumbers(ctx, radius)
       this.drawTime(ctx, radius)
     },
     drawTime (ctx, radius) {
@@ -33,10 +33,9 @@ export default {
       // second
       second = (second * Math.PI / 30)
       // console.log(second)
-      this.drawHand(ctx, second, radius * 0.9, radius * 0.02)
+      // this.drawHand(ctx, second, radius * 0.9, radius * 0.02)
 
       millis = (millis * Math.PI / 30000) + second
-      console.log(millis)
       this.drawHand(ctx, millis, radius * 0.9, radius * 0.02)
     },
     drawHand (ctx, pos, length, width) {
@@ -97,8 +96,8 @@ export default {
     ctx.arc(0, 0, radius, 0, 2 * Math.PI)
     ctx.fillStyle = 'white'
     ctx.fill()
-    this.drawFace(ctx, radius)
-    this.drawNumbers(ctx, radius)
+    // this.drawFace(ctx, radius)
+    // this.drawNumbers(ctx, radius)
     this.drawClock(ctx, radius)
   }
 }

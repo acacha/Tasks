@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Changelog\ChangelogController;
+use App\Http\Controllers\Api\CompletedTasksController;
 use App\Http\Controllers\Api\GitController;
 use App\Http\Controllers\Api\Notifications\NotificationsController;
 use App\Http\Controllers\Api\Notifications\SimpleNotificationsController;
@@ -44,8 +45,8 @@ Route::middleware('auth:api')->group(function() {
     Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
 
     // Completed tasks -> Estats
-    Route::delete('/v1/completed_task/{task}','Api\CompletedTasksController@destroy');
-    Route::post('/v1/completed_task/{task}','Api\CompletedTasksController@store');
+    Route::delete('/v1/completed_task/{task}','\\' . CompletedTasksController::class . '@destroy');
+    Route::post('/v1/completed_task/{task}','\\' . CompletedTasksController::class . '@store');
 
     // TAGS
     Route::get('/v1/tags','\\'. TagsController::class . '@index');                // BROWSE

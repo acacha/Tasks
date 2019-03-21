@@ -219,6 +219,29 @@ export default {
         this.loading = false
       })
     }
+  },
+  created () {
+    console.log('Registering laravel echo')
+    console.log('User id: ')
+    console.log(window.laravel_user.id)
+    console.log('Is admin: ')
+    console.log(window.laravel_user.admin)
+    if (window.laravel_user.admin) {
+      window.Echo.private('Tasques')
+        .listen('TaskUncompleted', (e) => {
+          console.log('TaskUncompleted Received')
+          console.log(e.task)
+          this.refresh()
+        })
+    } else {
+      window.Echo.private('App.User.' + window.laravel_user.id)
+        .listen('TaskUncompleted', (e) => {
+          console.log('TaskUncompleted Received')
+          console.log(e.task)
+          this.refresh()
+        })
+    }
+
   }
 }
 </script>

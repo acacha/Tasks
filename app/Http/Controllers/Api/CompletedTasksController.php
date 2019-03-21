@@ -12,7 +12,6 @@ class CompletedTasksController
     {
         $task->completed=false;
         $task->save();
-        // HOOK -> EVENT
         event(new TaskUncompleted($task));
     }
 

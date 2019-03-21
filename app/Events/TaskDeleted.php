@@ -2,37 +2,25 @@
 
 namespace App\Events;
 
-use App\Task;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TaskDeleted
+class TaskDeleted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $task;
-
-    public $name;
-    public $completed;
-    public $loquesigui;
-    public $loquesigui1;
-    public $loquesigui2;
-    public $loquesigui3;
-    public $loquesigui4;
-    public $loquesigui5;
+    public $oldTask;
 
     /**
      * TaskDeleted constructor.
      * @param $task
      */
-    public function __construct(array $oldTask, array $newTasK)
+    public function __construct(array $oldTask)
     {
-        $this->task = $task;
+        $this->oldTask = $oldTask;
     }
 
     /**
@@ -42,6 +30,6 @@ class TaskDeleted
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('tasks');
     }
 }

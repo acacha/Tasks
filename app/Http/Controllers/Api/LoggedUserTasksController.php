@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\TaskDeleted;
 use App\Http\Controllers\Controller;
 use App\Task;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class LoggedUserTasksController extends Controller
 
     public function destroy(Request $request, Task $task)
     {
+        event(new TaskDeleted($task->map()));
         Auth::user()->tasks()->findOrFail($task->id);
         $task->delete();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TaskDeleted;
 use App\Task;
 use Illuminate\Http\Request;
 

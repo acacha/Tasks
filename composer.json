@@ -16,7 +16,7 @@
         "laravel/horizon": "^2.0",
         "laravel/passport": "^7.0",
         "laravel/socialite": "^4.0",
-        "laravel/telescope": "^1.0",
+        "laravel/telescope": "^2.0",
         "laravel/tinker": "^1.0",
         "nao-pon/flysystem-google-drive": "^1.1",
         "predis/predis": "^1.1",
